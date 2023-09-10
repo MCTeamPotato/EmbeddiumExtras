@@ -1,0 +1,13 @@
+modLoader="javafml"
+loaderVersion="[36,)"
+license="LGPL-2.1"
+
+[[mods]]
+modId="magnesium_extras"
+version="${file.jarVersion}"
+displayName="Magnesium/Rubidium Extras"
+credits="TeamDeusVult, TexTrue, LocalizedMC"
+authors="Team Potato"
+description='''
+Adds Extra Settings to Magnesium/Rubidium.
+'''

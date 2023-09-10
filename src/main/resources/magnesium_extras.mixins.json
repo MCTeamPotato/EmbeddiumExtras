@@ -1,0 +1,26 @@
+{
+  "required": true,
+  "package": "vice.magnesium_extras.mixins",
+  "compatibilityLevel": "JAVA_8",
+  "refmap": "magnesium_extras.refmap.json",
+  "mixins": [
+    "fadeinchunks.ChunkGraphicsStateMixin",
+    "fadeinchunks.ChunkRenderShaderBackendMixin",
+    "fadeinchunks.GL43ChunkRenderBackendMixin",
+    "fadeinchunks.NioChunkDrawCallVectorMixin",
+    "fadeinchunks.ShaderLoaderMixin",
+    "fadeinchunks.UnsafeChunkDrawCallVectorMixin",
+    "sodiumconfig.MixinSodiumGameOptionPages",
+    "zoom.MouseMixin"
+  ],
+  "minVersion": "0.8",
+  "client": [
+    "entitydistance.MaxDistanceEntity",
+    "entitydistance.MaxDistanceTileEntity",
+    "framecounter.FpsAccessorMixin",
+    "framecounter.FrameCounterMixin",
+    "performance.RenderTypeLookupMixin",
+    "sodiumconfig.ZoomSettingsPage",
+    "zoom.GameRendererMixin"
+  ]
+}
