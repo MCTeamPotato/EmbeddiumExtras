@@ -64,12 +64,14 @@ public abstract class GameRendererMixin {
 			if (ZoomUtils.zoomFovMultiplier != 1.0F) {
 				fov *= MathHelper.lerp(tickDelta, ZoomUtils.lastZoomFovMultiplier, ZoomUtils.zoomFovMultiplier);
 				info.setReturnValue(fov);
+				info.cancel();
 			}
 		} else {
 			//Handle the zoom without smooth transitions.
 			if (ZoomUtils.zoomState) {
 				double zoomedFov = fov / ZoomUtils.zoomDivisor;
 				info.setReturnValue(zoomedFov);
+				info.cancel();
 			}
 		}
 

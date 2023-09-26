@@ -11,10 +11,7 @@ import me.jellysquid.mods.sodium.client.gui.options.storage.SodiumOptionsStorage
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.text.TranslationTextComponent;
-import org.spongepowered.asm.mixin.Final;
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Pseudo;
-import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -30,14 +27,15 @@ public abstract class ZoomSettingsPage {
     @Shadow
     @Final
     private List<OptionPage> pages;
-    private static final SodiumOptionsStorage sodiumOpts = new SodiumOptionsStorage();
+    @Unique
+    private static final SodiumOptionsStorage rbextras$sodiumOpts = new SodiumOptionsStorage();
 
 
     @Inject(method = "<init>", at = @At("RETURN"))
     private void dynamicLights(Screen prevScreen, CallbackInfo ci) {
         List<OptionGroup> groups = new ArrayList<>();
 
-        OptionImpl<SodiumGameOptions, Boolean> lowerSensitivity = OptionImpl.createBuilder(Boolean.class, sodiumOpts)
+        OptionImpl<SodiumGameOptions, Boolean> lowerSensitivity = OptionImpl.createBuilder(Boolean.class, rbextras$sodiumOpts)
                 .setName(I18n.get("extras.zoom.lower_sensitivity.name"))
                 .setTooltip(I18n.get("extras.zoom.lower_sensitivity.tooltip"))
                 .setControl(TickBoxControl::new)
@@ -47,7 +45,7 @@ public abstract class ZoomSettingsPage {
                 .setImpact(OptionImpact.LOW)
                 .build();
 
-        OptionImpl<SodiumGameOptions, Boolean> zoomScrolling = OptionImpl.createBuilder(Boolean.class, sodiumOpts)
+        OptionImpl<SodiumGameOptions, Boolean> zoomScrolling = OptionImpl.createBuilder(Boolean.class, rbextras$sodiumOpts)
                 .setName(I18n.get("extras.zoom.scrolling.name"))
                 .setTooltip(I18n.get("extras.zoom.scrolling.tooltip"))
                 .setControl(TickBoxControl::new)
@@ -57,7 +55,7 @@ public abstract class ZoomSettingsPage {
                 .setImpact(OptionImpact.LOW)
                 .build();
 
-        OptionImpl<SodiumGameOptions, Boolean> zoomOverlay = OptionImpl.createBuilder(Boolean.class, sodiumOpts)
+        OptionImpl<SodiumGameOptions, Boolean> zoomOverlay = OptionImpl.createBuilder(Boolean.class, rbextras$sodiumOpts)
                 .setName(I18n.get("extras.zoom.overlay.name"))
                 .setTooltip(I18n.get("extras.zoom.overlay.tooltip"))
                 .setControl(TickBoxControl::new)
@@ -77,7 +75,7 @@ public abstract class ZoomSettingsPage {
 
 
 
-        Option<MagnesiumExtrasConfig.ZoomTransitionOptions> zoomTransition =  OptionImpl.createBuilder(MagnesiumExtrasConfig.ZoomTransitionOptions.class, sodiumOpts)
+        Option<MagnesiumExtrasConfig.ZoomTransitionOptions> zoomTransition =  OptionImpl.createBuilder(MagnesiumExtrasConfig.ZoomTransitionOptions.class, rbextras$sodiumOpts)
                 .setName(I18n.get("extras.zoom.transition.name"))
                 .setTooltip(I18n.get("extras.zoom.transition.tooltip"))
                 .setControl(
@@ -92,7 +90,7 @@ public abstract class ZoomSettingsPage {
                 .setImpact(OptionImpact.LOW)
                 .build();
 
-        Option<MagnesiumExtrasConfig.ZoomModes> zoomMode =  OptionImpl.createBuilder(MagnesiumExtrasConfig.ZoomModes.class, sodiumOpts)
+        Option<MagnesiumExtrasConfig.ZoomModes> zoomMode =  OptionImpl.createBuilder(MagnesiumExtrasConfig.ZoomModes.class, rbextras$sodiumOpts)
                 .setName(I18n.get("extras.zoom.keybind.name"))
                 .setTooltip(I18n.get("extras.zoom.keybind.tooltip"))
                 .setControl(
@@ -108,7 +106,7 @@ public abstract class ZoomSettingsPage {
                 .setImpact(OptionImpact.LOW)
                 .build();
 
-        Option<MagnesiumExtrasConfig.CinematicCameraOptions> cinematicCameraMode =  OptionImpl.createBuilder(MagnesiumExtrasConfig.CinematicCameraOptions.class, sodiumOpts)
+        Option<MagnesiumExtrasConfig.CinematicCameraOptions> cinematicCameraMode =  OptionImpl.createBuilder(MagnesiumExtrasConfig.CinematicCameraOptions.class, rbextras$sodiumOpts)
                 .setName(I18n.get("extras.zoom.cinematic_camera.name"))
                 .setTooltip(I18n.get("extras.zoom.cinematic_camera.tooltip"))
                 .setControl((option) -> new CyclingControl<>(option, MagnesiumExtrasConfig.CinematicCameraOptions.class, new TranslationTextComponent[] {
