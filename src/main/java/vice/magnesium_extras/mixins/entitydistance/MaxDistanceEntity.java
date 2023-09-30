@@ -33,6 +33,5 @@ public abstract class MaxDistanceEntity {
             return;
         }
         cir.setReturnValue(false);
-        cir.cancel();
     }
 }

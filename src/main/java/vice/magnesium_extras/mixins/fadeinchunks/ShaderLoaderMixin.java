@@ -32,7 +32,6 @@ public abstract class ShaderLoaderMixin {
         if (isFragmentShader)
             replace(source, "(getFogFactor(),", "(min(v_FadeInProgress, getFogFactor()),");
         cir.setReturnValue(source.toString());
-        cir.cancel();
     }
 
     private static void replace(StringBuilder buffer, String search, String str) {

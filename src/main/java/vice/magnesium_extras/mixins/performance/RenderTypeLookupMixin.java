@@ -41,7 +41,6 @@ public abstract class RenderTypeLookupMixin
         } else {
             Predicate<RenderType> renderType = blockRenderChecks.get(block.delegate);
             cir.setReturnValue(renderType != null ? renderType.test(type) : type == RenderType.solid());
-            cir.cancel();
         }
     }
 
@@ -50,6 +49,5 @@ public abstract class RenderTypeLookupMixin
     {
         Predicate<RenderType> renderType = fluidRenderChecks.get(fluid.getType().delegate);
         cir.setReturnValue(renderType != null ? renderType.test(type) : type == RenderType.solid());
-        cir.cancel();
     }
 }
