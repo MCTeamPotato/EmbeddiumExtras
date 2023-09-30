@@ -3,6 +3,7 @@ package vice.magnesium_extras.mixins.fadeinchunks;
 import me.jellysquid.mods.sodium.client.render.chunk.ChunkGraphicsState;
 import me.jellysquid.mods.sodium.client.render.chunk.ChunkRenderContainer;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -10,25 +11,27 @@ import vice.magnesium_extras.features.fadeinchunks.ChunkGraphicsStateExt;
 
 @Mixin(value = {ChunkGraphicsState.class}, remap = false)
 public abstract class ChunkGraphicsStateMixin implements ChunkGraphicsStateExt {
-    private ChunkRenderContainer<?> container;
+    @Unique
+    private ChunkRenderContainer<?> rbpe$container;
 
-    private float loadTime;
+    @Unique
+    private float rbpe$loadTime;
 
     @Inject(method = {"<init>"}, at = {@At("RETURN")})
     private void init(ChunkRenderContainer<?> container, CallbackInfo ci) {
-        this.container = container;
+        this.rbpe$container = container;
     }
 
-    public ChunkRenderContainer<?> getContainer() {
-        return this.container;
+    public ChunkRenderContainer<?> getRbpe$container() {
+        return this.rbpe$container;
     }
 
-    public float getLoadTime() {
-        return this.loadTime;
+    public float getRbpe$loadTime() {
+        return this.rbpe$loadTime;
     }
 
-    public void setLoadTime(float time) {
-        this.loadTime = time;
+    public void setRbpe$loadTime(float time) {
+        this.rbpe$loadTime = time;
     }
 }
 

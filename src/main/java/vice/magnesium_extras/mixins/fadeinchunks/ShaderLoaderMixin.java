@@ -6,6 +6,7 @@ import me.jellysquid.mods.sodium.client.render.chunk.backends.multidraw.Multidra
 import net.minecraft.util.ResourceLocation;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
@@ -26,21 +27,23 @@ public abstract class ShaderLoaderMixin {
         if (!isVertexShader && !isFragmentShader)
             return;
         StringBuilder source = new StringBuilder(cir.getReturnValue());
-        prepend(source, "varying", "varying float v_FadeInProgress;");
+        rbpe$prepend(source, "varying", "varying float v_FadeInProgress;");
         if (isVertexShader)
-            prepend(source, "v_Color = ", "v_FadeInProgress = d_ModelOffset.w;");
+            rbpe$prepend(source, "v_Color = ", "v_FadeInProgress = d_ModelOffset.w;");
         if (isFragmentShader)
-            replace(source, "(getFogFactor(),", "(min(v_FadeInProgress, getFogFactor()),");
+            rbpe$replace(source, "(getFogFactor(),", "(min(v_FadeInProgress, getFogFactor()),");
         cir.setReturnValue(source.toString());
     }
 
-    private static void replace(StringBuilder buffer, String search, String str) {
+    @Unique
+    private static void rbpe$replace(StringBuilder buffer, String search, String str) {
         int idx = buffer.indexOf(search);
         buffer.replace(idx, idx + search.length(), str);
     }
 
-    private static void prepend(StringBuilder buffer, String search, String str) {
-        replace(buffer, search, str + search);
+    @Unique
+    private static void rbpe$prepend(StringBuilder buffer, String search, String str) {
+        rbpe$replace(buffer, search, str + search);
     }
 }
 

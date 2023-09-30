@@ -12,9 +12,9 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
+import vice.magnesium_extras.MagnesiumExtras;
 import vice.magnesium_extras.config.MagnesiumExtrasConfig;
 import vice.magnesium_extras.features.zoom.ZoomUtils;
-import vice.magnesium_extras.keybinds.KeyboardInput;
 
 
 //This mixin is responsible for the mouse-behavior-changing part of the zoom.
@@ -42,15 +42,15 @@ public abstract class MouseMixin {
 	private double accumulatedScroll;
 	
 	@Unique
-	private final MouseSmoother cursorXZoomSmoother = new MouseSmoother();
+	private final MouseSmoother repe$cursorXZoomSmoother = new MouseSmoother();
 
 	@Unique
-	private final MouseSmoother cursorYZoomSmoother = new MouseSmoother();
+	private final MouseSmoother repe$cursorYZoomSmoother = new MouseSmoother();
 
 	@Unique
-	private double extractedE;
+	private double repe$extractedE;
 	@Unique
-	private double adjustedG;
+	private double repe$adjustedG;
 	
 	//This mixin handles the "Reduce Sensitivity" option and extracts the g variable for the cinematic cameras.
 	@ModifyVariable(
@@ -72,7 +72,7 @@ public abstract class MouseMixin {
 
 		double appliedMouseSensitivity = modifiedMouseSensitivity * 0.6 + 0.2;
 		g = appliedMouseSensitivity * appliedMouseSensitivity * appliedMouseSensitivity * 8.0;
-		this.adjustedG = g;
+		this.repe$adjustedG = g;
 		return g;
 	}
 	
@@ -83,7 +83,7 @@ public abstract class MouseMixin {
 		locals = LocalCapture.CAPTURE_FAILHARD
 	)
 	private void obtainCinematicCameraValues(CallbackInfo info, double d, double e) {
-		this.extractedE = e;
+		this.repe$extractedE = e;
 	}
 
 	//Applies the cinematic camera on the mouse's X.
@@ -96,16 +96,16 @@ public abstract class MouseMixin {
 		if (!MagnesiumExtrasConfig.cinematicCameraMode.get().equals(MagnesiumExtrasConfig.CinematicCameraOptions.OFF.toString())) {
 			if (ZoomUtils.zoomState) {
 				if (this.minecraft.options.smoothCamera) {
-					l = this.smoothTurnX.getNewDeltaValue(this.accumulatedDX * this.adjustedG, (this.extractedE * this.adjustedG));
-					this.cursorXZoomSmoother.reset();
+					l = this.smoothTurnX.getNewDeltaValue(this.accumulatedDX * this.repe$adjustedG, (this.repe$extractedE * this.repe$adjustedG));
+					this.repe$cursorXZoomSmoother.reset();
 				} else {
-					l = this.cursorXZoomSmoother.getNewDeltaValue(this.accumulatedDX * this.adjustedG, (this.extractedE * this.adjustedG));
+					l = this.repe$cursorXZoomSmoother.getNewDeltaValue(this.accumulatedDX * this.repe$adjustedG, (this.repe$extractedE * this.repe$adjustedG));
 				}
 				if (MagnesiumExtrasConfig.cinematicCameraMode.get().equals(MagnesiumExtrasConfig.CinematicCameraOptions.MULTIPLIED.toString())) {
 					l *= MagnesiumExtrasConfig.zoomValues.cinematicMultiplier;
 				}
 			} else {
-				this.cursorXZoomSmoother.reset();
+				this.repe$cursorXZoomSmoother.reset();
 			}
 		}
 		return l;
@@ -121,16 +121,16 @@ public abstract class MouseMixin {
 		if (!MagnesiumExtrasConfig.cinematicCameraMode.get().equals(MagnesiumExtrasConfig.CinematicCameraOptions.OFF.toString())) {
 			if (ZoomUtils.zoomState) {
 				if (this.minecraft.options.smoothCamera) {
-					m = this.smoothTurnY.getNewDeltaValue(this.accumulatedDY * this.adjustedG, (this.extractedE * this.adjustedG));
-					this.cursorYZoomSmoother.reset();
+					m = this.smoothTurnY.getNewDeltaValue(this.accumulatedDY * this.repe$adjustedG, (this.repe$extractedE * this.repe$adjustedG));
+					this.repe$cursorYZoomSmoother.reset();
 				} else {
-					m = this.cursorYZoomSmoother.getNewDeltaValue(this.accumulatedDY * this.adjustedG, (this.extractedE * this.adjustedG));
+					m = this.repe$cursorYZoomSmoother.getNewDeltaValue(this.accumulatedDY * this.repe$adjustedG, (this.repe$extractedE * this.repe$adjustedG));
 				}
 				if (MagnesiumExtrasConfig.cinematicCameraMode.get().equals(MagnesiumExtrasConfig.CinematicCameraOptions.MULTIPLIED.toString())) {
 					m *= MagnesiumExtrasConfig.zoomValues.cinematicMultiplier;
 				}
 			} else {
-				this.cursorYZoomSmoother.reset();
+				this.repe$cursorYZoomSmoother.reset();
 			}
 		}
 		
@@ -147,7 +147,7 @@ public abstract class MouseMixin {
 		if (this.accumulatedScroll != 0.0) {
 			if (MagnesiumExtrasConfig.zoomScrolling.get()) {
 				if (MagnesiumExtrasConfig.zoomMode.get().equals(MagnesiumExtrasConfig.ZoomModes.PERSISTENT.toString())) {
-					if (!KeyboardInput.zoomKey.isDown())
+					if (!MagnesiumExtras.zoomKey.isDown())
 					{
 						return;
 					}
@@ -175,13 +175,13 @@ public abstract class MouseMixin {
 	private void zoomerOnMouseButton(long window, int button, int action, int mods, CallbackInfo info) {
 		if (MagnesiumExtrasConfig.zoomScrolling.get()) {
 			if (MagnesiumExtrasConfig.zoomMode.get().equals(MagnesiumExtrasConfig.ZoomModes.PERSISTENT.toString())) {
-				if (!KeyboardInput.zoomKey.isDown()) {
+				if (!MagnesiumExtras.zoomKey.isDown()) {
 					return;
 				}
 			}
 
 			if (button == 2 && action == 1) {
-				if (KeyboardInput.zoomKey.isDown()) {
+				if (MagnesiumExtras.zoomKey.isDown()) {
 					ZoomUtils.resetZoomDivisor();
 					info.cancel();
 				}

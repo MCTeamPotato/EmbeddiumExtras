@@ -14,7 +14,7 @@ public abstract class NioChunkDrawCallVectorMixin extends ChunkDrawParamsVector 
         super(capacity);
     }
 
-    public void pushChunkDrawParamFadeIn(float progress) {
+    public void rbpe$pushChunkDrawParamFadeIn(float progress) {
         this.buffer.putFloat(this.writeOffset - 4, progress);
     }
 }

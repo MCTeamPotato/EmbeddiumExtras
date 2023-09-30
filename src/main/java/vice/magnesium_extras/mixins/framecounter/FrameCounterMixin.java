@@ -1,7 +1,6 @@
 package vice.magnesium_extras.mixins.framecounter;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
-import lombok.val;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.client.gui.ForgeIngameGui;
 import org.jetbrains.annotations.NotNull;
@@ -20,9 +19,12 @@ import java.util.Queue;
 @Mixin(ForgeIngameGui.class)
 public abstract class FrameCounterMixin {
 
-    private int lastMeasuredFPS;
-    private String runningAverageFPS;
-    private final Queue<Integer> fpsRunningAverageQueue = new LinkedList<>();
+    @Unique
+    private int repe$lastMeasuredFPS;
+    @Unique
+    private String repe$runningAverageFPS;
+    @Unique
+    private final Queue<Integer> repe$fpsRunningAverageQueue = new LinkedList<>();
 
     @Inject(at = @At("TAIL"), method = "render")
     public void render(MatrixStack matrixStack, float tickDelta, CallbackInfo info)
@@ -89,28 +91,28 @@ public abstract class FrameCounterMixin {
     {
         vice.magnesium_extras.features.framecounter.MinFrameProvider.recalculate();
 
-        if (lastMeasuredFPS != fps)
+        if (repe$lastMeasuredFPS != fps)
         {
-            lastMeasuredFPS = fps;
+            repe$lastMeasuredFPS = fps;
 
-            if (fpsRunningAverageQueue.size() > 14)
-                fpsRunningAverageQueue.poll();
+            if (repe$fpsRunningAverageQueue.size() > 14)
+                repe$fpsRunningAverageQueue.poll();
 
-            fpsRunningAverageQueue.offer(fps);
+            repe$fpsRunningAverageQueue.offer(fps);
 
             int totalFps = 0;
             int frameCount = 0;
-            for (val frameTime : fpsRunningAverageQueue)
+            for (int frameTime : repe$fpsRunningAverageQueue)
             {
                 totalFps += frameTime;
                 frameCount++;
             }
 
             @SuppressWarnings("RedundantCast") int average = (int) (totalFps / frameCount);
-            runningAverageFPS = String.valueOf(average);
+            repe$runningAverageFPS = String.valueOf(average);
         }
 
-        return fps + " | MIN " + vice.magnesium_extras.features.framecounter.MinFrameProvider.getLastMinFrame() + " | AVG " + runningAverageFPS;
+        return fps + " | MIN " + vice.magnesium_extras.features.framecounter.MinFrameProvider.getLastMinFrame() + " | AVG " + repe$runningAverageFPS;
     }
 }
 

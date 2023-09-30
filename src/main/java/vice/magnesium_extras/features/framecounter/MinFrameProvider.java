@@ -1,19 +1,16 @@
 package vice.magnesium_extras.features.framecounter;
 
-import lombok.Getter;
-import lombok.val;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.FrameTimer;
 import net.minecraft.util.math.MathHelper;
 import vice.magnesium_extras.mixins.framecounter.FpsAccessorMixin;
 
 public class MinFrameProvider {
-    @Getter
+    public static int getLastMinFrame() { return lastMinFrame; }
     private static int lastMinFrame = 0;
 
-    public static void recalculate()
-    {
-        val client = Minecraft.getInstance();
+    public static void recalculate() {
+        Minecraft client = Minecraft.getInstance();
         FrameTimer ft = client.getFrameTimer();
 
         int logStart = ft.getLogStart();

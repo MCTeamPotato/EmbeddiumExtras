@@ -65,7 +65,7 @@ public class ZoomUtils {
 		lastZoomFovMultiplier = zoomFovMultiplier;
 		
 		if (MagnesiumExtrasConfig.zoomTransition.get().equals(MagnesiumExtrasConfig.ZoomTransitionOptions.SMOOTH.toString())) {
-			zoomFovMultiplier += (zoomMultiplier - zoomFovMultiplier) * MagnesiumExtrasConfig.zoomValues.smoothMultiplier;
+			zoomFovMultiplier += (float) ((zoomMultiplier - zoomFovMultiplier) * MagnesiumExtrasConfig.zoomValues.smoothMultiplier);
 		}
 	}
 
@@ -80,7 +80,7 @@ public class ZoomUtils {
 		lastZoomOverlayAlpha = zoomOverlayAlpha;
 
 		if (MagnesiumExtrasConfig.zoomTransition.get().equals(MagnesiumExtrasConfig.ZoomTransitionOptions.SMOOTH.toString())) {
-			zoomOverlayAlpha += (zoomMultiplier - zoomOverlayAlpha) * MagnesiumExtrasConfig.zoomValues.smoothMultiplier;
+			zoomOverlayAlpha += (float) ((zoomMultiplier - zoomOverlayAlpha) * MagnesiumExtrasConfig.zoomValues.smoothMultiplier);
 		}
 	}
 }

@@ -1,6 +1,5 @@
 package vice.magnesium_extras.features.framecounter;
 
-import lombok.val;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
@@ -13,7 +12,7 @@ public class DebugOverlayImprovements
     @SubscribeEvent
     public static void onRenderDebugText(RenderGameOverlayEvent.Pre event) {
         if (event.getType() != RenderGameOverlayEvent.ElementType.DEBUG) return;
-        val minecraft = Minecraft.getInstance();
+        Minecraft minecraft = Minecraft.getInstance();
         if (minecraft.options.renderFpsChart) event.setCanceled(true);
     }
 }

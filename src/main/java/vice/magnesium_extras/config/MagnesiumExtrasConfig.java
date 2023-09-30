@@ -2,7 +2,6 @@ package vice.magnesium_extras.config;
 
 import com.electronwill.nightconfig.core.file.CommentedFileConfig;
 import com.electronwill.nightconfig.core.io.WritingMode;
-import lombok.val;
 import me.jellysquid.mods.sodium.client.gui.options.TextProvider;
 import net.minecraftforge.common.ForgeConfigSpec;
 
@@ -36,7 +35,7 @@ public class MagnesiumExtrasConfig {
     public static ConfigValue<Boolean> zoomOverlay;
 
     static {
-        val builder = new ConfigBuilder("Magnesium/Rubidium Extra Settings");
+        ConfigBuilder builder = new ConfigBuilder("Magnesium/Rubidium Extra Settings");
 
 
         builder.Block("Misc", b -> fadeInQuality = b.define("Chunk Fade In Quality (OFF, FAST, FANCY)", "FANCY"));

@@ -7,11 +7,11 @@ import vice.magnesium_extras.config.MagnesiumExtrasConfig;
 import java.util.Objects;
 
 public interface ChunkGraphicsStateExt {
-    ChunkRenderContainer<?> getContainer();
+    ChunkRenderContainer<?> getRbpe$container();
 
-    float getLoadTime();
+    float getRbpe$loadTime();
 
-    void setLoadTime(float paramFloat);
+    void setRbpe$loadTime(float paramFloat);
 
     default float getFadeInProgress(float currentTime) {
         String mode = MagnesiumExtrasConfig.fadeInQuality.get();
@@ -22,7 +22,7 @@ public interface ChunkGraphicsStateExt {
             } else if (Objects.equals(mode, "FAST")) {
                 fadeTime = 5.0F;
             }
-        return (currentTime - getLoadTime()) * fadeTime;
+        return (currentTime - getRbpe$loadTime()) * fadeTime;
     }
 
     static ChunkGraphicsStateExt ext(ChunkGraphicsState self) {

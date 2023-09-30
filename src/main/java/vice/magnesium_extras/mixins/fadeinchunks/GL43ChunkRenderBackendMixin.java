@@ -32,20 +32,20 @@ public abstract class GL43ChunkRenderBackendMixin extends ChunkRenderShaderBacke
         if (player == null)
             return;
         ChunkGraphicsState state = it.getGraphicsState();
-        float progress = ChunkGraphicsStateExt.ext(state).getFadeInProgress(this.currentTime);
+        float progress = ChunkGraphicsStateExt.ext(state).getFadeInProgress(this.rbpe$currentTime);
         double x = player.getX() - 16.0D - state.getX();
         double z = player.getZ() - 16.0D - state.getZ();
         if (x * x + z * z < 576.0D) {
-            ChunkDrawParamsVectorExt.ext(this.uniformBufferBuilder).pushChunkDrawParamFadeIn(1.0F);
+            ChunkDrawParamsVectorExt.ext(this.uniformBufferBuilder).rbpe$pushChunkDrawParamFadeIn(1.0F);
         } else {
-            ChunkDrawParamsVectorExt.ext(this.uniformBufferBuilder).pushChunkDrawParamFadeIn(progress);
+            ChunkDrawParamsVectorExt.ext(this.uniformBufferBuilder).rbpe$pushChunkDrawParamFadeIn(progress);
         }
     }
 
     @ModifyArg(method = {"upload"}, at = @At(value = "INVOKE", target = "Lme/jellysquid/mods/sodium/client/render/chunk/ChunkRenderContainer;setGraphicsState(Lme/jellysquid/mods/sodium/client/render/chunk/passes/BlockRenderPass;Lme/jellysquid/mods/sodium/client/render/chunk/ChunkGraphicsState;)V", ordinal = 0))
     private ChunkGraphicsState setLoadTime(BlockRenderPass pass, ChunkGraphicsState newState) {
-        ChunkGraphicsState oldState = ChunkGraphicsStateExt.ext(newState).getContainer().getGraphicsState(pass);
-        ChunkGraphicsStateExt.ext(newState).setLoadTime((oldState == null) ? this.currentTime : ChunkGraphicsStateExt.ext(oldState).getLoadTime());
+        ChunkGraphicsState oldState = ChunkGraphicsStateExt.ext(newState).getRbpe$container().getGraphicsState(pass);
+        ChunkGraphicsStateExt.ext(newState).setRbpe$loadTime((oldState == null) ? this.rbpe$currentTime : ChunkGraphicsStateExt.ext(oldState).getRbpe$loadTime());
         return newState;
     }
 }
