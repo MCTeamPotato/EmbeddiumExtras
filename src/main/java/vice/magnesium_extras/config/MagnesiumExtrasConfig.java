@@ -33,6 +33,7 @@ public class MagnesiumExtrasConfig {
     public static ConfigValue<String> cinematicCameraMode;
     public static ConfigValue<Boolean> zoomScrolling;
     public static ConfigValue<Boolean> zoomOverlay;
+    public static ConfigValue<Boolean> enableFog;
 
     static {
         ConfigBuilder builder = new ConfigBuilder("Magnesium/Rubidium Extra Settings");
@@ -44,6 +45,10 @@ public class MagnesiumExtrasConfig {
             fpsCounterMode = b.define("Display FPS Counter (OFF, SIMPLE, ADVANCED)", "ADVANCED");
             fpsCounterAlignRight = b.define("Right-align FPS Counter", false);
             fpsCounterPosition = b.define("FPS Counter Distance", 12);
+        });
+
+        builder.Block("Fog", b -> {
+            enableFog = b.define("enableFog", true);
         });
 
         builder.Block("Entity Distance", b -> {

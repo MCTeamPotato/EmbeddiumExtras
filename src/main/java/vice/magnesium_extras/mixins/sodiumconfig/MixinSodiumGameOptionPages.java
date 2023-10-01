@@ -28,6 +28,8 @@ import java.util.List;
 @Mixin(value = SodiumGameOptionPages.class, remap = false, priority = 10)
 public abstract class MixinSodiumGameOptionPages {
     @Shadow @Final private static SodiumOptionsStorage sodiumOpts;
+
+
     @ModifyArg(method = "general", at = @At(value = "INVOKE", target = "Lcom/google/common/collect/ImmutableList;copyOf(Ljava/util/Collection;)Lcom/google/common/collect/ImmutableList;"))
     private static @NotNull Collection<OptionGroup> insertSetting1(Collection<OptionGroup> elements) {
         List<OptionGroup> groups = new ObjectArrayList<>(elements);
@@ -95,6 +97,18 @@ public abstract class MixinSodiumGameOptionPages {
     private static @NotNull Collection<OptionGroup> insertSetting3(Collection<OptionGroup> elements) {
         List<OptionGroup> groups = new ObjectArrayList<>(elements);
 
+        OptionImpl<SodiumGameOptions, Boolean> enableFog = OptionImpl.createBuilder(Boolean.class, sodiumOpts)
+                .setName(I18n.get("extra.enable_fog.name"))
+                .setTooltip(I18n.get("extra.enable_fog.tooltip"))
+                .setControl(TickBoxControl::new)
+                .setBinding(
+                        (options, value) -> MagnesiumExtrasConfig.enableFog.set(value),
+                        (option) -> MagnesiumExtrasConfig.enableFog.get())
+                .setImpact(OptionImpact.MEDIUM)
+                .build();
+
+        groups.add(OptionGroup.createBuilder().add(enableFog).build());
+
         OptionImpl<SodiumGameOptions, Boolean> enableDistanceChecks = OptionImpl.createBuilder(Boolean.class, sodiumOpts)
                 .setName(I18n.get("extras.enable_max_entity_distance.name"))
                 .setTooltip(I18n.get("extras.enable_max_entity_distance.tooltip"))
@@ -102,9 +116,8 @@ public abstract class MixinSodiumGameOptionPages {
                 .setBinding(
                         (options, value) -> MagnesiumExtrasConfig.enableDistanceChecks.set(value),
                         (options) -> MagnesiumExtrasConfig.enableDistanceChecks.get())
-                .setImpact(OptionImpact.LOW)
+                .setImpact(OptionImpact.EXTREME)
                 .build();
-
 
         groups.add(OptionGroup
                 .createBuilder()
@@ -166,6 +179,7 @@ public abstract class MixinSodiumGameOptionPages {
                         .add(maxTileEntityDistanceVertical)
                         .build()
         );
+
         return groups;
     }
 }

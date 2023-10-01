@@ -33,5 +33,4 @@ public abstract class MaxDistanceTileEntity
             ci.cancel();
         }
     }
-
 }

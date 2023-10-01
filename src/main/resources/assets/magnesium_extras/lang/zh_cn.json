@@ -1,4 +1,6 @@
 {
+  "extra.enable_fog.name": "启用雾",
+  "extra.enable_fog.tooltip": "是否渲染雾",
   "extras.key.zoom": "缩放",
   "extras.key.category": "铷/镁：附属",
   "extras.option.off": "关",
