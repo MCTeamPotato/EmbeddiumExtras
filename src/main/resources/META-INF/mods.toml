@@ -11,3 +11,10 @@ authors="Team Potato"
 description='''
 Adds Extra Settings to Embeddium.
 '''
+
+[[dependencies.magnesium_extras]]
+modId="embeddium"
+mandatory=true
+versionRange="[0.1.14+mc1.16.5,)"
+ordering="NONE"
+side="BOTH"

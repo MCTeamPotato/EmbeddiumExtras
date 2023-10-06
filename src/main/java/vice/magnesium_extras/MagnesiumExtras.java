@@ -1,5 +1,6 @@
 package vice.magnesium_extras;
 
+import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.client.util.InputMappings;
 import net.minecraftforge.client.settings.KeyConflictContext;
@@ -16,6 +17,7 @@ import net.minecraftforge.fml.network.FMLNetworkConstants;
 import org.apache.commons.lang3.tuple.Pair;
 import org.jetbrains.annotations.NotNull;
 import org.lwjgl.glfw.GLFW;
+import org.lwjgl.opengl.GL11;
 import vice.magnesium_extras.config.EntityListConfig;
 import vice.magnesium_extras.config.MagnesiumExtrasConfig;
 
@@ -34,5 +36,10 @@ public class MagnesiumExtras
 
     public void onClientSetup(@NotNull FMLClientSetupEvent event) {
         event.enqueueWork(() -> ClientRegistry.registerKeyBinding(zoomKey));
+    }
+
+    @SuppressWarnings("deprecation")
+    public static void disableFog() {
+        if (!MagnesiumExtrasConfig.enableFog.get() && GL11.glGetInteger(GL11.GL_FOG_MODE) == GL11.GL_LINEAR) RenderSystem.disableFog();
     }
 }
