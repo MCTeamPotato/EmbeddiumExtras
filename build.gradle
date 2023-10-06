@@ -32,7 +32,7 @@ project.buildnumber = System.getenv('BUILD_NUMBER') != null ? System.getenv('BUI
 
 version = "mc${minecraft_version}_v${mod_version}" + (dev && buildnumber != "custom" ? "+${buildnumber}" : '')
 group = 'vice.' + String.valueOf(mod_id)
-archivesBaseName = String.valueOf(mod_id)
+archivesBaseName = "embeddium-extras"
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(8)
 
@@ -107,7 +107,7 @@ dependencies {
     implementation 'org.jetbrains:annotations:24.0.0'
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
-    implementation fg.deobf("curse.maven:rubidium-574856:4743730")
+    implementation fg.deobf("curse.maven:embeddium-908741:4779182")
 }
 
 jar {
