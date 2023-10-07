@@ -10,7 +10,6 @@
     "fadeinchunks.NioChunkDrawCallVectorMixin",
     "fadeinchunks.ShaderLoaderMixin",
     "fadeinchunks.UnsafeChunkDrawCallVectorMixin",
-    "fog.MixinSodiumWorldRenderer",
     "sodiumconfig.MixinSodiumGameOptionPages",
     "zoom.MouseMixin"
   ],

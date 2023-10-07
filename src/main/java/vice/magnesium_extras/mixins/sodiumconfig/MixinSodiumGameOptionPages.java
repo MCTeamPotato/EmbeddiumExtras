@@ -29,7 +29,6 @@ import java.util.List;
 public abstract class MixinSodiumGameOptionPages {
     @Shadow @Final private static SodiumOptionsStorage sodiumOpts;
 
-
     @ModifyArg(method = "general", at = @At(value = "INVOKE", target = "Lcom/google/common/collect/ImmutableList;copyOf(Ljava/util/Collection;)Lcom/google/common/collect/ImmutableList;"))
     private static @NotNull Collection<OptionGroup> insertSetting1(Collection<OptionGroup> elements) {
         List<OptionGroup> groups = new ObjectArrayList<>(elements);
@@ -96,18 +95,6 @@ public abstract class MixinSodiumGameOptionPages {
     @ModifyArg(method = "performance", at = @At(value = "INVOKE", target = "Lcom/google/common/collect/ImmutableList;copyOf(Ljava/util/Collection;)Lcom/google/common/collect/ImmutableList;"))
     private static @NotNull Collection<OptionGroup> insertSetting3(Collection<OptionGroup> elements) {
         List<OptionGroup> groups = new ObjectArrayList<>(elements);
-
-        OptionImpl<SodiumGameOptions, Boolean> enableFog = OptionImpl.createBuilder(Boolean.class, sodiumOpts)
-                .setName(I18n.get("extra.enable_fog.name"))
-                .setTooltip(I18n.get("extra.enable_fog.tooltip"))
-                .setControl(TickBoxControl::new)
-                .setBinding(
-                        (options, value) -> MagnesiumExtrasConfig.enableFog.set(value),
-                        (option) -> MagnesiumExtrasConfig.enableFog.get())
-                .setImpact(OptionImpact.MEDIUM)
-                .build();
-
-        groups.add(OptionGroup.createBuilder().add(enableFog).build());
 
         OptionImpl<SodiumGameOptions, Boolean> enableDistanceChecks = OptionImpl.createBuilder(Boolean.class, sodiumOpts)
                 .setName(I18n.get("extras.enable_max_entity_distance.name"))
