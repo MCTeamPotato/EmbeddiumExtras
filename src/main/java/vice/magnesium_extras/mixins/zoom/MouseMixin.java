@@ -18,7 +18,7 @@ import vice.magnesium_extras.features.zoom.ZoomUtils;
 
 
 //This mixin is responsible for the mouse-behavior-changing part of the zoom.
-@Mixin(value = MouseHelper.class, priority = 10)
+@Mixin(MouseHelper.class)
 public abstract class MouseMixin {
 	@Shadow
 	@Final

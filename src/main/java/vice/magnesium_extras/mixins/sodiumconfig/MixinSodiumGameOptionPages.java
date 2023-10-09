@@ -1,12 +1,8 @@
 package vice.magnesium_extras.mixins.sodiumconfig;
 
-import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import me.jellysquid.mods.sodium.client.gui.SodiumGameOptionPages;
 import me.jellysquid.mods.sodium.client.gui.SodiumGameOptions;
-import me.jellysquid.mods.sodium.client.gui.options.Option;
-import me.jellysquid.mods.sodium.client.gui.options.OptionGroup;
-import me.jellysquid.mods.sodium.client.gui.options.OptionImpact;
-import me.jellysquid.mods.sodium.client.gui.options.OptionImpl;
+import me.jellysquid.mods.sodium.client.gui.options.*;
 import me.jellysquid.mods.sodium.client.gui.options.control.ControlValueFormatter;
 import me.jellysquid.mods.sodium.client.gui.options.control.CyclingControl;
 import me.jellysquid.mods.sodium.client.gui.options.control.SliderControl;
@@ -14,24 +10,23 @@ import me.jellysquid.mods.sodium.client.gui.options.control.TickBoxControl;
 import me.jellysquid.mods.sodium.client.gui.options.storage.SodiumOptionsStorage;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.text.TranslationTextComponent;
-import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.ModifyArg;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 import vice.magnesium_extras.config.MagnesiumExtrasConfig;
 
-import java.util.Collection;
 import java.util.List;
 
-@Mixin(value = SodiumGameOptionPages.class, remap = false, priority = 10)
+@Mixin(value = SodiumGameOptionPages.class, remap = false)
 public abstract class MixinSodiumGameOptionPages {
     @Shadow @Final private static SodiumOptionsStorage sodiumOpts;
 
-    @ModifyArg(method = "general", at = @At(value = "INVOKE", target = "Lcom/google/common/collect/ImmutableList;copyOf(Ljava/util/Collection;)Lcom/google/common/collect/ImmutableList;"))
-    private static @NotNull Collection<OptionGroup> insertSetting1(Collection<OptionGroup> elements) {
-        List<OptionGroup> groups = new ObjectArrayList<>(elements);
+    @Inject(method = "general", at = @At(value = "INVOKE", target = "Ljava/util/List;add(Ljava/lang/Object;)Z", remap = false, ordinal = 2, shift = At.Shift.BEFORE), locals = LocalCapture.CAPTURE_FAILEXCEPTION)
+    private static void insertSetting1(CallbackInfoReturnable<OptionPage> cir, List<OptionGroup> groups) {
         Option<MagnesiumExtrasConfig.Complexity> displayFps =  OptionImpl.createBuilder(MagnesiumExtrasConfig.Complexity.class, sodiumOpts)
                 .setName(I18n.get("extras.display_fps.display.name"))
                 .setTooltip(I18n.get("extras.display_fps.display.tooltip"))
@@ -68,13 +63,11 @@ public abstract class MixinSodiumGameOptionPages {
                 .add(displayFpsAlignRight)
                 .add(displayFpsPos)
                 .build());
-        return groups;
     }
 
 
-    @ModifyArg(method = "quality", at = @At(value = "INVOKE", target = "Lcom/google/common/collect/ImmutableList;copyOf(Ljava/util/Collection;)Lcom/google/common/collect/ImmutableList;"))
-    private static @NotNull Collection<OptionGroup> insertSetting2(Collection<OptionGroup> elements) {
-        List<OptionGroup> groups = new ObjectArrayList<>(elements);
+    @Inject(method = "quality", at = @At(value = "INVOKE", target = "Ljava/util/List;add(Ljava/lang/Object;)Z", remap = false, ordinal = 2, shift = At.Shift.BEFORE), locals = LocalCapture.CAPTURE_FAILEXCEPTION)
+    private static void insertSetting2(CallbackInfoReturnable<OptionPage> cir, List<OptionGroup> groups) {
         OptionImpl<SodiumGameOptions, MagnesiumExtrasConfig.Quality> chunkFadeIn = OptionImpl.createBuilder(MagnesiumExtrasConfig.Quality.class, sodiumOpts)
                 .setName(I18n.get("extras.fadeinchunks.name"))
                 .setTooltip(I18n.get("extras.fadeinchunks.tooltip"))
@@ -89,12 +82,10 @@ public abstract class MixinSodiumGameOptionPages {
         groups.add(OptionGroup.createBuilder()
                 .add(chunkFadeIn)
                 .build());
-        return groups;
     }
 
-    @ModifyArg(method = "performance", at = @At(value = "INVOKE", target = "Lcom/google/common/collect/ImmutableList;copyOf(Ljava/util/Collection;)Lcom/google/common/collect/ImmutableList;"))
-    private static @NotNull Collection<OptionGroup> insertSetting3(Collection<OptionGroup> elements) {
-        List<OptionGroup> groups = new ObjectArrayList<>(elements);
+    @Inject(method = "performance", at = @At(value = "INVOKE", target = "Ljava/util/List;add(Ljava/lang/Object;)Z", remap = false, ordinal = 0, shift = At.Shift.AFTER), locals = LocalCapture.CAPTURE_FAILEXCEPTION)
+    private static void insertSetting3(CallbackInfoReturnable<OptionPage> cir, List<OptionGroup> groups) {
 
         OptionImpl<SodiumGameOptions, Boolean> enableDistanceChecks = OptionImpl.createBuilder(Boolean.class, sodiumOpts)
                 .setName(I18n.get("extras.enable_max_entity_distance.name"))
@@ -166,7 +157,5 @@ public abstract class MixinSodiumGameOptionPages {
                         .add(maxTileEntityDistanceVertical)
                         .build()
         );
-
-        return groups;
     }
 }
