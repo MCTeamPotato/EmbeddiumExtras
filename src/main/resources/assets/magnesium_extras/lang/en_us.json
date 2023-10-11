@@ -2,7 +2,7 @@
   "extra.enable_fog.name": "Enable Fog",
   "extra.enable_fog.tooltip": "To enable fog or not.",
   "extras.key.zoom": "Zoom",
-  "extras.key.category": "Magnesium/Rubidium Extras",
+  "extras.key.category": "Embeddium Extras",
   "extras.option.off": "Off",
   "extras.option.simple": "Simple",
   "extras.option.advanced": "Advanced",
