@@ -12,10 +12,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(value = {ChunkRenderShaderBackend.class}, remap = false)
 public abstract class ChunkRenderShaderBackendMixin<P extends ChunkGraphicsState> {
     @Unique
-    protected float rbpe$currentTime;
+    protected float ee$currentTime;
 
     @Inject(method = {"begin"}, at = {@At("HEAD")})
     private void updateTime(CallbackInfo ci) {
-        this.rbpe$currentTime = (float)Util.getMillis() / 1000.0F;
+        this.ee$currentTime = (float)Util.getMillis() / 1000.0F;
     }
 }

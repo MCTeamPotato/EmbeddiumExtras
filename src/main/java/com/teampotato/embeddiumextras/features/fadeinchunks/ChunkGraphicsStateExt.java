@@ -7,11 +7,11 @@ import com.teampotato.embeddiumextras.config.MagnesiumExtrasConfig;
 import java.util.Objects;
 
 public interface ChunkGraphicsStateExt {
-    ChunkRenderContainer<?> getRbpe$container();
+    ChunkRenderContainer<?> getee$container();
 
-    float getRbpe$loadTime();
+    float getee$loadTime();
 
-    void setRbpe$loadTime(float paramFloat);
+    void setee$loadTime(float paramFloat);
 
     default float getFadeInProgress(float currentTime) {
         String mode = MagnesiumExtrasConfig.fadeInQuality.get();
@@ -22,7 +22,7 @@ public interface ChunkGraphicsStateExt {
             } else if (Objects.equals(mode, "FAST")) {
                 fadeTime = 5.0F;
             }
-        return (currentTime - getRbpe$loadTime()) * fadeTime;
+        return (currentTime - getee$loadTime()) * fadeTime;
     }
 
     static ChunkGraphicsStateExt ext(ChunkGraphicsState self) {

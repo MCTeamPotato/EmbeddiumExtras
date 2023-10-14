@@ -1,6 +1,7 @@
 package com.teampotato.embeddiumextras.mixins.entitydistance;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
+import com.teampotato.embeddiumextras.features.entitydistance.RenderChecker;
 import net.minecraft.client.renderer.ActiveRenderInfo;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
@@ -20,18 +21,8 @@ public abstract class MaxDistanceTileEntity
     @Shadow public ActiveRenderInfo camera;
 
     @Inject(at = @At("HEAD"), method = "render", cancellable = true)
-    public <E extends TileEntity> void render(E entity, float val, MatrixStack matrix, IRenderTypeBuffer p_228850_4_, CallbackInfo ci)
-    {
-        if (!MagnesiumExtrasConfig.enableDistanceChecks.get()) return;
-
-        if (!DistanceUtility.isEntityWithinDistance(
-                entity.getBlockPos(),
-                this.camera.getPosition(),
-                MagnesiumExtrasConfig.maxTileEntityRenderDistanceY.get(),
-                MagnesiumExtrasConfig.maxTileEntityRenderDistanceSquare.get()
-        ))
-        {
-            ci.cancel();
-        }
+    public <E extends TileEntity> void render(E entity, float val, MatrixStack matrix, IRenderTypeBuffer p_228850_4_, CallbackInfo ci) {
+        if (!MagnesiumExtrasConfig.enableDistanceChecks.get() || ((RenderChecker)entity).ee$shouldAlwaysRender() || DistanceUtility.isEntityWithinDistance(entity.getBlockPos(), this.camera.getPosition(), MagnesiumExtrasConfig.maxTileEntityRenderDistanceY.get(), MagnesiumExtrasConfig.maxTileEntityRenderDistanceSquare.get())) return;
+        ci.cancel();
     }
 }

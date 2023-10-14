@@ -3,24 +3,24 @@
   "package": "com.teampotato.embeddiumextras.mixins",
   "compatibilityLevel": "JAVA_8",
   "refmap": "embeddiumextras.refmap.json",
-  "mixins": [
+  "minVersion": "0.8",
+  "client": [
+    "entitydistance.EntityMixin",
+    "entitydistance.MaxDistanceEntity",
+    "entitydistance.MaxDistanceTileEntity",
     "fadeinchunks.ChunkGraphicsStateMixin",
     "fadeinchunks.ChunkRenderShaderBackendMixin",
     "fadeinchunks.GL43ChunkRenderBackendMixin",
     "fadeinchunks.NioChunkDrawCallVectorMixin",
     "fadeinchunks.ShaderLoaderMixin",
     "fadeinchunks.UnsafeChunkDrawCallVectorMixin",
-    "sodiumconfig.MixinSodiumGameOptionPages",
-    "zoom.MouseMixin"
-  ],
-  "minVersion": "0.8",
-  "client": [
-    "entitydistance.MaxDistanceEntity",
-    "entitydistance.MaxDistanceTileEntity",
     "framecounter.FpsAccessorMixin",
     "framecounter.FrameCounterMixin",
     "performance.RenderTypeLookupMixin",
+    "sodiumconfig.MixinSodiumGameOptionPages",
     "sodiumconfig.ZoomSettingsPage",
-    "zoom.GameRendererMixin"
+    "zoom.GameRendererMixin",
+    "zoom.MouseMixin",
+    "entitydistance.TileEntityMixin"
   ]
 }

@@ -12,26 +12,26 @@ import com.teampotato.embeddiumextras.features.fadeinchunks.ChunkGraphicsStateEx
 @Mixin(value = {ChunkGraphicsState.class}, remap = false)
 public abstract class ChunkGraphicsStateMixin implements ChunkGraphicsStateExt {
     @Unique
-    private ChunkRenderContainer<?> rbpe$container;
+    private ChunkRenderContainer<?> ee$container;
 
     @Unique
-    private float rbpe$loadTime;
+    private float ee$loadTime;
 
     @Inject(method = {"<init>"}, at = {@At("RETURN")})
     private void init(ChunkRenderContainer<?> container, CallbackInfo ci) {
-        this.rbpe$container = container;
+        this.ee$container = container;
     }
 
-    public ChunkRenderContainer<?> getRbpe$container() {
-        return this.rbpe$container;
+    public ChunkRenderContainer<?> getee$container() {
+        return this.ee$container;
     }
 
-    public float getRbpe$loadTime() {
-        return this.rbpe$loadTime;
+    public float getee$loadTime() {
+        return this.ee$loadTime;
     }
 
-    public void setRbpe$loadTime(float time) {
-        this.rbpe$loadTime = time;
+    public void setee$loadTime(float time) {
+        this.ee$loadTime = time;
     }
 }
 

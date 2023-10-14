@@ -15,7 +15,7 @@ public abstract class UnsafeChunkDrawCallVectorMixin extends ChunkDrawParamsVect
         super(capacity);
     }
 
-    public void rbpe$pushChunkDrawParamFadeIn(float progress) {
+    public void ee$pushChunkDrawParamFadeIn(float progress) {
         MemoryUtil.memPutFloat(this.writePointer - 4L, progress);
     }
 }
