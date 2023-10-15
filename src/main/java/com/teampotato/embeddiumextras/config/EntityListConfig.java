@@ -11,10 +11,12 @@ public class EntityListConfig {
     public static final ForgeConfigSpec.ConfigValue<List<? extends String>> ENTITY_LIST, ENTITY_MODID_LIST, TILE_ENTITY_LIST, TILE_ENTITY_MODID_LIST;
 
     static {
-        List<? extends String> entity_modid_list = ObjectArrayList.wrap(
+        List<? extends String> tileEntityList = ObjectArrayList.wrap(new String[]{"minecraft:beacon"});
+        List<? extends String> tileEntityModidList = ObjectArrayList.wrap(new String[]{});
+        List<? extends String> entityModidList = ObjectArrayList.wrap(
                 new String[]{"witherstormmod"}
         );
-        List<? extends String> entity_list = ObjectArrayList.wrap(
+        List<? extends String> entityList = ObjectArrayList.wrap(
                 new String[] {
                         "minecraft:ender_dragon",
                         "minecraft:ghast",
@@ -111,12 +113,12 @@ public class EntityListConfig {
         ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
         builder.comment("Embeddium Extra Entity List Config");
         builder.push("Entity");
-        ENTITY_LIST = builder.defineList("entities which should always be rendered", entity_list, validator);
-        ENTITY_MODID_LIST = builder.defineList("modid(entities of this mod will always be rendered)", entity_modid_list, validator);
+        ENTITY_LIST = builder.defineList("entities which should always be rendered", entityList, validator);
+        ENTITY_MODID_LIST = builder.defineList("modid(entities of this mod will always be rendered)", entityModidList, validator);
         builder.pop();
         builder.push("TileEntity");
-        TILE_ENTITY_LIST = builder.defineList("tile entities which should always be rendered", new ObjectArrayList<>(), validator);
-        TILE_ENTITY_MODID_LIST = builder.defineList("modid(tile entities of this mod will always be rendered)", new ObjectArrayList<>(), validator);
+        TILE_ENTITY_LIST = builder.defineList("tile entities which should always be rendered", tileEntityList, validator);
+        TILE_ENTITY_MODID_LIST = builder.defineList("modid(tile entities of this mod will always be rendered)", tileEntityModidList, validator);
         builder.pop();
         ENTITY_LIST_CONFIG = builder.build();
     }

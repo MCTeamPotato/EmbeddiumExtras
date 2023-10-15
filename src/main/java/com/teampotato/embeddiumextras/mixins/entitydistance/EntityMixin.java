@@ -6,7 +6,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.loading.FMLLoader;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -23,10 +22,17 @@ public class EntityMixin implements RenderChecker {
         return this.ee$shouldAlwaysRender;
     }
 
+    @Override
+    public void ee$setShouldAlwaysRender(boolean shouldAlwaysRender) {
+        this.ee$shouldAlwaysRender = shouldAlwaysRender;
+    }
+
     @Inject(method = "<init>", at = @At("RETURN"))
     private void onInit(EntityType<?> entityType, World world, CallbackInfo ci) {
-        if (!FMLLoader.getDist().isClient()) return;
+        if (this.ee$shouldAlwaysRender() || world == null || !world.isClientSide) return;
         ResourceLocation id = entityType.getRegistryName();
-        if (id != null && (EntityListConfig.ENTITY_LIST.get().contains(id.toString()) || EntityListConfig.ENTITY_MODID_LIST.get().contains(id.getNamespace()))) this.ee$shouldAlwaysRender = true;
+        if (id != null && (EntityListConfig.ENTITY_LIST.get().contains(id.toString()) || EntityListConfig.ENTITY_MODID_LIST.get().contains(id.getNamespace()))) {
+            this.ee$setShouldAlwaysRender(true);
+        }
     }
 }
