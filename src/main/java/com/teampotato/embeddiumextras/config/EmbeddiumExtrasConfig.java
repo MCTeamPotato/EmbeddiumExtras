@@ -34,7 +34,10 @@ public class EmbeddiumExtrasConfig {
     static {
         ConfigBuilder builder = new ConfigBuilder("Embeddium Extra Settings");
 
-        builder.block("Misc", b -> fadeInQuality = b.define("Chunk Fade In Quality (OFF, FAST, FANCY)", "FANCY"));
+        builder.block("Misc", b -> {
+            fadeInQuality = b.define("Chunk Fade In Quality (OFF, FAST, FANCY)", "FANCY");
+            hideJeiItems = b.comment("Tweak JEI rendering so that the item list does not display unless search is active. This de-clutters the screen significantly unless you're actively using JEI.").define("Hide JEI Items", false);
+        });
 
         builder.block("FPS Counter", b -> {
             fpsCounterMode = b.define("Display FPS Counter (OFF, SIMPLE, ADVANCED)", "ADVANCED");
@@ -72,8 +75,6 @@ public class EmbeddiumExtrasConfig {
             EmbeddiumExtrasConfig.tileEntityList = b.defineList("tile entities which should always be rendered", tileEntityList, validator);
             EmbeddiumExtrasConfig.tileEntityModIdList = b.defineList("modid(tile entities of this mod will always be rendered)", tileEntityModidList, validator);
         });
-
-        builder.block("Just Enough Items", b -> hideJeiItems = b.comment("Tweak JEI rendering so that the item list does not display unless search is active. This de-clutters the screen significantly unless you're actively using JEI.").define("Hide JEI Items", false));
 
         ConfigSpec = builder.save();
     }
