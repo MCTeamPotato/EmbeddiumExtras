@@ -10,6 +10,7 @@ import me.jellysquid.mods.sodium.client.gui.options.control.TickBoxControl;
 import me.jellysquid.mods.sodium.client.gui.options.storage.SodiumOptionsStorage;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.text.TranslationTextComponent;
+import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -85,7 +86,17 @@ public abstract class MixinSodiumGameOptionPages {
     }
 
     @Inject(method = "performance", at = @At(value = "INVOKE", target = "Ljava/util/List;add(Ljava/lang/Object;)Z", remap = false, ordinal = 0, shift = At.Shift.AFTER), locals = LocalCapture.CAPTURE_FAILEXCEPTION)
-    private static void insertSetting3(CallbackInfoReturnable<OptionPage> cir, List<OptionGroup> groups) {
+    private static void insertSetting3(CallbackInfoReturnable<OptionPage> cir, @NotNull List<OptionGroup> groups) {
+        OptionImpl<SodiumGameOptions, Boolean> hideJei = OptionImpl.createBuilder(Boolean.class, sodiumOpts)
+                .setName(I18n.get("extras.jei.name"))
+                .setTooltip(I18n.get("extras.jei.tooltip"))
+                .setControl(TickBoxControl::new)
+                .setBinding((sodiumGameOptions, aBoolean) -> EmbeddiumExtrasConfig.hideJeiItems.set(aBoolean), sodiumGameOptions -> EmbeddiumExtrasConfig.hideJeiItems.get())
+                .setImpact(OptionImpact.MEDIUM)
+                .setFlags(new OptionFlag[]{OptionFlag.REQUIRES_RENDERER_RELOAD})
+                .build();
+
+        groups.add(OptionGroup.createBuilder().add(hideJei).build());
 
         OptionImpl<SodiumGameOptions, Boolean> enableDistanceChecks = OptionImpl.createBuilder(Boolean.class, sodiumOpts)
                 .setName(I18n.get("extras.enable_max_entity_distance.name"))

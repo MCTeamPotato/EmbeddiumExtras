@@ -108,6 +108,7 @@ dependencies {
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
     implementation fg.deobf("curse.maven:embeddium-908741:4788595")
+    implementation fg.deobf("curse.maven:jei-238222:4371666")
 }
 
 jar {

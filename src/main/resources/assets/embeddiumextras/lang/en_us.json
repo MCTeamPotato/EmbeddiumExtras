@@ -1,6 +1,6 @@
 {
-  "extra.enable_fog.name": "Enable Fog",
-  "extra.enable_fog.tooltip": "To enable fog or not.",
+  "extras.jei.name": "Hide JEI Items",
+  "extras.jei.tooltip": "Tweak JEI rendering so that the item list does not display unless search is active. This de-clutters the screen significantly unless you're actively using JEI.",
   "extras.key.zoom": "Zoom",
   "extras.key.category": "Embeddium Extras",
   "extras.option.off": "Off",

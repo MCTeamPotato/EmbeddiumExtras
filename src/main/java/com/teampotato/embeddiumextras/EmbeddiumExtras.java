@@ -1,6 +1,5 @@
 package com.teampotato.embeddiumextras;
 
-import com.teampotato.embeddiumextras.config.EntityListConfig;
 import com.teampotato.embeddiumextras.config.EmbeddiumExtrasConfig;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.client.util.InputMappings;
@@ -10,7 +9,6 @@ import net.minecraftforge.fml.ExtensionPoint;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLPaths;
@@ -28,7 +26,6 @@ public class EmbeddiumExtras
     public EmbeddiumExtras() {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::onClientSetup);
         EmbeddiumExtrasConfig.loadConfig(FMLPaths.CONFIGDIR.get().resolve("embeddium_extras.toml"));
-        ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, EntityListConfig.ENTITY_LIST_CONFIG, "embeddium_extras_entitylist.toml");
         ModLoadingContext.get().registerExtensionPoint(ExtensionPoint.DISPLAYTEST, () -> Pair.of(() -> FMLNetworkConstants.IGNORESERVERONLY, (a, b) -> true));
     }
 

@@ -1,6 +1,6 @@
 package com.teampotato.embeddiumextras.mixins.entitydistance;
 
-import com.teampotato.embeddiumextras.config.EntityListConfig;
+import com.teampotato.embeddiumextras.config.EmbeddiumExtrasConfig;
 import com.teampotato.embeddiumextras.features.entitydistance.RenderChecker;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
@@ -35,7 +35,7 @@ public class TileEntityMixin implements RenderChecker {
     private void onInit(World world, BlockPos blockPos, CallbackInfo ci) {
         if (this.ee$shouldAlwaysRender() || world == null || !world.isClientSide) return;
         ResourceLocation id = this.type.getRegistryName();
-        if (id != null && (EntityListConfig.TILE_ENTITY_LIST.get().contains(id.toString()) || EntityListConfig.TILE_ENTITY_MODID_LIST.get().contains(id.getNamespace()))) {
+        if (id != null && (EmbeddiumExtrasConfig.tileEntityList.get().contains(id.toString()) || EmbeddiumExtrasConfig.tileEntityModIdList.get().contains(id.getNamespace()))) {
             this.ee$setShouldAlwaysRender(true);
         }
     }
