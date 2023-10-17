@@ -3,7 +3,7 @@ loaderVersion="[36,)"
 license="LGPL-2.1"
 
 [[mods]]
-modId="magnesium_extras"
+modId="embeddiumextras"
 version="${file.jarVersion}"
 displayName="Embeddium Extras"
 credits="TeamDeusVult, TexTrue, LocalizedMC"
@@ -12,7 +12,7 @@ description='''
 Adds Extra Settings to Embeddium.
 '''
 
-[[dependencies.magnesium_extras]]
+[[dependencies.embeddiumextras]]
 modId="embeddium"
 mandatory=true
 versionRange="[0.1.14+mc1.16.5,)"

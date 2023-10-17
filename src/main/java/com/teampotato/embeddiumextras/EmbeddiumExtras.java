@@ -22,7 +22,7 @@ import org.lwjgl.glfw.GLFW;
 @Mod(EmbeddiumExtras.MODID)
 public class EmbeddiumExtras
 {
-    public static final String MODID = "magnesium_extras";
+    public static final String MODID = "embeddiumextras";
     public static final KeyBinding zoomKey = new KeyBinding("extras.key.zoom", KeyConflictContext.IN_GAME, KeyModifier.NONE, InputMappings.Type.KEYSYM, GLFW.GLFW_KEY_C, "extras.key.category");
 
     public EmbeddiumExtras() {
