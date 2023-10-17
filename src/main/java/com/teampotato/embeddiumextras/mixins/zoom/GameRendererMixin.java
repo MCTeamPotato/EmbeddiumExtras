@@ -18,7 +18,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import com.teampotato.embeddiumextras.config.MagnesiumExtrasConfig;
+import com.teampotato.embeddiumextras.config.EmbeddiumExtrasConfig;
 import com.teampotato.embeddiumextras.features.zoom.ZoomUtils;
 
 //This mixin is responsible for managing the fov-changing part of the zoom.
@@ -40,12 +40,12 @@ public abstract class GameRendererMixin {
 	)
 	private void zoomTick(CallbackInfo info) {
 		//If zoom transitions are enabled, update the zoom FOV multiplier.
-		if (!MagnesiumExtrasConfig.zoomTransition.get().equals(MagnesiumExtrasConfig.ZoomTransitionOptions.OFF.toString())) {
+		if (!EmbeddiumExtrasConfig.zoomTransition.get().equals(EmbeddiumExtrasConfig.ZoomTransitionOptions.OFF.toString())) {
 			ZoomUtils.updateZoomFovMultiplier();
 		}
 
 		//If the zoom overlay is enabled, update the zoom overlay alpha.
-		if (MagnesiumExtrasConfig.zoomOverlay.get()) {
+		if (EmbeddiumExtrasConfig.zoomOverlay.get()) {
 			ZoomUtils.updateZoomOverlayAlpha();
 		}
 	}
@@ -59,7 +59,7 @@ public abstract class GameRendererMixin {
 	private void getZoomedFov(ActiveRenderInfo camera, float tickDelta, boolean changingFov, @NotNull CallbackInfoReturnable<Double> info) {
 		double fov = info.getReturnValue();
 
-		if (!MagnesiumExtrasConfig.zoomTransition.get().equals(MagnesiumExtrasConfig.ZoomTransitionOptions.OFF.toString())) {
+		if (!EmbeddiumExtrasConfig.zoomTransition.get().equals(EmbeddiumExtrasConfig.ZoomTransitionOptions.OFF.toString())) {
 			//Handle the zoom with smooth transitions enabled.
 			if (ZoomUtils.zoomFovMultiplier != 1.0F) {
 				fov *= MathHelper.lerp(tickDelta, ZoomUtils.lastZoomFovMultiplier, ZoomUtils.zoomFovMultiplier);
@@ -87,7 +87,7 @@ public abstract class GameRendererMixin {
 		method = "render(FJZ)V"
 	)
 	public void injectZoomOverlay(float tickDelta, long startTime, boolean tick, CallbackInfo info) {
-		if (MagnesiumExtrasConfig.zoomOverlay.get()) {
+		if (EmbeddiumExtrasConfig.zoomOverlay.get()) {
 			if (this.minecraft.options.hideGui) {
 				return;
 			}
@@ -95,7 +95,7 @@ public abstract class GameRendererMixin {
 			RenderSystem.defaultAlphaFunc();
 			RenderSystem.enableBlend();
 			//If zoom transitions is on, apply the transition to the overlay.
-			if (!MagnesiumExtrasConfig.zoomTransition.get().equals(MagnesiumExtrasConfig.ZoomTransitionOptions.OFF.toString())) {
+			if (!EmbeddiumExtrasConfig.zoomTransition.get().equals(EmbeddiumExtrasConfig.ZoomTransitionOptions.OFF.toString())) {
 				if (ZoomUtils.zoomFovMultiplier != 0.0F) {
 					float transparency = MathHelper.lerp(tickDelta, ZoomUtils.lastZoomOverlayAlpha, ZoomUtils.zoomOverlayAlpha);
 					this.rb$renderZoomOverlay(transparency);

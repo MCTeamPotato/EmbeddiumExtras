@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import com.teampotato.embeddiumextras.features.framecounter.MinFrameProvider;
-import com.teampotato.embeddiumextras.config.MagnesiumExtrasConfig;
+import com.teampotato.embeddiumextras.config.EmbeddiumExtrasConfig;
 
 import java.util.LinkedList;
 import java.util.Objects;
@@ -21,16 +21,16 @@ import java.util.Queue;
 public abstract class FrameCounterMixin {
 
     @Unique
-    private int repe$lastMeasuredFPS;
+    private int ee$lastMeasuredFPS;
     @Unique
-    private String repe$runningAverageFPS;
+    private String ee$runningAverageFPS;
     @Unique
-    private final Queue<Integer> repe$fpsRunningAverageQueue = new LinkedList<>();
+    private final Queue<Integer> ee$fpsRunningAverageQueue = new LinkedList<>();
 
     @Inject(at = @At("TAIL"), method = "render")
     public void render(MatrixStack matrixStack, float tickDelta, CallbackInfo info)
     {
-        if (Objects.equals(MagnesiumExtrasConfig.fpsCounterMode.get(), "OFF"))
+        if (Objects.equals(EmbeddiumExtrasConfig.fpsCounterMode.get(), "OFF"))
             return;
 
         Minecraft client = Minecraft.getInstance();
@@ -42,14 +42,14 @@ public abstract class FrameCounterMixin {
         String displayString;
         int fps = FpsAccessorMixin.getFPS();
 
-        if (Objects.equals(MagnesiumExtrasConfig.fpsCounterMode.get(), "ADVANCED"))
-            displayString = rb$getAdvancedFPSString(fps);
+        if (Objects.equals(EmbeddiumExtrasConfig.fpsCounterMode.get(), "ADVANCED"))
+            displayString = ee$getAdvancedFPSString(fps);
         else
             displayString = String.valueOf(fps);
 
-        boolean textAlignRight = MagnesiumExtrasConfig.fpsCounterAlignRight.get();
+        boolean textAlignRight = EmbeddiumExtrasConfig.fpsCounterAlignRight.get();
 
-        @SuppressWarnings("RedundantCast") float textPos = (int)MagnesiumExtrasConfig.fpsCounterPosition.get();
+        @SuppressWarnings("RedundantCast") float textPos = (int) EmbeddiumExtrasConfig.fpsCounterPosition.get();
 
         int textAlpha = 200;
         int textColor = 0xFFFFFF;
@@ -88,32 +88,32 @@ public abstract class FrameCounterMixin {
 
 
     @Unique
-    private @NotNull String rb$getAdvancedFPSString(int fps)
+    private @NotNull String ee$getAdvancedFPSString(int fps)
     {
         MinFrameProvider.recalculate();
 
-        if (repe$lastMeasuredFPS != fps)
+        if (ee$lastMeasuredFPS != fps)
         {
-            repe$lastMeasuredFPS = fps;
+            ee$lastMeasuredFPS = fps;
 
-            if (repe$fpsRunningAverageQueue.size() > 14)
-                repe$fpsRunningAverageQueue.poll();
+            if (ee$fpsRunningAverageQueue.size() > 14)
+                ee$fpsRunningAverageQueue.poll();
 
-            repe$fpsRunningAverageQueue.offer(fps);
+            ee$fpsRunningAverageQueue.offer(fps);
 
             int totalFps = 0;
             int frameCount = 0;
-            for (int frameTime : repe$fpsRunningAverageQueue)
+            for (int frameTime : ee$fpsRunningAverageQueue)
             {
                 totalFps += frameTime;
                 frameCount++;
             }
 
             @SuppressWarnings("RedundantCast") int average = (int) (totalFps / frameCount);
-            repe$runningAverageFPS = String.valueOf(average);
+            ee$runningAverageFPS = String.valueOf(average);
         }
 
-        return fps + " | MIN " + MinFrameProvider.getLastMinFrame() + " | AVG " + repe$runningAverageFPS;
+        return fps + " | MIN " + MinFrameProvider.getLastMinFrame() + " | AVG " + ee$runningAverageFPS;
     }
 }
 

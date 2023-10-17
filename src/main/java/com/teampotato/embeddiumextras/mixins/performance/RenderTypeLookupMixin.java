@@ -45,8 +45,7 @@ public abstract class RenderTypeLookupMixin
     }
 
     @Inject(remap = false, at = @At("HEAD"), method = "canRenderInLayer(Lnet/minecraft/fluid/FluidState;Lnet/minecraft/client/renderer/RenderType;)Z", cancellable = true)
-    private static void render(@NotNull FluidState fluid, RenderType type, @NotNull CallbackInfoReturnable<Boolean> cir)
-    {
+    private static void render(@NotNull FluidState fluid, RenderType type, @NotNull CallbackInfoReturnable<Boolean> cir) {
         Predicate<RenderType> renderType = fluidRenderChecks.get(fluid.getType().delegate);
         cir.setReturnValue(renderType != null ? renderType.test(type) : type == RenderType.solid());
     }

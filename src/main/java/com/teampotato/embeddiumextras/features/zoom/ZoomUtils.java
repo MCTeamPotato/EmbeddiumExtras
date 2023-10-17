@@ -1,6 +1,6 @@
 package com.teampotato.embeddiumextras.features.zoom;
 
-import com.teampotato.embeddiumextras.config.MagnesiumExtrasConfig;
+import com.teampotato.embeddiumextras.config.EmbeddiumExtrasConfig;
 
 //The class that contains most of the logic behind the zoom itself.
 public class ZoomUtils {
@@ -11,7 +11,7 @@ public class ZoomUtils {
 	public static boolean lastZoomState = false;
 
 	//The zoom divisor, managed by the zoom press and zoom scrolling. Used by other mixins.
-	public static double zoomDivisor = MagnesiumExtrasConfig.zoomValues.zoomDivisor;
+	public static double zoomDivisor = EmbeddiumExtrasConfig.zoomValues.zoomDivisor;
 
 	//The zoom FOV multipliers. Used by the GameRenderer mixin.
 	public static float zoomFovMultiplier = 1.0F;
@@ -27,20 +27,20 @@ public class ZoomUtils {
 		double lesserChangedZoomDivisor;
 
 		if (increase) {
-			changedZoomDivisor = zoomDivisor + MagnesiumExtrasConfig.zoomValues.scrollStep;
-			lesserChangedZoomDivisor = zoomDivisor + MagnesiumExtrasConfig.zoomValues.lesserScrollStep;
+			changedZoomDivisor = zoomDivisor + EmbeddiumExtrasConfig.zoomValues.scrollStep;
+			lesserChangedZoomDivisor = zoomDivisor + EmbeddiumExtrasConfig.zoomValues.lesserScrollStep;
 		} else {
-			changedZoomDivisor = zoomDivisor - MagnesiumExtrasConfig.zoomValues.scrollStep;
-			lesserChangedZoomDivisor = zoomDivisor - MagnesiumExtrasConfig.zoomValues.lesserScrollStep;
+			changedZoomDivisor = zoomDivisor - EmbeddiumExtrasConfig.zoomValues.scrollStep;
+			lesserChangedZoomDivisor = zoomDivisor - EmbeddiumExtrasConfig.zoomValues.lesserScrollStep;
 			lastZoomState = true;
 		}
 
-		if (lesserChangedZoomDivisor <= MagnesiumExtrasConfig.zoomValues.zoomDivisor) {
+		if (lesserChangedZoomDivisor <= EmbeddiumExtrasConfig.zoomValues.zoomDivisor) {
 			changedZoomDivisor = lesserChangedZoomDivisor;
 		}
 
-		if (changedZoomDivisor >= MagnesiumExtrasConfig.zoomValues.minimumZoomDivisor) {
-			if (changedZoomDivisor <= MagnesiumExtrasConfig.zoomValues.maximumZoomDivisor) {
+		if (changedZoomDivisor >= EmbeddiumExtrasConfig.zoomValues.minimumZoomDivisor) {
+			if (changedZoomDivisor <= EmbeddiumExtrasConfig.zoomValues.maximumZoomDivisor) {
 				zoomDivisor = changedZoomDivisor;
 			}
 		}
@@ -48,7 +48,7 @@ public class ZoomUtils {
 
 	//The method used by both the "Reset Zoom" keybind and the "Reset Zoom With Mouse" tweak.
 	public static void resetZoomDivisor() {
-		zoomDivisor = MagnesiumExtrasConfig.zoomValues.zoomDivisor;
+		zoomDivisor = EmbeddiumExtrasConfig.zoomValues.zoomDivisor;
 		lastZoomState = true;
 	}
 
@@ -64,8 +64,8 @@ public class ZoomUtils {
 
 		lastZoomFovMultiplier = zoomFovMultiplier;
 		
-		if (MagnesiumExtrasConfig.zoomTransition.get().equals(MagnesiumExtrasConfig.ZoomTransitionOptions.SMOOTH.toString())) {
-			zoomFovMultiplier += (float) ((zoomMultiplier - zoomFovMultiplier) * MagnesiumExtrasConfig.zoomValues.smoothMultiplier);
+		if (EmbeddiumExtrasConfig.zoomTransition.get().equals(EmbeddiumExtrasConfig.ZoomTransitionOptions.SMOOTH.toString())) {
+			zoomFovMultiplier += (float) ((zoomMultiplier - zoomFovMultiplier) * EmbeddiumExtrasConfig.zoomValues.smoothMultiplier);
 		}
 	}
 
@@ -79,8 +79,8 @@ public class ZoomUtils {
 
 		lastZoomOverlayAlpha = zoomOverlayAlpha;
 
-		if (MagnesiumExtrasConfig.zoomTransition.get().equals(MagnesiumExtrasConfig.ZoomTransitionOptions.SMOOTH.toString())) {
-			zoomOverlayAlpha += (float) ((zoomMultiplier - zoomOverlayAlpha) * MagnesiumExtrasConfig.zoomValues.smoothMultiplier);
+		if (EmbeddiumExtrasConfig.zoomTransition.get().equals(EmbeddiumExtrasConfig.ZoomTransitionOptions.SMOOTH.toString())) {
+			zoomOverlayAlpha += (float) ((zoomMultiplier - zoomOverlayAlpha) * EmbeddiumExtrasConfig.zoomValues.smoothMultiplier);
 		}
 	}
 }

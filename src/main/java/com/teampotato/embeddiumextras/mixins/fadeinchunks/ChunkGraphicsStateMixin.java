@@ -17,20 +17,20 @@ public abstract class ChunkGraphicsStateMixin implements ChunkGraphicsStateExt {
     @Unique
     private float ee$loadTime;
 
-    @Inject(method = {"<init>"}, at = {@At("RETURN")})
+    @Inject(method = "<init>", at = {@At("RETURN")})
     private void init(ChunkRenderContainer<?> container, CallbackInfo ci) {
         this.ee$container = container;
     }
 
-    public ChunkRenderContainer<?> getee$container() {
+    public ChunkRenderContainer<?> ee$getcontainer() {
         return this.ee$container;
     }
 
-    public float getee$loadTime() {
+    public float ee$getloadTime() {
         return this.ee$loadTime;
     }
 
-    public void setee$loadTime(float time) {
+    public void ee$setloadTime(float time) {
         this.ee$loadTime = time;
     }
 }

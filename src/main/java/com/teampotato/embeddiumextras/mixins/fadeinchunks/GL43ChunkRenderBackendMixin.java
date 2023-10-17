@@ -26,7 +26,7 @@ public abstract class GL43ChunkRenderBackendMixin extends ChunkRenderShaderBacke
     @Final
     private ChunkDrawParamsVector uniformBufferBuilder;
 
-    @Inject(method = {"setupDrawBatches"}, at = {@At(value = "INVOKE", target = "Lme/jellysquid/mods/sodium/client/render/chunk/backends/multidraw/ChunkDrawParamsVector;pushChunkDrawParams(FFF)V", shift = At.Shift.AFTER)})
+    @Inject(method = "setupDrawBatches", at = {@At(value = "INVOKE", target = "Lme/jellysquid/mods/sodium/client/render/chunk/backends/multidraw/ChunkDrawParamsVector;pushChunkDrawParams(FFF)V", shift = At.Shift.AFTER)})
     private void pushChunkDrawParamFadeInProgress(CommandList i, ChunkRenderListIterator<MultidrawGraphicsState> it, ChunkCameraContext visible, CallbackInfo ci) {
         ClientPlayerEntity player = (Minecraft.getInstance()).player;
         if (player == null)
@@ -42,10 +42,10 @@ public abstract class GL43ChunkRenderBackendMixin extends ChunkRenderShaderBacke
         }
     }
 
-    @ModifyArg(method = {"upload"}, at = @At(value = "INVOKE", target = "Lme/jellysquid/mods/sodium/client/render/chunk/ChunkRenderContainer;setGraphicsState(Lme/jellysquid/mods/sodium/client/render/chunk/passes/BlockRenderPass;Lme/jellysquid/mods/sodium/client/render/chunk/ChunkGraphicsState;)V", ordinal = 0))
+    @ModifyArg(method = "upload", at = @At(value = "INVOKE", target = "Lme/jellysquid/mods/sodium/client/render/chunk/ChunkRenderContainer;setGraphicsState(Lme/jellysquid/mods/sodium/client/render/chunk/passes/BlockRenderPass;Lme/jellysquid/mods/sodium/client/render/chunk/ChunkGraphicsState;)V", ordinal = 0))
     private ChunkGraphicsState setLoadTime(BlockRenderPass pass, ChunkGraphicsState newState) {
-        ChunkGraphicsState oldState = ChunkGraphicsStateExt.ext(newState).getee$container().getGraphicsState(pass);
-        ChunkGraphicsStateExt.ext(newState).setee$loadTime((oldState == null) ? this.ee$currentTime : ChunkGraphicsStateExt.ext(oldState).getee$loadTime());
+        ChunkGraphicsState oldState = ChunkGraphicsStateExt.ext(newState).ee$getcontainer().getGraphicsState(pass);
+        ChunkGraphicsStateExt.ext(newState).ee$setloadTime((oldState == null) ? this.ee$currentTime : ChunkGraphicsStateExt.ext(oldState).ee$getloadTime());
         return newState;
     }
 }

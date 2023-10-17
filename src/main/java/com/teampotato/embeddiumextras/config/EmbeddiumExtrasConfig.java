@@ -9,7 +9,7 @@ import java.nio.file.Path;
 
 import static net.minecraftforge.common.ForgeConfigSpec.ConfigValue;
 
-public class MagnesiumExtrasConfig {
+public class EmbeddiumExtrasConfig {
     public static final ForgeConfigSpec ConfigSpec;
 
     public static ForgeConfigSpec.ConfigValue<String> fadeInQuality;
@@ -37,15 +37,15 @@ public class MagnesiumExtrasConfig {
     static {
         ConfigBuilder builder = new ConfigBuilder("Embeddium Extra Settings");
 
-        builder.Block("Misc", b -> fadeInQuality = b.define("Chunk Fade In Quality (OFF, FAST, FANCY)", "FANCY"));
+        builder.block("Misc", b -> fadeInQuality = b.define("Chunk Fade In Quality (OFF, FAST, FANCY)", "FANCY"));
 
-        builder.Block("FPS Counter", b -> {
+        builder.block("FPS Counter", b -> {
             fpsCounterMode = b.define("Display FPS Counter (OFF, SIMPLE, ADVANCED)", "ADVANCED");
             fpsCounterAlignRight = b.define("Right-align FPS Counter", false);
             fpsCounterPosition = b.define("FPS Counter Distance", 12);
         });
 
-        builder.Block("Entity Distance", b -> {
+        builder.block("Entity Distance", b -> {
             enableDistanceChecks = b.define("Enable Max Distance Checks", true);
 
             maxTileEntityRenderDistanceSquare = b.define("(TileEntity) Max Horizontal Render Distance [Squared, Default 64^2]", 4096);
@@ -55,7 +55,7 @@ public class MagnesiumExtrasConfig {
             maxEntityRenderDistanceY = b.define("(Entity) Max Vertical Render Distance [Raw, Default 32]", 32);
         });
 
-        builder.Block("Zoom", b -> {
+        builder.block("Zoom", b -> {
             lowerZoomSensitivity = b.define("Lower Zoom Sensitivity", true);
             zoomScrolling = b.define("Zoom Scrolling Enabled", true);
             zoomTransition = b.define("Zoom Transition Mode (OFF, LINEAR, SMOOTH)", ZoomTransitionOptions.SMOOTH.toString());
@@ -64,7 +64,7 @@ public class MagnesiumExtrasConfig {
             zoomOverlay = b.define("Enable Zoom Overlay", true);
         });
 
-        ConfigSpec = builder.Save();
+        ConfigSpec = builder.save();
     }
 
     public static void loadConfig(Path path) {

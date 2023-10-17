@@ -4,6 +4,7 @@ import me.jellysquid.mods.sodium.client.SodiumClientMod;
 import me.jellysquid.mods.sodium.client.gl.shader.ShaderLoader;
 import me.jellysquid.mods.sodium.client.render.chunk.backends.multidraw.MultidrawChunkRenderBackend;
 import net.minecraft.util.ResourceLocation;
+import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -18,7 +19,7 @@ public abstract class ShaderLoaderMixin {
         return null;
     }
 
-    @Inject(method = {"getShaderSource"}, at = {@At("RETURN")}, cancellable = true)
+    @Inject(method = "getShaderSource", at = {@At("RETURN")}, cancellable = true)
     private static void modifyShaderForFadeInEffect(String path, CallbackInfoReturnable<String> cir) {
         if (!(SodiumClientMod.options()).advanced.useChunkMultidraw || !MultidrawChunkRenderBackend.isSupported(false))
             return;
@@ -36,7 +37,7 @@ public abstract class ShaderLoaderMixin {
     }
 
     @Unique
-    private static void ee$replace(StringBuilder buffer, String search, String str) {
+    private static void ee$replace(@NotNull StringBuilder buffer, String search, String str) {
         int idx = buffer.indexOf(search);
         buffer.replace(idx, idx + search.length(), str);
     }

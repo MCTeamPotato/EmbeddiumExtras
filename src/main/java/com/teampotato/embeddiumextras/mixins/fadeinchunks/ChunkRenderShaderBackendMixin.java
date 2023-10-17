@@ -14,7 +14,7 @@ public abstract class ChunkRenderShaderBackendMixin<P extends ChunkGraphicsState
     @Unique
     protected float ee$currentTime;
 
-    @Inject(method = {"begin"}, at = {@At("HEAD")})
+    @Inject(method = "begin", at = {@At("HEAD")})
     private void updateTime(CallbackInfo ci) {
         this.ee$currentTime = (float)Util.getMillis() / 1000.0F;
     }

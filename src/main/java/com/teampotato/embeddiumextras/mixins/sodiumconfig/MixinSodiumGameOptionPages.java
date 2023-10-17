@@ -17,7 +17,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
-import com.teampotato.embeddiumextras.config.MagnesiumExtrasConfig;
+import com.teampotato.embeddiumextras.config.EmbeddiumExtrasConfig;
 
 import java.util.List;
 
@@ -27,13 +27,13 @@ public abstract class MixinSodiumGameOptionPages {
 
     @Inject(method = "general", at = @At(value = "INVOKE", target = "Ljava/util/List;add(Ljava/lang/Object;)Z", remap = false, ordinal = 2, shift = At.Shift.BEFORE), locals = LocalCapture.CAPTURE_FAILEXCEPTION)
     private static void insertSetting1(CallbackInfoReturnable<OptionPage> cir, List<OptionGroup> groups) {
-        Option<MagnesiumExtrasConfig.Complexity> displayFps =  OptionImpl.createBuilder(MagnesiumExtrasConfig.Complexity.class, sodiumOpts)
+        Option<EmbeddiumExtrasConfig.Complexity> displayFps =  OptionImpl.createBuilder(EmbeddiumExtrasConfig.Complexity.class, sodiumOpts)
                 .setName(I18n.get("extras.display_fps.display.name"))
                 .setTooltip(I18n.get("extras.display_fps.display.tooltip"))
-                .setControl((option) -> new CyclingControl<>(option, MagnesiumExtrasConfig.Complexity.class, new TranslationTextComponent[] {new TranslationTextComponent("extras.option.off"), new TranslationTextComponent("extras.option.simple"), new TranslationTextComponent("extras.option.advanced")}))
+                .setControl((option) -> new CyclingControl<>(option, EmbeddiumExtrasConfig.Complexity.class, new TranslationTextComponent[] {new TranslationTextComponent("extras.option.off"), new TranslationTextComponent("extras.option.simple"), new TranslationTextComponent("extras.option.advanced")}))
                 .setBinding(
-                        (opts, value) -> MagnesiumExtrasConfig.fpsCounterMode.set(value.toString()),
-                        (opts) -> MagnesiumExtrasConfig.Complexity.valueOf(MagnesiumExtrasConfig.fpsCounterMode.get()))
+                        (opts, value) -> EmbeddiumExtrasConfig.fpsCounterMode.set(value.toString()),
+                        (opts) -> EmbeddiumExtrasConfig.Complexity.valueOf(EmbeddiumExtrasConfig.fpsCounterMode.get()))
                 .setImpact(OptionImpact.LOW)
                 .build();
 
@@ -44,8 +44,8 @@ public abstract class MixinSodiumGameOptionPages {
                 .setControl((option) -> new SliderControl(option, 4, 64, 2, ControlValueFormatter.number()))
                 .setImpact(OptionImpact.LOW)
                 .setBinding(
-                        (opts, value) -> MagnesiumExtrasConfig.fpsCounterPosition.set(value),
-                        (opts) -> MagnesiumExtrasConfig.fpsCounterPosition.get())
+                        (opts, value) -> EmbeddiumExtrasConfig.fpsCounterPosition.set(value),
+                        (opts) -> EmbeddiumExtrasConfig.fpsCounterPosition.get())
                 .build();
 
         OptionImpl<SodiumGameOptions, Boolean> displayFpsAlignRight = OptionImpl.createBuilder(Boolean.class, sodiumOpts)
@@ -53,8 +53,8 @@ public abstract class MixinSodiumGameOptionPages {
                 .setTooltip(I18n.get("extras.display_fps.right_align.tooltip"))
                 .setControl(TickBoxControl::new)
                 .setBinding(
-                        (options, value) -> MagnesiumExtrasConfig.fpsCounterAlignRight.set(value),
-                        (options) -> MagnesiumExtrasConfig.fpsCounterAlignRight.get())
+                        (options, value) -> EmbeddiumExtrasConfig.fpsCounterAlignRight.set(value),
+                        (options) -> EmbeddiumExtrasConfig.fpsCounterAlignRight.get())
                 .setImpact(OptionImpact.LOW)
                 .build();
 
@@ -68,14 +68,14 @@ public abstract class MixinSodiumGameOptionPages {
 
     @Inject(method = "quality", at = @At(value = "INVOKE", target = "Ljava/util/List;add(Ljava/lang/Object;)Z", remap = false, ordinal = 2, shift = At.Shift.BEFORE), locals = LocalCapture.CAPTURE_FAILEXCEPTION)
     private static void insertSetting2(CallbackInfoReturnable<OptionPage> cir, List<OptionGroup> groups) {
-        OptionImpl<SodiumGameOptions, MagnesiumExtrasConfig.Quality> chunkFadeIn = OptionImpl.createBuilder(MagnesiumExtrasConfig.Quality.class, sodiumOpts)
+        OptionImpl<SodiumGameOptions, EmbeddiumExtrasConfig.Quality> chunkFadeIn = OptionImpl.createBuilder(EmbeddiumExtrasConfig.Quality.class, sodiumOpts)
                 .setName(I18n.get("extras.fadeinchunks.name"))
                 .setTooltip(I18n.get("extras.fadeinchunks.tooltip"))
-                .setControl(option -> new CyclingControl<>(option, MagnesiumExtrasConfig.Quality.class, new TranslationTextComponent[] {
+                .setControl(option -> new CyclingControl<>(option, EmbeddiumExtrasConfig.Quality.class, new TranslationTextComponent[] {
                         new TranslationTextComponent("extras.fadeinchunks.ctrl.off"), new TranslationTextComponent("extras.fadeinchunks.ctrl.fast"), new TranslationTextComponent("extras.fadeinchunks.ctrl.fancy") }))
                 .setBinding(
-                        (opts, value) -> MagnesiumExtrasConfig.fadeInQuality.set(value.toString()),
-                        opts -> MagnesiumExtrasConfig.Quality.valueOf(MagnesiumExtrasConfig.fadeInQuality.get()))
+                        (opts, value) -> EmbeddiumExtrasConfig.fadeInQuality.set(value.toString()),
+                        opts -> EmbeddiumExtrasConfig.Quality.valueOf(EmbeddiumExtrasConfig.fadeInQuality.get()))
                 .setImpact(OptionImpact.LOW).build();
 
 
@@ -92,8 +92,8 @@ public abstract class MixinSodiumGameOptionPages {
                 .setTooltip(I18n.get("extras.enable_max_entity_distance.tooltip"))
                 .setControl(TickBoxControl::new)
                 .setBinding(
-                        (options, value) -> MagnesiumExtrasConfig.enableDistanceChecks.set(value),
-                        (options) -> MagnesiumExtrasConfig.enableDistanceChecks.get())
+                        (options, value) -> EmbeddiumExtrasConfig.enableDistanceChecks.set(value),
+                        (options) -> EmbeddiumExtrasConfig.enableDistanceChecks.get())
                 .setImpact(OptionImpact.EXTREME)
                 .build();
 
@@ -108,8 +108,8 @@ public abstract class MixinSodiumGameOptionPages {
                 .setTooltip(I18n.get("extras.max_entity_distance.tooltip"))
                 .setControl((option) -> new SliderControl(option, 16, 192, 8, ControlValueFormatter.number()))
                 .setBinding(
-                        (options, value) -> MagnesiumExtrasConfig.maxEntityRenderDistanceSquare.set(value * value),
-                        (options) ->  Math.toIntExact(Math.round(Math.sqrt(MagnesiumExtrasConfig.maxEntityRenderDistanceSquare.get()))))
+                        (options, value) -> EmbeddiumExtrasConfig.maxEntityRenderDistanceSquare.set(value * value),
+                        (options) ->  Math.toIntExact(Math.round(Math.sqrt(EmbeddiumExtrasConfig.maxEntityRenderDistanceSquare.get()))))
                 .setImpact(OptionImpact.EXTREME)
                 .build();
 
@@ -118,8 +118,8 @@ public abstract class MixinSodiumGameOptionPages {
                 .setTooltip(I18n.get("extras.vertical_entity_distance.tooltip"))
                 .setControl((option) -> new SliderControl(option, 16, 64, 4, ControlValueFormatter.number()))
                 .setBinding(
-                        (options, value) -> MagnesiumExtrasConfig.maxEntityRenderDistanceY.set(value ),
-                        (options) -> MagnesiumExtrasConfig.maxEntityRenderDistanceY.get())
+                        (options, value) -> EmbeddiumExtrasConfig.maxEntityRenderDistanceY.set(value ),
+                        (options) -> EmbeddiumExtrasConfig.maxEntityRenderDistanceY.get())
                 .setImpact(OptionImpact.EXTREME)
                 .build();
 
@@ -136,8 +136,8 @@ public abstract class MixinSodiumGameOptionPages {
                 .setTooltip(I18n.get("extras.max_tile_distance.tooltip"))
                 .setControl((option) -> new SliderControl(option, 16, 256, 8, ControlValueFormatter.number()))
                 .setBinding(
-                        (options, value) -> MagnesiumExtrasConfig.maxTileEntityRenderDistanceSquare.set(value * value),
-                        (options) -> Math.toIntExact(Math.round(Math.sqrt(MagnesiumExtrasConfig.maxTileEntityRenderDistanceSquare.get()))))
+                        (options, value) -> EmbeddiumExtrasConfig.maxTileEntityRenderDistanceSquare.set(value * value),
+                        (options) -> Math.toIntExact(Math.round(Math.sqrt(EmbeddiumExtrasConfig.maxTileEntityRenderDistanceSquare.get()))))
                 .setImpact(OptionImpact.HIGH)
                 .build();
 
@@ -146,8 +146,8 @@ public abstract class MixinSodiumGameOptionPages {
                 .setTooltip(I18n.get("extras.vertical_tile_distance.tooltip"))
                 .setControl((option) -> new SliderControl(option, 16, 64, 4, ControlValueFormatter.number()))
                 .setBinding(
-                        (options, value) -> MagnesiumExtrasConfig.maxTileEntityRenderDistanceY.set(value),
-                        (options) -> MagnesiumExtrasConfig.maxTileEntityRenderDistanceY.get())
+                        (options, value) -> EmbeddiumExtrasConfig.maxTileEntityRenderDistanceY.set(value),
+                        (options) -> EmbeddiumExtrasConfig.maxTileEntityRenderDistanceY.get())
                 .setImpact(OptionImpact.HIGH)
                 .build();
 

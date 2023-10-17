@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 import com.teampotato.embeddiumextras.EmbeddiumExtras;
-import com.teampotato.embeddiumextras.config.MagnesiumExtrasConfig;
+import com.teampotato.embeddiumextras.config.EmbeddiumExtrasConfig;
 import com.teampotato.embeddiumextras.features.zoom.ZoomUtils;
 
 
@@ -42,15 +42,15 @@ public abstract class MouseMixin {
 	private double accumulatedScroll;
 	
 	@Unique
-	private final MouseSmoother repe$cursorXZoomSmoother = new MouseSmoother();
+	private final MouseSmoother ee$cursorXZoomSmoother = new MouseSmoother();
 
 	@Unique
-	private final MouseSmoother repe$cursorYZoomSmoother = new MouseSmoother();
+	private final MouseSmoother ee$cursorYZoomSmoother = new MouseSmoother();
 
 	@Unique
-	private double repe$extractedE;
+	private double ee$extractedE;
 	@Unique
-	private double repe$adjustedG;
+	private double ee$adjustedG;
 	
 	//This mixin handles the "Reduce Sensitivity" option and extracts the g variable for the cinematic cameras.
 	@ModifyVariable(
@@ -61,9 +61,9 @@ public abstract class MouseMixin {
 	private double applyReduceSensitivity(double g) {
 		double modifiedMouseSensitivity = this.minecraft.options.sensitivity;
 
-		if (MagnesiumExtrasConfig.lowerZoomSensitivity.get())
+		if (EmbeddiumExtrasConfig.lowerZoomSensitivity.get())
 		{
-			if (!MagnesiumExtrasConfig.zoomTransition.get().equals(MagnesiumExtrasConfig.ZoomTransitionOptions.OFF.toString())) {
+			if (!EmbeddiumExtrasConfig.zoomTransition.get().equals(EmbeddiumExtrasConfig.ZoomTransitionOptions.OFF.toString())) {
 				modifiedMouseSensitivity *= ZoomUtils.zoomFovMultiplier;
 			} else if (ZoomUtils.zoomState) {
 				modifiedMouseSensitivity /= ZoomUtils.zoomDivisor;
@@ -72,7 +72,7 @@ public abstract class MouseMixin {
 
 		double appliedMouseSensitivity = modifiedMouseSensitivity * 0.6 + 0.2;
 		g = appliedMouseSensitivity * appliedMouseSensitivity * appliedMouseSensitivity * 8.0;
-		this.repe$adjustedG = g;
+		this.ee$adjustedG = g;
 		return g;
 	}
 	
@@ -83,7 +83,7 @@ public abstract class MouseMixin {
 		locals = LocalCapture.CAPTURE_FAILHARD
 	)
 	private void obtainCinematicCameraValues(CallbackInfo info, double d, double e) {
-		this.repe$extractedE = e;
+		this.ee$extractedE = e;
 	}
 
 	//Applies the cinematic camera on the mouse's X.
@@ -93,19 +93,19 @@ public abstract class MouseMixin {
 		ordinal = 2
 	)
 	private double applyCinematicModeX(double l) {
-		if (!MagnesiumExtrasConfig.cinematicCameraMode.get().equals(MagnesiumExtrasConfig.CinematicCameraOptions.OFF.toString())) {
+		if (!EmbeddiumExtrasConfig.cinematicCameraMode.get().equals(EmbeddiumExtrasConfig.CinematicCameraOptions.OFF.toString())) {
 			if (ZoomUtils.zoomState) {
 				if (this.minecraft.options.smoothCamera) {
-					l = this.smoothTurnX.getNewDeltaValue(this.accumulatedDX * this.repe$adjustedG, (this.repe$extractedE * this.repe$adjustedG));
-					this.repe$cursorXZoomSmoother.reset();
+					l = this.smoothTurnX.getNewDeltaValue(this.accumulatedDX * this.ee$adjustedG, (this.ee$extractedE * this.ee$adjustedG));
+					this.ee$cursorXZoomSmoother.reset();
 				} else {
-					l = this.repe$cursorXZoomSmoother.getNewDeltaValue(this.accumulatedDX * this.repe$adjustedG, (this.repe$extractedE * this.repe$adjustedG));
+					l = this.ee$cursorXZoomSmoother.getNewDeltaValue(this.accumulatedDX * this.ee$adjustedG, (this.ee$extractedE * this.ee$adjustedG));
 				}
-				if (MagnesiumExtrasConfig.cinematicCameraMode.get().equals(MagnesiumExtrasConfig.CinematicCameraOptions.MULTIPLIED.toString())) {
-					l *= MagnesiumExtrasConfig.zoomValues.cinematicMultiplier;
+				if (EmbeddiumExtrasConfig.cinematicCameraMode.get().equals(EmbeddiumExtrasConfig.CinematicCameraOptions.MULTIPLIED.toString())) {
+					l *= EmbeddiumExtrasConfig.zoomValues.cinematicMultiplier;
 				}
 			} else {
-				this.repe$cursorXZoomSmoother.reset();
+				this.ee$cursorXZoomSmoother.reset();
 			}
 		}
 		return l;
@@ -118,19 +118,19 @@ public abstract class MouseMixin {
 		ordinal = 2
 	)
 	private double applyCinematicModeY(double m) {
-		if (!MagnesiumExtrasConfig.cinematicCameraMode.get().equals(MagnesiumExtrasConfig.CinematicCameraOptions.OFF.toString())) {
+		if (!EmbeddiumExtrasConfig.cinematicCameraMode.get().equals(EmbeddiumExtrasConfig.CinematicCameraOptions.OFF.toString())) {
 			if (ZoomUtils.zoomState) {
 				if (this.minecraft.options.smoothCamera) {
-					m = this.smoothTurnY.getNewDeltaValue(this.accumulatedDY * this.repe$adjustedG, (this.repe$extractedE * this.repe$adjustedG));
-					this.repe$cursorYZoomSmoother.reset();
+					m = this.smoothTurnY.getNewDeltaValue(this.accumulatedDY * this.ee$adjustedG, (this.ee$extractedE * this.ee$adjustedG));
+					this.ee$cursorYZoomSmoother.reset();
 				} else {
-					m = this.repe$cursorYZoomSmoother.getNewDeltaValue(this.accumulatedDY * this.repe$adjustedG, (this.repe$extractedE * this.repe$adjustedG));
+					m = this.ee$cursorYZoomSmoother.getNewDeltaValue(this.accumulatedDY * this.ee$adjustedG, (this.ee$extractedE * this.ee$adjustedG));
 				}
-				if (MagnesiumExtrasConfig.cinematicCameraMode.get().equals(MagnesiumExtrasConfig.CinematicCameraOptions.MULTIPLIED.toString())) {
-					m *= MagnesiumExtrasConfig.zoomValues.cinematicMultiplier;
+				if (EmbeddiumExtrasConfig.cinematicCameraMode.get().equals(EmbeddiumExtrasConfig.CinematicCameraOptions.MULTIPLIED.toString())) {
+					m *= EmbeddiumExtrasConfig.zoomValues.cinematicMultiplier;
 				}
 			} else {
-				this.repe$cursorYZoomSmoother.reset();
+				this.ee$cursorYZoomSmoother.reset();
 			}
 		}
 		
@@ -145,8 +145,8 @@ public abstract class MouseMixin {
 	)
 	private void zoomerOnMouseScroll(CallbackInfo info) {
 		if (this.accumulatedScroll != 0.0) {
-			if (MagnesiumExtrasConfig.zoomScrolling.get()) {
-				if (MagnesiumExtrasConfig.zoomMode.get().equals(MagnesiumExtrasConfig.ZoomModes.PERSISTENT.toString())) {
+			if (EmbeddiumExtrasConfig.zoomScrolling.get()) {
+				if (EmbeddiumExtrasConfig.zoomMode.get().equals(EmbeddiumExtrasConfig.ZoomModes.PERSISTENT.toString())) {
 					if (!EmbeddiumExtras.zoomKey.isDown())
 					{
 						return;
@@ -169,22 +169,17 @@ public abstract class MouseMixin {
 	@Inject(
 			at = @At(value = "INVOKE", target = "Lnet/minecraft/client/settings/KeyBinding;set(Lnet/minecraft/client/util/InputMappings$Input;Z)V"),
 			method = "onPress(JIII)V",
-			cancellable = true,
-			locals = LocalCapture.CAPTURE_FAILHARD
+			cancellable = true
 	)
 	private void zoomerOnMouseButton(long window, int button, int action, int mods, CallbackInfo info) {
-		if (MagnesiumExtrasConfig.zoomScrolling.get()) {
-			if (MagnesiumExtrasConfig.zoomMode.get().equals(MagnesiumExtrasConfig.ZoomModes.PERSISTENT.toString())) {
-				if (!EmbeddiumExtras.zoomKey.isDown()) {
-					return;
-				}
+		if (EmbeddiumExtrasConfig.zoomScrolling.get()) {
+			if (!EmbeddiumExtras.zoomKey.isDown() && EmbeddiumExtrasConfig.zoomMode.get().equals(EmbeddiumExtrasConfig.ZoomModes.PERSISTENT.toString())) {
+				return;
 			}
 
-			if (button == 2 && action == 1) {
-				if (EmbeddiumExtras.zoomKey.isDown()) {
-					ZoomUtils.resetZoomDivisor();
-					info.cancel();
-				}
+			if (button == 2 && action == 1 && EmbeddiumExtras.zoomKey.isDown()) {
+				ZoomUtils.resetZoomDivisor();
+				info.cancel();
 			}
 		}
 	}

@@ -2,6 +2,8 @@ package com.teampotato.embeddiumextras.mixins.sodiumconfig;
 
 
 import com.google.common.collect.ImmutableList;
+import com.teampotato.embeddiumextras.config.EmbeddiumExtrasConfig;
+import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import me.jellysquid.mods.sodium.client.gui.SodiumGameOptions;
 import me.jellysquid.mods.sodium.client.gui.SodiumOptionsGUI;
 import me.jellysquid.mods.sodium.client.gui.options.*;
@@ -15,9 +17,7 @@ import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import com.teampotato.embeddiumextras.config.MagnesiumExtrasConfig;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Pseudo
@@ -28,40 +28,40 @@ public abstract class ZoomSettingsPage {
     @Final
     private List<OptionPage> pages;
     @Unique
-    private static final SodiumOptionsStorage rbextras$sodiumOpts = new SodiumOptionsStorage();
+    private static final SodiumOptionsStorage ee$sodiumOpts = new SodiumOptionsStorage();
 
 
     @Inject(method = "<init>", at = @At("RETURN"))
     private void dynamicLights(Screen prevScreen, CallbackInfo ci) {
-        List<OptionGroup> groups = new ArrayList<>();
+        List<OptionGroup> groups = new ObjectArrayList<>();
 
-        OptionImpl<SodiumGameOptions, Boolean> lowerSensitivity = OptionImpl.createBuilder(Boolean.class, rbextras$sodiumOpts)
+        OptionImpl<SodiumGameOptions, Boolean> lowerSensitivity = OptionImpl.createBuilder(Boolean.class, ee$sodiumOpts)
                 .setName(I18n.get("extras.zoom.lower_sensitivity.name"))
                 .setTooltip(I18n.get("extras.zoom.lower_sensitivity.tooltip"))
                 .setControl(TickBoxControl::new)
                 .setBinding(
-                        (options, value) -> MagnesiumExtrasConfig.lowerZoomSensitivity.set(value),
-                        (options) -> MagnesiumExtrasConfig.lowerZoomSensitivity.get())
+                        (options, value) -> EmbeddiumExtrasConfig.lowerZoomSensitivity.set(value),
+                        (options) -> EmbeddiumExtrasConfig.lowerZoomSensitivity.get())
                 .setImpact(OptionImpact.LOW)
                 .build();
 
-        OptionImpl<SodiumGameOptions, Boolean> zoomScrolling = OptionImpl.createBuilder(Boolean.class, rbextras$sodiumOpts)
+        OptionImpl<SodiumGameOptions, Boolean> zoomScrolling = OptionImpl.createBuilder(Boolean.class, ee$sodiumOpts)
                 .setName(I18n.get("extras.zoom.scrolling.name"))
                 .setTooltip(I18n.get("extras.zoom.scrolling.tooltip"))
                 .setControl(TickBoxControl::new)
                 .setBinding(
-                        (options, value) -> MagnesiumExtrasConfig.zoomScrolling.set(value),
-                        (options) -> MagnesiumExtrasConfig.zoomScrolling.get())
+                        (options, value) -> EmbeddiumExtrasConfig.zoomScrolling.set(value),
+                        (options) -> EmbeddiumExtrasConfig.zoomScrolling.get())
                 .setImpact(OptionImpact.LOW)
                 .build();
 
-        OptionImpl<SodiumGameOptions, Boolean> zoomOverlay = OptionImpl.createBuilder(Boolean.class, rbextras$sodiumOpts)
+        OptionImpl<SodiumGameOptions, Boolean> zoomOverlay = OptionImpl.createBuilder(Boolean.class, ee$sodiumOpts)
                 .setName(I18n.get("extras.zoom.overlay.name"))
                 .setTooltip(I18n.get("extras.zoom.overlay.tooltip"))
                 .setControl(TickBoxControl::new)
                 .setBinding(
-                        (options, value) -> MagnesiumExtrasConfig.zoomOverlay.set(value),
-                        (options) -> MagnesiumExtrasConfig.zoomOverlay.get())
+                        (options, value) -> EmbeddiumExtrasConfig.zoomOverlay.set(value),
+                        (options) -> EmbeddiumExtrasConfig.zoomOverlay.get())
                 .setImpact(OptionImpact.LOW)
                 .build();
 
@@ -75,48 +75,48 @@ public abstract class ZoomSettingsPage {
 
 
 
-        Option<MagnesiumExtrasConfig.ZoomTransitionOptions> zoomTransition =  OptionImpl.createBuilder(MagnesiumExtrasConfig.ZoomTransitionOptions.class, rbextras$sodiumOpts)
+        Option<EmbeddiumExtrasConfig.ZoomTransitionOptions> zoomTransition =  OptionImpl.createBuilder(EmbeddiumExtrasConfig.ZoomTransitionOptions.class, ee$sodiumOpts)
                 .setName(I18n.get("extras.zoom.transition.name"))
                 .setTooltip(I18n.get("extras.zoom.transition.tooltip"))
                 .setControl(
-                        (option) -> new CyclingControl<>(option, MagnesiumExtrasConfig.ZoomTransitionOptions.class, new TranslationTextComponent[] {
+                        (option) -> new CyclingControl<>(option, EmbeddiumExtrasConfig.ZoomTransitionOptions.class, new TranslationTextComponent[] {
                                 new TranslationTextComponent("extras.option.off"),
                                 new TranslationTextComponent("extras.option.smooth")
                         })
                 )
                 .setBinding(
-                        (opts, value) -> MagnesiumExtrasConfig.zoomTransition.set(value.toString()),
-                        (opts) -> MagnesiumExtrasConfig.ZoomTransitionOptions.valueOf(MagnesiumExtrasConfig.zoomTransition.get()))
+                        (opts, value) -> EmbeddiumExtrasConfig.zoomTransition.set(value.toString()),
+                        (opts) -> EmbeddiumExtrasConfig.ZoomTransitionOptions.valueOf(EmbeddiumExtrasConfig.zoomTransition.get()))
                 .setImpact(OptionImpact.LOW)
                 .build();
 
-        Option<MagnesiumExtrasConfig.ZoomModes> zoomMode =  OptionImpl.createBuilder(MagnesiumExtrasConfig.ZoomModes.class, rbextras$sodiumOpts)
+        Option<EmbeddiumExtrasConfig.ZoomModes> zoomMode =  OptionImpl.createBuilder(EmbeddiumExtrasConfig.ZoomModes.class, ee$sodiumOpts)
                 .setName(I18n.get("extras.zoom.keybind.name"))
                 .setTooltip(I18n.get("extras.zoom.keybind.tooltip"))
                 .setControl(
-                        (option) -> new CyclingControl<>(option, MagnesiumExtrasConfig.ZoomModes.class, new TranslationTextComponent[] {
+                        (option) -> new CyclingControl<>(option, EmbeddiumExtrasConfig.ZoomModes.class, new TranslationTextComponent[] {
                                 new TranslationTextComponent("extras.option.hold"),
                                 new TranslationTextComponent("extras.option.toggle"),
                                 new TranslationTextComponent("extras.option.persistent")
                         })
                 )
                 .setBinding(
-                        (opts, value) -> MagnesiumExtrasConfig.zoomMode.set(value.toString()),
-                        (opts) -> MagnesiumExtrasConfig.ZoomModes.valueOf(MagnesiumExtrasConfig.zoomMode.get()))
+                        (opts, value) -> EmbeddiumExtrasConfig.zoomMode.set(value.toString()),
+                        (opts) -> EmbeddiumExtrasConfig.ZoomModes.valueOf(EmbeddiumExtrasConfig.zoomMode.get()))
                 .setImpact(OptionImpact.LOW)
                 .build();
 
-        Option<MagnesiumExtrasConfig.CinematicCameraOptions> cinematicCameraMode =  OptionImpl.createBuilder(MagnesiumExtrasConfig.CinematicCameraOptions.class, rbextras$sodiumOpts)
+        Option<EmbeddiumExtrasConfig.CinematicCameraOptions> cinematicCameraMode =  OptionImpl.createBuilder(EmbeddiumExtrasConfig.CinematicCameraOptions.class, ee$sodiumOpts)
                 .setName(I18n.get("extras.zoom.cinematic_camera.name"))
                 .setTooltip(I18n.get("extras.zoom.cinematic_camera.tooltip"))
-                .setControl((option) -> new CyclingControl<>(option, MagnesiumExtrasConfig.CinematicCameraOptions.class, new TranslationTextComponent[] {
+                .setControl((option) -> new CyclingControl<>(option, EmbeddiumExtrasConfig.CinematicCameraOptions.class, new TranslationTextComponent[] {
                         new TranslationTextComponent("extras.option.off"),
                         new TranslationTextComponent("extras.option.vanilla"),
                         new TranslationTextComponent("extras.option.multiplied")
                 }))
                 .setBinding(
-                        (opts, value) -> MagnesiumExtrasConfig.cinematicCameraMode.set(value.toString()),
-                        (opts) -> MagnesiumExtrasConfig.CinematicCameraOptions.valueOf(MagnesiumExtrasConfig.cinematicCameraMode.get()))
+                        (opts, value) -> EmbeddiumExtrasConfig.cinematicCameraMode.set(value.toString()),
+                        (opts) -> EmbeddiumExtrasConfig.CinematicCameraOptions.valueOf(EmbeddiumExtrasConfig.cinematicCameraMode.get()))
                 .setImpact(OptionImpact.LOW)
                 .build();
 
