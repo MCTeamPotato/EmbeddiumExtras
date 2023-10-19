@@ -1,6 +1,7 @@
 package com.teampotato.embeddiumextras.mixins.zoom;
 
 import com.mojang.blaze3d.systems.RenderSystem;
+import com.teampotato.embeddiumextras.EmbeddiumExtras;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ActiveRenderInfo;
 import net.minecraft.client.renderer.BufferBuilder;
@@ -27,7 +28,7 @@ import com.teampotato.embeddiumextras.features.zoom.ZoomUtils;
 public abstract class GameRendererMixin {
 	//The zoom overlay's texture identifier.
 	@Unique
-	private static final ResourceLocation ZOOM_OVERLAY = new ResourceLocation("magnesium_extras:textures/misc/zoom_overlay.png");
+	private static final ResourceLocation ZOOM_OVERLAY = new ResourceLocation(EmbeddiumExtras.MODID, "textures/misc/zoom_overlay.png");
 
 	@Final
 	@Shadow

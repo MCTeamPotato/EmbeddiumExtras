@@ -7,7 +7,7 @@ import net.minecraftforge.fml.common.Mod;
 import com.teampotato.embeddiumextras.EmbeddiumExtras;
 import com.teampotato.embeddiumextras.config.EmbeddiumExtrasConfig;
 
-@Mod.EventBusSubscriber(modid = "magnesium_extras", bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
+@Mod.EventBusSubscriber(modid = EmbeddiumExtras.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
 public class ZoomHandler {
     private static boolean lastZoomPress = false;
     private static boolean persistentZoom = false;
