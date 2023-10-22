@@ -1,6 +1,6 @@
 {
   "extras.jei.name": "Hide JEI Items",
-  "extras.jei.tooltip": "Tweak JEI rendering so that the item list does not display unless search is active. This de-clutters the screen significantly unless you're actively using JEI.",
+  "extras.jei.tooltip": "Tweak JEI rendering so that the item list does not display unless search is active. This de-clutters the screen significantly unless you're actively using JEI. \n NOTE: If you are a modpacker, it's not recommended to default enable this option for your end users as they may get confused about that.",
   "extras.key.zoom": "Zoom",
   "extras.key.category": "Embeddium Extras",
   "extras.option.off": "Off",

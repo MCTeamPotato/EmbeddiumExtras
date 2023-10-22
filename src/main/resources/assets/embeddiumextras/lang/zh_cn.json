@@ -1,6 +1,6 @@
 {
   "extras.jei.name": "隐藏JEI物品",
-  "extras.jei.tooltip": "调整JEI的渲染。当你不在搜索物品时，JEI的海量物品列表不会显示。这将大大减少它们造成的干扰，除非你正在积极地使用JEI。",
+  "extras.jei.tooltip": "调整JEI的渲染。当你不在搜索物品时，JEI的海量物品列表不会显示。这将大大减少它们造成的干扰，除非你正在积极地使用JEI。\n注意：如果你是一名整合包作者，不推荐将这个选项为你的终端用户设置为默认开启，否则他们可能会感到疑惑。",
   "extras.key.zoom": "缩放",
   "extras.key.category": "Embeddium Extras",
   "extras.option.off": "关",
