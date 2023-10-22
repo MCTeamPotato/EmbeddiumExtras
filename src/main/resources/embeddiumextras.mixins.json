@@ -5,10 +5,8 @@
   "refmap": "embeddiumextras.refmap.json",
   "minVersion": "0.8",
   "client": [
-    "entitydistance.EntityMixin",
     "entitydistance.MaxDistanceEntity",
     "entitydistance.MaxDistanceTileEntity",
-    "entitydistance.TileEntityMixin",
     "fadeinchunks.ChunkGraphicsStateMixin",
     "fadeinchunks.ChunkRenderShaderBackendMixin",
     "fadeinchunks.GL43ChunkRenderBackendMixin",
@@ -17,11 +15,15 @@
     "fadeinchunks.UnsafeChunkDrawCallVectorMixin",
     "framecounter.FpsAccessorMixin",
     "framecounter.FrameCounterMixin",
+    "jei.IngredientListOverlayMixin",
     "performance.RenderTypeLookupMixin",
     "sodiumconfig.MixinSodiumGameOptionPages",
     "sodiumconfig.ZoomSettingsPage",
     "zoom.GameRendererMixin",
-    "zoom.MouseMixin",
-    "jei.IngredientListOverlayMixin"
+    "zoom.MouseMixin"
+  ],
+  "mixins": [
+    "entitydistance.EntityTypeMixin",
+    "entitydistance.TileEntityTypeMixin"
   ]
 }

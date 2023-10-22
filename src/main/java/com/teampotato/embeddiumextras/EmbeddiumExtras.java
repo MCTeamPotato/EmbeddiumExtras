@@ -1,8 +1,12 @@
 package com.teampotato.embeddiumextras;
 
 import com.teampotato.embeddiumextras.config.EmbeddiumExtrasConfig;
+import com.teampotato.embeddiumextras.features.entitydistance.RenderChecker;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.client.util.InputMappings;
+import net.minecraft.entity.EntityType;
+import net.minecraft.tileentity.TileEntityType;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.settings.KeyConflictContext;
 import net.minecraftforge.client.settings.KeyModifier;
 import net.minecraftforge.fml.ExtensionPoint;
@@ -13,6 +17,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLPaths;
 import net.minecraftforge.fml.network.FMLNetworkConstants;
+import net.minecraftforge.registries.ForgeRegistries;
 import org.apache.commons.lang3.tuple.Pair;
 import org.jetbrains.annotations.NotNull;
 import org.lwjgl.glfw.GLFW;
@@ -30,6 +35,16 @@ public class EmbeddiumExtras
     }
 
     public void onClientSetup(@NotNull FMLClientSetupEvent event) {
-        event.enqueueWork(() -> ClientRegistry.registerKeyBinding(zoomKey));
+        event.enqueueWork(() -> {
+            ClientRegistry.registerKeyBinding(zoomKey);
+            for (EntityType<?> entityType : ForgeRegistries.ENTITIES) {
+                ResourceLocation id = entityType.getRegistryName();
+                if (id != null) ((RenderChecker)entityType).ee$setShouldAlwaysRender((EmbeddiumExtrasConfig.entityList.get().contains(id.toString()) || EmbeddiumExtrasConfig.entityModIdList.get().contains(id.getNamespace())) ? true : null);
+            }
+            for (TileEntityType<?> entityType : ForgeRegistries.TILE_ENTITIES) {
+                ResourceLocation id = entityType.getRegistryName();
+                if (id != null) ((RenderChecker)entityType).ee$setShouldAlwaysRender((EmbeddiumExtrasConfig.tileEntityList.get().contains(id.toString()) || EmbeddiumExtrasConfig.tileEntityModIdList.get().contains(id.getNamespace())) ? true : null);
+            }
+        });
     }
 }
