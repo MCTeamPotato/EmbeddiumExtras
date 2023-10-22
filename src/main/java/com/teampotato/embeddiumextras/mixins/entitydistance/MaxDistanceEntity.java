@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class MaxDistanceEntity {
     @Inject(at = @At("HEAD"), method = "shouldRender", cancellable = true)
     public <E extends Entity> void shouldDoRender(E entity, ClippingHelper clippingHelper, double cameraX, double cameraY, double cameraZ, @NotNull CallbackInfoReturnable<Boolean> cir) {
-        if (!EmbeddiumExtrasConfig.enableDistanceChecks.get() || ((RenderChecker)entity.getType()).ee$shouldAlwaysRender() != null || DistanceUtility.isEntityWithinDistance(entity, cameraX, cameraY, cameraZ, EmbeddiumExtrasConfig.maxEntityRenderDistanceY.get(), EmbeddiumExtrasConfig.maxEntityRenderDistanceSquare.get())) return;
+        if (!EmbeddiumExtrasConfig.enableDistanceChecks.get() || ((RenderChecker)entity.getType()).ee$shouldAlwaysRender() || DistanceUtility.isEntityWithinDistance(entity, cameraX, cameraY, cameraZ, EmbeddiumExtrasConfig.maxEntityRenderDistanceY.get(), EmbeddiumExtrasConfig.maxEntityRenderDistanceSquare.get())) return;
         cir.setReturnValue(false);
     }
 }
