@@ -53,6 +53,7 @@ public abstract class MouseMixin {
 	private double ee$adjustedG;
 	
 	//This mixin handles the "Reduce Sensitivity" option and extracts the g variable for the cinematic cameras.
+	@SuppressWarnings("ParameterCanBeLocal")
 	@ModifyVariable(
 		at = @At(value = "FIELD", target = "Lnet/minecraft/client/MouseHelper;minecraft:Lnet/minecraft/client/Minecraft;", ordinal = 2),
 		method = "turnPlayer",
@@ -102,7 +103,7 @@ public abstract class MouseMixin {
 					l = this.ee$cursorXZoomSmoother.getNewDeltaValue(this.accumulatedDX * this.ee$adjustedG, (this.ee$extractedE * this.ee$adjustedG));
 				}
 				if (EmbeddiumExtrasConfig.cinematicCameraMode.get().equals(EmbeddiumExtrasConfig.CinematicCameraOptions.MULTIPLIED.toString())) {
-					l *= EmbeddiumExtrasConfig.zoomValues.cinematicMultiplier;
+					l *= EmbeddiumExtrasConfig.ZOOM_VALUES.cinematicMultiplier;
 				}
 			} else {
 				this.ee$cursorXZoomSmoother.reset();
@@ -127,7 +128,7 @@ public abstract class MouseMixin {
 					m = this.ee$cursorYZoomSmoother.getNewDeltaValue(this.accumulatedDY * this.ee$adjustedG, (this.ee$extractedE * this.ee$adjustedG));
 				}
 				if (EmbeddiumExtrasConfig.cinematicCameraMode.get().equals(EmbeddiumExtrasConfig.CinematicCameraOptions.MULTIPLIED.toString())) {
-					m *= EmbeddiumExtrasConfig.zoomValues.cinematicMultiplier;
+					m *= EmbeddiumExtrasConfig.ZOOM_VALUES.cinematicMultiplier;
 				}
 			} else {
 				this.ee$cursorYZoomSmoother.reset();
@@ -147,7 +148,7 @@ public abstract class MouseMixin {
 		if (this.accumulatedScroll != 0.0) {
 			if (EmbeddiumExtrasConfig.zoomScrolling.get()) {
 				if (EmbeddiumExtrasConfig.zoomMode.get().equals(EmbeddiumExtrasConfig.ZoomModes.PERSISTENT.toString())) {
-					if (!EmbeddiumExtras.zoomKey.isDown())
+					if (!EmbeddiumExtras.ZOOM_KEY.isDown())
 					{
 						return;
 					}
@@ -173,11 +174,11 @@ public abstract class MouseMixin {
 	)
 	private void zoomerOnMouseButton(long window, int button, int action, int mods, CallbackInfo info) {
 		if (EmbeddiumExtrasConfig.zoomScrolling.get()) {
-			if (!EmbeddiumExtras.zoomKey.isDown() && EmbeddiumExtrasConfig.zoomMode.get().equals(EmbeddiumExtrasConfig.ZoomModes.PERSISTENT.toString())) {
+			if (!EmbeddiumExtras.ZOOM_KEY.isDown() && EmbeddiumExtrasConfig.zoomMode.get().equals(EmbeddiumExtrasConfig.ZoomModes.PERSISTENT.toString())) {
 				return;
 			}
 
-			if (button == 2 && action == 1 && EmbeddiumExtras.zoomKey.isDown()) {
+			if (button == 2 && action == 1 && EmbeddiumExtras.ZOOM_KEY.isDown()) {
 				ZoomUtils.resetZoomDivisor();
 				info.cancel();
 			}

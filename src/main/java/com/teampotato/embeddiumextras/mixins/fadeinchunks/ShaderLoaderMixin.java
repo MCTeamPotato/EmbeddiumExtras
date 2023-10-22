@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class ShaderLoaderMixin {
     @Shadow
     private static String getShaderPath(ResourceLocation name) {
-        return null;
+        throw new RuntimeException();
     }
 
     @Inject(method = "getShaderSource", at = {@At("RETURN")}, cancellable = true)

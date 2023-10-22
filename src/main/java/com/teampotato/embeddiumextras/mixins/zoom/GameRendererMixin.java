@@ -28,7 +28,7 @@ import com.teampotato.embeddiumextras.features.zoom.ZoomUtils;
 public abstract class GameRendererMixin {
 	//The zoom overlay's texture identifier.
 	@Unique
-	private static final ResourceLocation ZOOM_OVERLAY = new ResourceLocation(EmbeddiumExtras.MODID, "textures/misc/zoom_overlay.png");
+	private static final ResourceLocation ZOOM_OVERLAY = new ResourceLocation(EmbeddiumExtras.MOD_ID, "textures/misc/zoom_overlay.png");
 
 	@Final
 	@Shadow

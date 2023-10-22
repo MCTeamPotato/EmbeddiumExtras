@@ -11,7 +11,7 @@ public class ZoomUtils {
 	public static boolean lastZoomState = false;
 
 	//The zoom divisor, managed by the zoom press and zoom scrolling. Used by other mixins.
-	public static double zoomDivisor = EmbeddiumExtrasConfig.zoomValues.zoomDivisor;
+	public static double zoomDivisor = EmbeddiumExtrasConfig.ZOOM_VALUES.zoomDivisor;
 
 	//The zoom FOV multipliers. Used by the GameRenderer mixin.
 	public static float zoomFovMultiplier = 1.0F;
@@ -27,20 +27,20 @@ public class ZoomUtils {
 		double lesserChangedZoomDivisor;
 
 		if (increase) {
-			changedZoomDivisor = zoomDivisor + EmbeddiumExtrasConfig.zoomValues.scrollStep;
-			lesserChangedZoomDivisor = zoomDivisor + EmbeddiumExtrasConfig.zoomValues.lesserScrollStep;
+			changedZoomDivisor = zoomDivisor + EmbeddiumExtrasConfig.ZOOM_VALUES.scrollStep;
+			lesserChangedZoomDivisor = zoomDivisor + EmbeddiumExtrasConfig.ZOOM_VALUES.lesserScrollStep;
 		} else {
-			changedZoomDivisor = zoomDivisor - EmbeddiumExtrasConfig.zoomValues.scrollStep;
-			lesserChangedZoomDivisor = zoomDivisor - EmbeddiumExtrasConfig.zoomValues.lesserScrollStep;
+			changedZoomDivisor = zoomDivisor - EmbeddiumExtrasConfig.ZOOM_VALUES.scrollStep;
+			lesserChangedZoomDivisor = zoomDivisor - EmbeddiumExtrasConfig.ZOOM_VALUES.lesserScrollStep;
 			lastZoomState = true;
 		}
 
-		if (lesserChangedZoomDivisor <= EmbeddiumExtrasConfig.zoomValues.zoomDivisor) {
+		if (lesserChangedZoomDivisor <= EmbeddiumExtrasConfig.ZOOM_VALUES.zoomDivisor) {
 			changedZoomDivisor = lesserChangedZoomDivisor;
 		}
 
-		if (changedZoomDivisor >= EmbeddiumExtrasConfig.zoomValues.minimumZoomDivisor) {
-			if (changedZoomDivisor <= EmbeddiumExtrasConfig.zoomValues.maximumZoomDivisor) {
+		if (changedZoomDivisor >= EmbeddiumExtrasConfig.ZOOM_VALUES.minimumZoomDivisor) {
+			if (changedZoomDivisor <= EmbeddiumExtrasConfig.ZOOM_VALUES.maximumZoomDivisor) {
 				zoomDivisor = changedZoomDivisor;
 			}
 		}
@@ -48,7 +48,7 @@ public class ZoomUtils {
 
 	//The method used by both the "Reset Zoom" keybind and the "Reset Zoom With Mouse" tweak.
 	public static void resetZoomDivisor() {
-		zoomDivisor = EmbeddiumExtrasConfig.zoomValues.zoomDivisor;
+		zoomDivisor = EmbeddiumExtrasConfig.ZOOM_VALUES.zoomDivisor;
 		lastZoomState = true;
 	}
 
@@ -65,7 +65,7 @@ public class ZoomUtils {
 		lastZoomFovMultiplier = zoomFovMultiplier;
 		
 		if (EmbeddiumExtrasConfig.zoomTransition.get().equals(EmbeddiumExtrasConfig.ZoomTransitionOptions.SMOOTH.toString())) {
-			zoomFovMultiplier += (float) ((zoomMultiplier - zoomFovMultiplier) * EmbeddiumExtrasConfig.zoomValues.smoothMultiplier);
+			zoomFovMultiplier += (float) ((zoomMultiplier - zoomFovMultiplier) * EmbeddiumExtrasConfig.ZOOM_VALUES.smoothMultiplier);
 		}
 	}
 
@@ -80,7 +80,7 @@ public class ZoomUtils {
 		lastZoomOverlayAlpha = zoomOverlayAlpha;
 
 		if (EmbeddiumExtrasConfig.zoomTransition.get().equals(EmbeddiumExtrasConfig.ZoomTransitionOptions.SMOOTH.toString())) {
-			zoomOverlayAlpha += (float) ((zoomMultiplier - zoomOverlayAlpha) * EmbeddiumExtrasConfig.zoomValues.smoothMultiplier);
+			zoomOverlayAlpha += (float) ((zoomMultiplier - zoomOverlayAlpha) * EmbeddiumExtrasConfig.ZOOM_VALUES.smoothMultiplier);
 		}
 	}
 }

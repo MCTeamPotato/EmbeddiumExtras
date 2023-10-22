@@ -12,8 +12,11 @@ import java.util.function.Predicate;
 
 import static net.minecraftforge.common.ForgeConfigSpec.ConfigValue;
 
+@SuppressWarnings("unused")
 public class EmbeddiumExtrasConfig {
-    public static final ForgeConfigSpec ConfigSpec;
+    public static final ForgeConfigSpec CONFIG_SPEC;
+
+    public static final ZoomValues ZOOM_VALUES = new ZoomValues();
 
     public static ConfigValue<String> fadeInQuality;
     public static ConfigValue<String> fpsCounterMode;
@@ -25,8 +28,6 @@ public class EmbeddiumExtrasConfig {
     public static ConfigValue<Integer> maxTileEntityRenderDistanceSquare, maxTileEntityRenderDistanceY, maxEntityRenderDistanceSquare, maxEntityRenderDistanceY;
 
     public static ConfigValue<Boolean> enableDistanceChecks;
-
-    public static final ZoomValues zoomValues = new ZoomValues();
     public static ConfigValue<String> zoomTransition, zoomMode, cinematicCameraMode;
     public static ConfigValue<Boolean> zoomScrolling, zoomOverlay, lowerZoomSensitivity;
     public static ConfigValue<List<? extends String>> entityList, entityModIdList, tileEntityList, tileEntityModIdList;
@@ -76,14 +77,14 @@ public class EmbeddiumExtrasConfig {
             EmbeddiumExtrasConfig.tileEntityModIdList = b.defineList("modid(tile entities of this mod will always be rendered)", tileEntityModidList, validator);
         });
 
-        ConfigSpec = builder.save();
+        CONFIG_SPEC = builder.save();
     }
 
     public static void loadConfig(Path path) {
         final CommentedFileConfig configData = CommentedFileConfig.builder(path).sync().autosave().writingMode(WritingMode.REPLACE).build();
 
         configData.load();
-        ConfigSpec.setConfig(configData);
+        CONFIG_SPEC.setConfig(configData);
     }
 
 

@@ -10,6 +10,6 @@ public interface FpsAccessorMixin
     @Accessor("fps")
     static int getFPS()
     {
-        return 0;
+        throw new RuntimeException();
     }
 }

@@ -22,11 +22,11 @@ import org.apache.commons.lang3.tuple.Pair;
 import org.jetbrains.annotations.NotNull;
 import org.lwjgl.glfw.GLFW;
 
-@Mod(EmbeddiumExtras.MODID)
+@Mod(EmbeddiumExtras.MOD_ID)
 public class EmbeddiumExtras
 {
-    public static final String MODID = "embeddiumextras";
-    public static final KeyBinding zoomKey = new KeyBinding("extras.key.zoom", KeyConflictContext.IN_GAME, KeyModifier.NONE, InputMappings.Type.KEYSYM, GLFW.GLFW_KEY_C, "extras.key.category");
+    public static final String MOD_ID = "embeddiumextras";
+    public static final KeyBinding ZOOM_KEY = new KeyBinding("extras.key.zoom", KeyConflictContext.IN_GAME, KeyModifier.NONE, InputMappings.Type.KEYSYM, GLFW.GLFW_KEY_C, "extras.key.category");
 
     public EmbeddiumExtras() {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::onClientSetup);
@@ -36,7 +36,7 @@ public class EmbeddiumExtras
 
     public void onClientSetup(@NotNull FMLClientSetupEvent event) {
         event.enqueueWork(() -> {
-            ClientRegistry.registerKeyBinding(zoomKey);
+            ClientRegistry.registerKeyBinding(ZOOM_KEY);
             for (EntityType<?> entityType : ForgeRegistries.ENTITIES) {
                 ResourceLocation id = entityType.getRegistryName();
                 if (id != null) ((RenderChecker)entityType).ee$setShouldAlwaysRender((EmbeddiumExtrasConfig.entityList.get().contains(id.toString()) || EmbeddiumExtrasConfig.entityModIdList.get().contains(id.getNamespace())) ? true : null);
