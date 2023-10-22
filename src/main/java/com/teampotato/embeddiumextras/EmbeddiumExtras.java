@@ -23,8 +23,7 @@ import org.jetbrains.annotations.NotNull;
 import org.lwjgl.glfw.GLFW;
 
 @Mod(EmbeddiumExtras.MOD_ID)
-public class EmbeddiumExtras
-{
+public class EmbeddiumExtras {
     public static final String MOD_ID = "embeddiumextras";
     public static final KeyBinding ZOOM_KEY = new KeyBinding("extras.key.zoom", KeyConflictContext.IN_GAME, KeyModifier.NONE, InputMappings.Type.KEYSYM, GLFW.GLFW_KEY_C, "extras.key.category");
 
@@ -39,11 +38,11 @@ public class EmbeddiumExtras
             ClientRegistry.registerKeyBinding(ZOOM_KEY);
             for (EntityType<?> entityType : ForgeRegistries.ENTITIES) {
                 ResourceLocation id = entityType.getRegistryName();
-                if (id != null) ((RenderChecker)entityType).ee$setShouldAlwaysRender((EmbeddiumExtrasConfig.entityList.get().contains(id.toString()) || EmbeddiumExtrasConfig.entityModIdList.get().contains(id.getNamespace())) ? true : null);
+                if (id != null) ((RenderChecker)entityType).ee$setShouldAlwaysRender(EmbeddiumExtrasConfig.entityList.get().contains(id.toString()) || EmbeddiumExtrasConfig.entityModIdList.get().contains(id.getNamespace()));
             }
             for (TileEntityType<?> entityType : ForgeRegistries.TILE_ENTITIES) {
                 ResourceLocation id = entityType.getRegistryName();
-                if (id != null) ((RenderChecker)entityType).ee$setShouldAlwaysRender((EmbeddiumExtrasConfig.tileEntityList.get().contains(id.toString()) || EmbeddiumExtrasConfig.tileEntityModIdList.get().contains(id.getNamespace())) ? true : null);
+                if (id != null) ((RenderChecker)entityType).ee$setShouldAlwaysRender(EmbeddiumExtrasConfig.tileEntityList.get().contains(id.toString()) || EmbeddiumExtrasConfig.tileEntityModIdList.get().contains(id.getNamespace()));
             }
         });
     }

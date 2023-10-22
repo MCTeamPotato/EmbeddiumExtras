@@ -2,21 +2,20 @@ package com.teampotato.embeddiumextras.mixins.entitydistance;
 
 import com.teampotato.embeddiumextras.features.entitydistance.RenderChecker;
 import net.minecraft.entity.EntityType;
-import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 
 @Mixin(EntityType.class)
 public class EntityTypeMixin implements RenderChecker {
-    @Unique @Nullable private Boolean ee$shouldAlwaysRender = null;
+    @Unique private boolean ee$shouldAlwaysRender;
 
     @Override
-    public @Nullable Boolean ee$shouldAlwaysRender() {
+    public boolean ee$shouldAlwaysRender() {
         return this.ee$shouldAlwaysRender;
     }
 
     @Override
-    public void ee$setShouldAlwaysRender(@Nullable Boolean shouldAlwaysRender) {
+    public void ee$setShouldAlwaysRender(boolean shouldAlwaysRender) {
         this.ee$shouldAlwaysRender = shouldAlwaysRender;
     }
 }
