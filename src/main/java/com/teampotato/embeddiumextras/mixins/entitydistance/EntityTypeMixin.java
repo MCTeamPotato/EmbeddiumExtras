@@ -8,8 +8,7 @@ import org.spongepowered.asm.mixin.Unique;
 
 @Mixin(EntityType.class)
 public class EntityTypeMixin implements RenderChecker {
-    @Unique
-    private Boolean ee$shouldAlwaysRender = null;
+    @Unique @Nullable private Boolean ee$shouldAlwaysRender = null;
 
     @Override
     public @Nullable Boolean ee$shouldAlwaysRender() {
