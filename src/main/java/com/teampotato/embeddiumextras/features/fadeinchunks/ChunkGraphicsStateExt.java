@@ -3,9 +3,12 @@ package com.teampotato.embeddiumextras.features.fadeinchunks;
 import me.jellysquid.mods.sodium.client.render.chunk.ChunkGraphicsState;
 import me.jellysquid.mods.sodium.client.render.chunk.ChunkRenderContainer;
 import com.teampotato.embeddiumextras.config.EmbeddiumExtrasConfig;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.Objects;
 
+@OnlyIn(Dist.CLIENT)
 public interface ChunkGraphicsStateExt {
     ChunkRenderContainer<?> ee$getcontainer();
 

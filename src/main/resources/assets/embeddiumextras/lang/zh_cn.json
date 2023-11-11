@@ -1,6 +1,10 @@
 {
+  "extras.fix_gpu_memory_leak.name": "修复GPU内存泄漏",
+  "extras.fix_gpu_memory_leak.tooltip": "若启用，Embeddium Extras 会尝试每秒钟通过一系列手段移除过时的资源，来避免潜在的内存泄漏问题。",
+  "extras.fastchest.name": "快速箱子渲染",
+  "extras.fastchest.tooltip": "移除了箱子的动态模型，让它们以静态块状几何体的方式渲染。\n这也意味着，你将无法再看到箱子打开时的动画效果。",
   "extras.jei.name": "隐藏JEI物品",
-  "extras.jei.tooltip": "调整JEI的渲染。当你不在搜索物品时，JEI的海量物品列表不会显示。这将大大减少它们造成的干扰，除非你正在积极地使用JEI。\n注意：如果你是一名整合包作者，不推荐将这个选项为你的终端用户设置为默认开启，否则他们可能会感到疑惑。",
+  "extras.jei.tooltip": "调整JEI的渲染。当你不在搜索物品时，JEI的海量物品列表不会显示。这将大大减少它们造成的干扰，除非你正在积极地使用JEI。\n注意：如果你是一名整合包作者，不推荐将这个选项为你的终端用户设置为默认开启，否则他们可能会因此感到困惑。",
   "extras.key.zoom": "缩放",
   "extras.key.category": "Embeddium Extras",
   "extras.option.off": "关",

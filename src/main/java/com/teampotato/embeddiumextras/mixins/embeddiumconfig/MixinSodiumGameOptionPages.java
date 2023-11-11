@@ -1,5 +1,7 @@
-package com.teampotato.embeddiumextras.mixins.sodiumconfig;
+package com.teampotato.embeddiumextras.mixins.embeddiumconfig;
 
+import com.teampotato.embeddiumextras.config.EmbeddiumExtrasConfig;
+import com.teampotato.embeddiumextras.features.gpumemleakfix.ClientEventHandler;
 import me.jellysquid.mods.sodium.client.gui.SodiumGameOptionPages;
 import me.jellysquid.mods.sodium.client.gui.SodiumGameOptions;
 import me.jellysquid.mods.sodium.client.gui.options.*;
@@ -18,7 +20,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
-import com.teampotato.embeddiumextras.config.EmbeddiumExtrasConfig;
 
 import java.util.List;
 
@@ -59,11 +60,7 @@ public abstract class MixinSodiumGameOptionPages {
                 .setImpact(OptionImpact.LOW)
                 .build();
 
-        groups.add(OptionGroup.createBuilder()
-                .add(displayFps)
-                .add(displayFpsAlignRight)
-                .add(displayFpsPos)
-                .build());
+        groups.add(OptionGroup.createBuilder().add(displayFps).add(displayFpsAlignRight).add(displayFpsPos).build());
     }
 
 
@@ -97,6 +94,30 @@ public abstract class MixinSodiumGameOptionPages {
                 .build();
 
         groups.add(OptionGroup.createBuilder().add(hideJei).build());
+
+        OptionImpl<SodiumGameOptions, Boolean> fastchest = OptionImpl.createBuilder(Boolean.class, sodiumOpts)
+                .setName(I18n.get("extras.fastchest.name"))
+                .setTooltip(I18n.get("extras.fastchest.tooltip"))
+                .setControl(TickBoxControl::new)
+                .setBinding((sodiumGameOptions, aBoolean) -> EmbeddiumExtrasConfig.enableFastChest.set(aBoolean), sodiumGameOptions -> EmbeddiumExtrasConfig.enableFastChest.get())
+                .setImpact(OptionImpact.MEDIUM)
+                .setFlags(new OptionFlag[]{OptionFlag.REQUIRES_RENDERER_RELOAD})
+                .build();
+
+        groups.add(OptionGroup.createBuilder().add(fastchest).build());
+
+        OptionImpl<SodiumGameOptions, Boolean> fixGPUMemoryLeak = OptionImpl.createBuilder(Boolean.class, sodiumOpts)
+                .setName(I18n.get("extras.fix_gpu_memory_leak.name"))
+                .setTooltip(I18n.get("extras.fix_gpu_memory_leak.tooltip"))
+                .setControl(TickBoxControl::new)
+                .setBinding((sodiumGameOptions, aBoolean) -> {
+                    EmbeddiumExtrasConfig.fixGPUMemoryLeak.set(aBoolean);
+                    ClientEventHandler.IDS_CONTAINERS.clear();
+                }, sodiumGameOptions -> EmbeddiumExtrasConfig.fixGPUMemoryLeak.get())
+                .setImpact(OptionImpact.VARIES)
+                .build();
+
+        groups.add(OptionGroup.createBuilder().add(fixGPUMemoryLeak).build());
 
         OptionImpl<SodiumGameOptions, Boolean> enableDistanceChecks = OptionImpl.createBuilder(Boolean.class, sodiumOpts)
                 .setName(I18n.get("extras.enable_max_entity_distance.name"))

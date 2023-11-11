@@ -23,7 +23,7 @@ public abstract class IngredientListOverlayMixin {
     @Shadow @Final private GuiIconToggleButton configButton;
 
     @Inject(method = "drawScreen", at = @At(value = "INVOKE", target = "Lmezz/jei/gui/overlay/IngredientGridWithNavigation;draw(Lnet/minecraft/client/Minecraft;Lcom/mojang/blaze3d/matrix/MatrixStack;IIF)V"), cancellable = true)
-    private void onDrawScreen(Minecraft minecraft, MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks, CallbackInfo ci) {
+    private void ee$onDrawScreen(Minecraft minecraft, MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks, CallbackInfo ci) {
         if (EmbeddiumExtrasConfig.hideJeiItems.get()) {
             String value = searchField.getValue();
             if (value.isEmpty()) {
@@ -34,7 +34,7 @@ public abstract class IngredientListOverlayMixin {
     }
 
     @Inject(method = "drawTooltips", at = @At("HEAD"), cancellable = true)
-    private void onDrawTooltips(Minecraft minecraft, MatrixStack matrixStack, int mouseX, int mouseY, CallbackInfo ci) {
+    private void ee$onDrawTooltips(Minecraft minecraft, MatrixStack matrixStack, int mouseX, int mouseY, CallbackInfo ci) {
         if (EmbeddiumExtrasConfig.hideJeiItems.get()) {
             String value = searchField.getValue();
             if (value.isEmpty()) ci.cancel();

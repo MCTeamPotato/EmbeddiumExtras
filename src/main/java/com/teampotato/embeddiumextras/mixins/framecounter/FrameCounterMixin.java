@@ -28,7 +28,7 @@ public abstract class FrameCounterMixin {
     private final Queue<Integer> ee$fpsRunningAverageQueue = new LinkedList<>();
 
     @Inject(at = @At("TAIL"), method = "render")
-    public void render(MatrixStack matrixStack, float tickDelta, CallbackInfo info)
+    public void ee$render(MatrixStack matrixStack, float tickDelta, CallbackInfo info)
     {
         if (Objects.equals(EmbeddiumExtrasConfig.fpsCounterMode.get(), "OFF"))
             return;
@@ -40,7 +40,7 @@ public abstract class FrameCounterMixin {
             return;
 
         String displayString;
-        int fps = FpsAccessorMixin.getFPS();
+        int fps = MinecraftAccessor.ee$getFps();
 
         if (Objects.equals(EmbeddiumExtrasConfig.fpsCounterMode.get(), "ADVANCED"))
             displayString = ee$getAdvancedFPSString(fps);

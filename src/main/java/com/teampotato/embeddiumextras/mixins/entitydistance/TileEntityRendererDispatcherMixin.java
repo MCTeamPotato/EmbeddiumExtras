@@ -12,17 +12,16 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import com.teampotato.embeddiumextras.config.EmbeddiumExtrasConfig;
-import com.teampotato.embeddiumextras.util.DistanceUtility;
 
 @Mixin(TileEntityRendererDispatcher.class)
-public abstract class MaxDistanceTileEntity
+public abstract class TileEntityRendererDispatcherMixin
 {
 
     @Shadow public ActiveRenderInfo camera;
 
     @Inject(at = @At("HEAD"), method = "render", cancellable = true)
     public <E extends TileEntity> void render(E entity, float val, MatrixStack matrix, IRenderTypeBuffer p_228850_4_, CallbackInfo ci) {
-        if (!EmbeddiumExtrasConfig.enableDistanceChecks.get() || ((RenderChecker)entity.getType()).ee$shouldAlwaysRender() || DistanceUtility.isEntityWithinDistance(entity.getBlockPos(), this.camera.getPosition(), EmbeddiumExtrasConfig.maxTileEntityRenderDistanceY.get(), EmbeddiumExtrasConfig.maxTileEntityRenderDistanceSquare.get())) return;
+        if (!EmbeddiumExtrasConfig.enableDistanceChecks.get() || ((RenderChecker)entity.getType()).ee$shouldAlwaysRender() || RenderChecker.isEntityWithinDistance(entity.getBlockPos(), this.camera.getPosition(), EmbeddiumExtrasConfig.maxTileEntityRenderDistanceY.get(), EmbeddiumExtrasConfig.maxTileEntityRenderDistanceSquare.get())) return;
         ci.cancel();
     }
 }

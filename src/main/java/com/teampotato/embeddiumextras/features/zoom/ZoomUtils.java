@@ -3,7 +3,7 @@ package com.teampotato.embeddiumextras.features.zoom;
 import com.teampotato.embeddiumextras.config.EmbeddiumExtrasConfig;
 
 //The class that contains most of the logic behind the zoom itself.
-public class ZoomUtils {
+public final class ZoomUtils {
     //The zoom signal, which is managed in an event and used by other mixins.
 	public static boolean zoomState = false;
 

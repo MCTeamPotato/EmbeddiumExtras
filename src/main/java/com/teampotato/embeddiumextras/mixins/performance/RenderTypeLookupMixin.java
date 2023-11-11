@@ -34,7 +34,7 @@ public abstract class RenderTypeLookupMixin
     private static Map<IRegistryDelegate<Fluid>, Predicate<RenderType>> fluidRenderChecks;
 
     @Inject(remap = false, at = @At("HEAD"), method = "canRenderInLayer(Lnet/minecraft/block/BlockState;Lnet/minecraft/client/renderer/RenderType;)Z", cancellable = true)
-    private static void render(@NotNull BlockState state, RenderType type, CallbackInfoReturnable<Boolean> cir) {
+    private static void ee$render(@NotNull BlockState state, RenderType type, CallbackInfoReturnable<Boolean> cir) {
         Block block = state.getBlock();
         if (block instanceof LeavesBlock) {
             cir.setReturnValue(renderCutout ? type == RenderType.cutoutMipped() : type == RenderType.solid());
@@ -45,7 +45,7 @@ public abstract class RenderTypeLookupMixin
     }
 
     @Inject(remap = false, at = @At("HEAD"), method = "canRenderInLayer(Lnet/minecraft/fluid/FluidState;Lnet/minecraft/client/renderer/RenderType;)Z", cancellable = true)
-    private static void render(@NotNull FluidState fluid, RenderType type, @NotNull CallbackInfoReturnable<Boolean> cir) {
+    private static void ee$render(@NotNull FluidState fluid, RenderType type, @NotNull CallbackInfoReturnable<Boolean> cir) {
         Predicate<RenderType> renderType = fluidRenderChecks.get(fluid.getType().delegate);
         cir.setReturnValue(renderType != null ? renderType.test(type) : type == RenderType.solid());
     }

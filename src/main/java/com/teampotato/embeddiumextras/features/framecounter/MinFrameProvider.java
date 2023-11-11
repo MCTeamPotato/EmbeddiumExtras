@@ -1,6 +1,6 @@
 package com.teampotato.embeddiumextras.features.framecounter;
 
-import com.teampotato.embeddiumextras.mixins.framecounter.FpsAccessorMixin;
+import com.teampotato.embeddiumextras.mixins.framecounter.MinecraftAccessor;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.FrameTimer;
 import net.minecraft.util.math.MathHelper;
@@ -19,7 +19,7 @@ public class MinFrameProvider {
         if (logEnd == logStart)
             return;
 
-        int fps = FpsAccessorMixin.getFPS();
+        int fps = MinecraftAccessor.ee$getFps();
         if (fps <= 0)
             fps = 1;
 

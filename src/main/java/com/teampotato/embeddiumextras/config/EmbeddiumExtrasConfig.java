@@ -27,7 +27,7 @@ public class EmbeddiumExtrasConfig {
 
     public static ConfigValue<Integer> maxTileEntityRenderDistanceSquare, maxTileEntityRenderDistanceY, maxEntityRenderDistanceSquare, maxEntityRenderDistanceY;
 
-    public static ConfigValue<Boolean> enableDistanceChecks;
+    public static ConfigValue<Boolean> enableDistanceChecks, enableFastChest, fixGPUMemoryLeak;
     public static ConfigValue<String> zoomTransition, zoomMode, cinematicCameraMode;
     public static ConfigValue<Boolean> zoomScrolling, zoomOverlay, lowerZoomSensitivity;
     public static ConfigValue<List<? extends String>> entityList, entityModIdList, tileEntityList, tileEntityModIdList;
@@ -36,6 +36,8 @@ public class EmbeddiumExtrasConfig {
         ConfigBuilder builder = new ConfigBuilder("Embeddium Extra Settings");
 
         builder.block("Misc", b -> {
+            fixGPUMemoryLeak = b.define("Enable GPU Memory Leak Fix", true);
+            enableFastChest = b.comment("FastChest helps by removing their dynamic models (aka BlockEntityRenderer) and making them render as static chunk geometry, like most normal blocks. This means they will lose their lid opening animation!").define("Enable Fast Chest", false);
             fadeInQuality = b.define("Chunk Fade In Quality (OFF, FAST, FANCY)", "FANCY");
             hideJeiItems = b.comment("Tweak JEI rendering so that the item list does not display unless search is active. This de-clutters the screen significantly unless you're actively using JEI.").define("Hide JEI Items", false);
         });

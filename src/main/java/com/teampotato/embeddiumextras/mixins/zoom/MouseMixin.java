@@ -59,7 +59,7 @@ public abstract class MouseMixin {
 		method = "turnPlayer",
 		ordinal = 2
 	)
-	private double applyReduceSensitivity(double g) {
+	private double ee$applyReduceSensitivity(double g) {
 		double modifiedMouseSensitivity = this.minecraft.options.sensitivity;
 
 		if (EmbeddiumExtrasConfig.lowerZoomSensitivity.get())
@@ -83,7 +83,7 @@ public abstract class MouseMixin {
 		method = "turnPlayer",
 		locals = LocalCapture.CAPTURE_FAILHARD
 	)
-	private void obtainCinematicCameraValues(CallbackInfo info, double d, double e) {
+	private void ee$obtainCinematicCameraValues(CallbackInfo info, double d, double e) {
 		this.ee$extractedE = e;
 	}
 
@@ -93,7 +93,7 @@ public abstract class MouseMixin {
 		method = "turnPlayer",
 		ordinal = 2
 	)
-	private double applyCinematicModeX(double l) {
+	private double ee$applyCinematicModeX(double l) {
 		if (!EmbeddiumExtrasConfig.cinematicCameraMode.get().equals(EmbeddiumExtrasConfig.CinematicCameraOptions.OFF.toString())) {
 			if (ZoomUtils.zoomState) {
 				if (this.minecraft.options.smoothCamera) {
@@ -118,7 +118,7 @@ public abstract class MouseMixin {
 		method = "turnPlayer",
 		ordinal = 2
 	)
-	private double applyCinematicModeY(double m) {
+	private double ee$applyCinematicModeY(double m) {
 		if (!EmbeddiumExtrasConfig.cinematicCameraMode.get().equals(EmbeddiumExtrasConfig.CinematicCameraOptions.OFF.toString())) {
 			if (ZoomUtils.zoomState) {
 				if (this.minecraft.options.smoothCamera) {
@@ -144,7 +144,7 @@ public abstract class MouseMixin {
 		method = "onScroll",
 		cancellable = true
 	)
-	private void zoomerOnMouseScroll(CallbackInfo info) {
+	private void ee$zoomerOnMouseScroll(CallbackInfo info) {
 		if (this.accumulatedScroll != 0.0) {
 			if (EmbeddiumExtrasConfig.zoomScrolling.get()) {
 				if (EmbeddiumExtrasConfig.zoomMode.get().equals(EmbeddiumExtrasConfig.ZoomModes.PERSISTENT.toString())) {
@@ -172,7 +172,7 @@ public abstract class MouseMixin {
 			method = "onPress(JIII)V",
 			cancellable = true
 	)
-	private void zoomerOnMouseButton(long window, int button, int action, int mods, CallbackInfo info) {
+	private void ee$zoomerOnMouseButton(long window, int button, int action, int mods, CallbackInfo info) {
 		if (EmbeddiumExtrasConfig.zoomScrolling.get()) {
 			if (!EmbeddiumExtras.ZOOM_KEY.isDown() && EmbeddiumExtrasConfig.zoomMode.get().equals(EmbeddiumExtrasConfig.ZoomModes.PERSISTENT.toString())) {
 				return;

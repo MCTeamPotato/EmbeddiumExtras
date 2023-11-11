@@ -1,4 +1,4 @@
-package com.teampotato.embeddiumextras.mixins.sodiumconfig;
+package com.teampotato.embeddiumextras.mixins.embeddiumconfig;
 
 
 import com.google.common.collect.ImmutableList;

@@ -39,7 +39,7 @@ public abstract class GameRendererMixin {
 		at = @At("HEAD"),
 		method = "tick()V"
 	)
-	private void zoomTick(CallbackInfo info) {
+	private void ee$zoomTick(CallbackInfo info) {
 		//If zoom transitions are enabled, update the zoom FOV multiplier.
 		if (!EmbeddiumExtrasConfig.zoomTransition.get().equals(EmbeddiumExtrasConfig.ZoomTransitionOptions.OFF.toString())) {
 			ZoomUtils.updateZoomFovMultiplier();
@@ -57,7 +57,7 @@ public abstract class GameRendererMixin {
 		method = "getFov",
 		cancellable = true
 	)
-	private void getZoomedFov(ActiveRenderInfo camera, float tickDelta, boolean changingFov, @NotNull CallbackInfoReturnable<Double> info) {
+	private void ee$getZoomedFov(ActiveRenderInfo camera, float tickDelta, boolean changingFov, @NotNull CallbackInfoReturnable<Double> info) {
 		double fov = info.getReturnValue();
 
 		if (!EmbeddiumExtrasConfig.zoomTransition.get().equals(EmbeddiumExtrasConfig.ZoomTransitionOptions.OFF.toString())) {
@@ -87,7 +87,7 @@ public abstract class GameRendererMixin {
 		at = @At(value = "FIELD", target = "Lnet/minecraft/client/GameSettings;hideGui:Z"),
 		method = "render(FJZ)V"
 	)
-	public void injectZoomOverlay(float tickDelta, long startTime, boolean tick, CallbackInfo info) {
+	public void ee$injectZoomOverlay(float tickDelta, long startTime, boolean tick, CallbackInfo info) {
 		if (EmbeddiumExtrasConfig.zoomOverlay.get()) {
 			if (this.minecraft.options.hideGui) {
 				return;
@@ -99,12 +99,12 @@ public abstract class GameRendererMixin {
 			if (!EmbeddiumExtrasConfig.zoomTransition.get().equals(EmbeddiumExtrasConfig.ZoomTransitionOptions.OFF.toString())) {
 				if (ZoomUtils.zoomFovMultiplier != 0.0F) {
 					float transparency = MathHelper.lerp(tickDelta, ZoomUtils.lastZoomOverlayAlpha, ZoomUtils.zoomOverlayAlpha);
-					this.rb$renderZoomOverlay(transparency);
+					this.ee$renderZoomOverlay(transparency);
 				}
 			} else {
 				//Else, just do a simple toggle on the overlay.
 				if (ZoomUtils.zoomState) {
-					this.rb$renderZoomOverlay(1.0F);
+					this.ee$renderZoomOverlay(1.0F);
 				}
 			}
 			RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
@@ -115,7 +115,7 @@ public abstract class GameRendererMixin {
 
 	//This renders the zoom overlay.
 	@Unique
-	public void rb$renderZoomOverlay(float f) {
+	public void ee$renderZoomOverlay(float f) {
 		RenderSystem.disableAlphaTest();
 		RenderSystem.disableDepthTest();
 		RenderSystem.depthMask(false);
