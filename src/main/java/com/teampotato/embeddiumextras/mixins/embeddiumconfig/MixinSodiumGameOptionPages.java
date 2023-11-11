@@ -1,7 +1,7 @@
 package com.teampotato.embeddiumextras.mixins.embeddiumconfig;
 
 import com.teampotato.embeddiumextras.config.EmbeddiumExtrasConfig;
-import com.teampotato.embeddiumextras.features.gpumemleakfix.ClientEventHandler;
+import com.teampotato.embeddiumextras.features.gpumemleakfix.MemoryCleaner;
 import me.jellysquid.mods.sodium.client.gui.SodiumGameOptionPages;
 import me.jellysquid.mods.sodium.client.gui.SodiumGameOptions;
 import me.jellysquid.mods.sodium.client.gui.options.*;
@@ -112,11 +112,13 @@ public abstract class MixinSodiumGameOptionPages {
                 .setControl(TickBoxControl::new)
                 .setBinding((sodiumGameOptions, aBoolean) -> {
                     EmbeddiumExtrasConfig.fixGPUMemoryLeak.set(aBoolean);
-                    ClientEventHandler.IDS_CONTAINERS.clear();
+                    MemoryCleaner.shouldFixGPUMemoryLeak = aBoolean;
+                    MemoryCleaner.IDS_CONTAINERS.clear();
                 }, sodiumGameOptions -> EmbeddiumExtrasConfig.fixGPUMemoryLeak.get())
                 .setImpact(OptionImpact.VARIES)
                 .build();
 
+        MemoryCleaner.shouldFixGPUMemoryLeak = EmbeddiumExtrasConfig.fixGPUMemoryLeak.get();
         groups.add(OptionGroup.createBuilder().add(fixGPUMemoryLeak).build());
 
         OptionImpl<SodiumGameOptions, Boolean> enableDistanceChecks = OptionImpl.createBuilder(Boolean.class, sodiumOpts)

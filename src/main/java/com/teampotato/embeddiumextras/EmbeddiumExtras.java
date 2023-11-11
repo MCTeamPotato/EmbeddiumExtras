@@ -2,7 +2,7 @@ package com.teampotato.embeddiumextras;
 
 import com.teampotato.embeddiumextras.config.EmbeddiumExtrasConfig;
 import com.teampotato.embeddiumextras.features.entitydistance.RenderChecker;
-import com.teampotato.embeddiumextras.features.gpumemleakfix.ClientEventHandler;
+import com.teampotato.embeddiumextras.features.gpumemleakfix.MemoryCleaner;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.client.util.InputMappings;
 import net.minecraft.entity.EntityType;
@@ -30,7 +30,7 @@ public class EmbeddiumExtras {
     public static final KeyBinding ZOOM_KEY = new KeyBinding("extras.key.zoom", KeyConflictContext.IN_GAME, KeyModifier.NONE, InputMappings.Type.KEYSYM, GLFW.GLFW_KEY_C, "extras.key.category");
 
     public EmbeddiumExtras() {
-        MinecraftForge.EVENT_BUS.register(ClientEventHandler.class);
+        MinecraftForge.EVENT_BUS.register(MemoryCleaner.class);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::onClientSetup);
         EmbeddiumExtrasConfig.loadConfig(FMLPaths.CONFIGDIR.get().resolve("embeddium_extras.toml"));
         ModLoadingContext.get().registerExtensionPoint(ExtensionPoint.DISPLAYTEST, () -> Pair.of(() -> FMLNetworkConstants.IGNORESERVERONLY, (a, b) -> true));
