@@ -63,6 +63,22 @@ public abstract class MixinSodiumGameOptionPages {
         groups.add(OptionGroup.createBuilder().add(displayFps).add(displayFpsAlignRight).add(displayFpsPos).build());
     }
 
+    @Inject(method = "advanced", at = @At(value = "INVOKE", target = "Ljava/util/List;add(Ljava/lang/Object;)Z", ordinal = 3, shift = At.Shift.BEFORE, remap = false), locals = LocalCapture.CAPTURE_FAILEXCEPTION)
+    private static void insertSettingInAdvanced(CallbackInfoReturnable<OptionPage> cir, List<OptionGroup> groups) {
+        OptionImpl<SodiumGameOptions, Boolean> fixGPUMemoryLeak = OptionImpl.createBuilder(Boolean.class, sodiumOpts)
+                .setName(I18n.get("extras.fix_gpu_memory_leak.name"))
+                .setTooltip(I18n.get("extras.fix_gpu_memory_leak.tooltip"))
+                .setControl(TickBoxControl::new)
+                .setBinding((sodiumGameOptions, aBoolean) -> {
+                    EmbeddiumExtrasConfig.fixGPUMemoryLeak.set(aBoolean);
+                    MemoryCleaner.shouldFixGPUMemoryLeak = aBoolean;
+                    MemoryCleaner.IDS_CONTAINERS.clear();
+                }, sodiumGameOptions -> EmbeddiumExtrasConfig.fixGPUMemoryLeak.get())
+                .setImpact(OptionImpact.VARIES)
+                .build();
+        MemoryCleaner.shouldFixGPUMemoryLeak = EmbeddiumExtrasConfig.fixGPUMemoryLeak.get();
+        groups.add(OptionGroup.createBuilder().add(fixGPUMemoryLeak).build());
+    }
 
     @Inject(method = "quality", at = @At(value = "INVOKE", target = "Ljava/util/List;add(Ljava/lang/Object;)Z", remap = false, ordinal = 2, shift = At.Shift.BEFORE), locals = LocalCapture.CAPTURE_FAILEXCEPTION)
     private static void insertSetting2(CallbackInfoReturnable<OptionPage> cir, List<OptionGroup> groups) {
@@ -105,21 +121,6 @@ public abstract class MixinSodiumGameOptionPages {
                 .build();
 
         groups.add(OptionGroup.createBuilder().add(fastchest).build());
-
-        OptionImpl<SodiumGameOptions, Boolean> fixGPUMemoryLeak = OptionImpl.createBuilder(Boolean.class, sodiumOpts)
-                .setName(I18n.get("extras.fix_gpu_memory_leak.name"))
-                .setTooltip(I18n.get("extras.fix_gpu_memory_leak.tooltip"))
-                .setControl(TickBoxControl::new)
-                .setBinding((sodiumGameOptions, aBoolean) -> {
-                    EmbeddiumExtrasConfig.fixGPUMemoryLeak.set(aBoolean);
-                    MemoryCleaner.shouldFixGPUMemoryLeak = aBoolean;
-                    MemoryCleaner.IDS_CONTAINERS.clear();
-                }, sodiumGameOptions -> EmbeddiumExtrasConfig.fixGPUMemoryLeak.get())
-                .setImpact(OptionImpact.VARIES)
-                .build();
-
-        MemoryCleaner.shouldFixGPUMemoryLeak = EmbeddiumExtrasConfig.fixGPUMemoryLeak.get();
-        groups.add(OptionGroup.createBuilder().add(fixGPUMemoryLeak).build());
 
         OptionImpl<SodiumGameOptions, Boolean> enableDistanceChecks = OptionImpl.createBuilder(Boolean.class, sodiumOpts)
                 .setName(I18n.get("extras.enable_max_entity_distance.name"))
