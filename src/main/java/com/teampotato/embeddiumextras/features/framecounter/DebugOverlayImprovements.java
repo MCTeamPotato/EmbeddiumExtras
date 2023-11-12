@@ -13,7 +13,6 @@ public class DebugOverlayImprovements
     @SubscribeEvent
     public static void onRenderDebugText(RenderGameOverlayEvent.Pre event) {
         if (event.getType() != RenderGameOverlayEvent.ElementType.DEBUG) return;
-        Minecraft minecraft = Minecraft.getInstance();
-        if (minecraft.options.renderFpsChart) event.setCanceled(true);
+        if (Minecraft.getInstance().options.renderFpsChart) event.setCanceled(true);
     }
 }

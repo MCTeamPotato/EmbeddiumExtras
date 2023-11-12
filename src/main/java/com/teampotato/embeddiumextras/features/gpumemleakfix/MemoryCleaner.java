@@ -2,6 +2,7 @@ package com.teampotato.embeddiumextras.features.gpumemleakfix;
 
 import com.mojang.blaze3d.platform.GlStateManager;
 import net.minecraft.client.renderer.texture.TextureUtil;
+import net.minecraft.client.shader.FramebufferConstants;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -21,7 +22,7 @@ public final class MemoryCleaner {
             while (!IDS_CONTAINERS.isEmpty() && counter++ < 20) {
                 if (!done) {
                     GlStateManager._bindTexture(0);
-                    GlStateManager._glBindFramebuffer(36160, 0);
+                    GlStateManager._glBindFramebuffer(FramebufferConstants.GL_FRAMEBUFFER, 0);
                     done = true;
                 }
                 FramebufferIdsContainer ids = IDS_CONTAINERS.poll();
@@ -29,7 +30,7 @@ public final class MemoryCleaner {
                     if (ids.depthBufferId > -1) TextureUtil.releaseTextureId(ids.depthBufferId);
                     if (ids.colorTextureId > -1) TextureUtil.releaseTextureId(ids.colorTextureId);
                     if (ids.frameBufferId > -1) {
-                        GlStateManager._glBindFramebuffer(36160, 0);
+                        GlStateManager._glBindFramebuffer(FramebufferConstants.GL_FRAMEBUFFER, 0);
                         GlStateManager._glDeleteFramebuffers(ids.frameBufferId);
                     }
                 }
