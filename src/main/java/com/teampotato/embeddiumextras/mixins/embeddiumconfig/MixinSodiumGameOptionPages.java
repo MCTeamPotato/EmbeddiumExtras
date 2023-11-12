@@ -96,6 +96,18 @@ public abstract class MixinSodiumGameOptionPages {
         groups.add(OptionGroup.createBuilder()
                 .add(chunkFadeIn)
                 .build());
+
+        OptionImpl<SodiumGameOptions, Boolean> shutUpGLError = OptionImpl.createBuilder(Boolean.class, sodiumOpts)
+                .setName(I18n.get("extras.shut_up_gl_error.name"))
+                .setTooltip(I18n.get("extras.shut_up_gl_error.tooltip"))
+                .setControl(TickBoxControl::new)
+                .setBinding((sodiumGameOptions, aBoolean) -> EmbeddiumExtrasConfig.shutUpGLError.set(aBoolean), sodiumGameOptions -> EmbeddiumExtrasConfig.shutUpGLError.get())
+                .setImpact(OptionImpact.LOW)
+                .build();
+
+        groups.add(OptionGroup.createBuilder()
+                .add(shutUpGLError)
+                .build());
     }
 
     @Inject(method = "performance", at = @At(value = "INVOKE", target = "Ljava/util/List;add(Ljava/lang/Object;)Z", remap = false, ordinal = 0, shift = At.Shift.AFTER), locals = LocalCapture.CAPTURE_FAILEXCEPTION)

@@ -7,8 +7,8 @@
   "client": [
     "embeddiumconfig.MixinSodiumGameOptionPages",
     "embeddiumconfig.ZoomSettingsPage",
-    "entitydistance.EntityTypeMixin",
     "entitydistance.EntityRendererManagerMixin",
+    "entitydistance.EntityTypeMixin",
     "entitydistance.TileEntityRendererDispatcherMixin",
     "entitydistance.TileEntityTypeMixin",
     "fadeinchunks.ChunkGraphicsStateMixin",
@@ -21,6 +21,7 @@
     "fastchest.TileEntityRendererDispatcherMixin",
     "framecounter.FrameCounterMixin",
     "framecounter.MinecraftAccessor",
+    "shutupglerror.InputMappingsMixin",
     "gpumemleakfix.FramebufferMixin",
     "jei.IngredientListOverlayMixin",
     "performance.RenderTypeLookupMixin",

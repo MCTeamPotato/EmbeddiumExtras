@@ -1,4 +1,6 @@
 {
+  "extras.shut_up_gl_error.name": "禁用按下按键时可能出现的 GL 错误",
+  "extras.shut_up_gl_error.tooltip": "这个 GL 错误背后从未有过真正的错误——至少不是玩家真正需要担心的错误，它不应该在这污染日志。",
   "extras.fix_gpu_memory_leak.name": "修复GPU内存泄漏",
   "extras.fix_gpu_memory_leak.tooltip": "若启用，Embeddium Extras 会尝试每秒钟通过一系列手段移除过时的资源，来避免潜在的内存泄漏问题。",
   "extras.fastchest.name": "快速箱子渲染",
