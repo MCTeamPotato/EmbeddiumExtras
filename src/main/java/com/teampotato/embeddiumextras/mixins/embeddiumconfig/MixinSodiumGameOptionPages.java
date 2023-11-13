@@ -82,16 +82,15 @@ public abstract class MixinSodiumGameOptionPages {
 
     @Inject(method = "quality", at = @At(value = "INVOKE", target = "Ljava/util/List;add(Ljava/lang/Object;)Z", remap = false, ordinal = 2, shift = At.Shift.BEFORE), locals = LocalCapture.CAPTURE_FAILEXCEPTION)
     private static void insertSetting2(CallbackInfoReturnable<OptionPage> cir, List<OptionGroup> groups) {
-        OptionImpl<SodiumGameOptions, EmbeddiumExtrasConfig.Quality> chunkFadeIn = OptionImpl.createBuilder(EmbeddiumExtrasConfig.Quality.class, sodiumOpts)
-                .setName(I18n.get("extras.fadeinchunks.name"))
-                .setTooltip(I18n.get("extras.fadeinchunks.tooltip"))
-                .setControl(option -> new CyclingControl<>(option, EmbeddiumExtrasConfig.Quality.class, new TranslationTextComponent[] {
-                        new TranslationTextComponent("extras.fadeinchunks.ctrl.off"), new TranslationTextComponent("extras.fadeinchunks.ctrl.fast"), new TranslationTextComponent("extras.fadeinchunks.ctrl.fancy") }))
+        OptionImpl<SodiumGameOptions, Integer> chunkFadeIn = OptionImpl.createBuilder(Integer.TYPE, sodiumOpts)
+                .setName(I18n.get("extras.chunk_fade_in.name"))
+                .setTooltip(I18n.get("extras.chunk_fade_in.tooltip"))
+                .setControl((option) -> new SliderControl(option, 5, 30, 5, ControlValueFormatter.number()))
                 .setBinding(
-                        (opts, value) -> EmbeddiumExtrasConfig.fadeInQuality.set(value.toString()),
-                        opts -> EmbeddiumExtrasConfig.Quality.valueOf(EmbeddiumExtrasConfig.fadeInQuality.get()))
-                .setImpact(OptionImpact.LOW).build();
-
+                        (options, value) -> EmbeddiumExtrasConfig.fadeInTime.set(value),
+                        (options) ->  EmbeddiumExtrasConfig.fadeInTime.get())
+                .setImpact(OptionImpact.LOW)
+                .build();
 
         groups.add(OptionGroup.createBuilder()
                 .add(chunkFadeIn)

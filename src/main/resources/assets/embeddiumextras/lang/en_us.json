@@ -58,9 +58,6 @@
   "extras.zoom.overlay.tooltip": "Renders a vignette overlay when zooming.",
   "extras.zoom.cinematic_camera.name": "Cinematic Camera Options",
   "extras.zoom.cinematic_camera.tooltip": "Cinematic Camera Mode",
-  "extras.fadeinchunks.name": "Chunk Fade In Quality",
-  "extras.fadeinchunks.tooltip": "Controls how fast chunks fade in. No performance hit, Fancy simply takes longer, but looks a bit cooler.",
-  "extras.fadeinchunks.ctrl.off": "Off",
-  "extras.fadeinchunks.ctrl.fast": "Fast",
-  "extras.fadeinchunks.ctrl.fancy": "Fancy"
+  "extras.chunk_fade_in.name": "Chunks Fade In Speed Modifier",
+  "extras.chunk_fade_in.tooltip": "Controls how fast chunks fade in. No performance hit, higher value will make it quicker. 30 will disable this feature."
 }

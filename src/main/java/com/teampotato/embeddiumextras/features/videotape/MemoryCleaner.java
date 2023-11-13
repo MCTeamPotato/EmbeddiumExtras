@@ -1,6 +1,7 @@
 package com.teampotato.embeddiumextras.features.videotape;
 
 import com.mojang.blaze3d.platform.GlStateManager;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.TextureUtil;
 import net.minecraft.client.shader.FramebufferConstants;
 import net.minecraftforge.event.TickEvent;
@@ -18,6 +19,7 @@ public final class MemoryCleaner {
     public static final Logger LOGGER = LogManager.getLogger();
 
     public static void onClientTick(TickEvent.ClientTickEvent event) {
+        Minecraft.getInstance().getProfiler().push("potentialMemoryLeakFix");
         if (event.phase.equals(TickEvent.Phase.END) && shouldFixGPUMemoryLeak) {
             boolean done = false;
             int counter = 0;
@@ -41,6 +43,7 @@ public final class MemoryCleaner {
                 }
             }
         }
+        Minecraft.getInstance().getProfiler().pop();
     }
 
     public static void onFramebufferFinalize(final int depthBufferId, final int colorTextureId, final int frameBufferId) {

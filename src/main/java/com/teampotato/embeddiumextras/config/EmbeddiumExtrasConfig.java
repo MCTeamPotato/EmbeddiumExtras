@@ -17,15 +17,13 @@ public class EmbeddiumExtrasConfig {
     public static final ForgeConfigSpec CONFIG_SPEC;
 
     public static final ZoomValues ZOOM_VALUES = new ZoomValues();
-
-    public static ConfigValue<String> fadeInQuality;
     public static ConfigValue<String> fpsCounterMode;
     public static ConfigValue<Boolean> fpsCounterAlignRight;
     public static ConfigValue<Integer> fpsCounterPosition;
 
     public static ConfigValue<Boolean> hideJeiItems;
 
-    public static ConfigValue<Integer> maxTileEntityRenderDistanceSquare, maxTileEntityRenderDistanceY, maxEntityRenderDistanceSquare, maxEntityRenderDistanceY;
+    public static ConfigValue<Integer> fadeInTime, maxTileEntityRenderDistanceSquare, maxTileEntityRenderDistanceY, maxEntityRenderDistanceSquare, maxEntityRenderDistanceY;
 
     public static ConfigValue<Boolean> enableDistanceChecks, enableFastChest, fixGPUMemoryLeak;
     public static ConfigValue<String> zoomTransition, zoomMode, cinematicCameraMode;
@@ -39,7 +37,7 @@ public class EmbeddiumExtrasConfig {
             shutUpGLError = b.define("Disable GL Error 65539 Invalid key -1 when pressing keys (There was never a real error going on here - not the kind you should have to worry about and definitely not the kind that should pollute logs constantly.)", true);
             fixGPUMemoryLeak = b.define("Enable GPU Memory Leak Fix", true);
             enableFastChest = b.comment("FastChest helps by removing their dynamic models (aka BlockEntityRenderer) and making them render as static chunk geometry, like most normal blocks. This means they will lose their lid opening animation!").define("Enable Fast Chest", false);
-            fadeInQuality = b.define("Chunk Fade In Quality (OFF, FAST, FANCY)", "FANCY");
+            fadeInTime = b.define("Chunk Fade In Speed Modifier", 3);
             hideJeiItems = b.comment("Tweak JEI rendering so that the item list does not display unless search is active. This de-clutters the screen significantly unless you're actively using JEI.").define("Hide JEI Items", false);
         });
 
@@ -101,22 +99,6 @@ public class EmbeddiumExtrasConfig {
         private final String name;
 
         Complexity(String name) {
-            this.name = name;
-        }
-
-        public String getLocalizedName() {
-            return this.name;
-        }
-    }
-
-    public enum Quality implements TextProvider {
-        OFF("Off"),
-        FAST("Fast"),
-        FANCY("Fancy");
-
-        private final String name;
-
-        Quality(String name) {
             this.name = name;
         }
 

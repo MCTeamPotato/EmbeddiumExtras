@@ -17,15 +17,9 @@ public interface ChunkGraphicsStateExt {
     void ee$setloadTime(float paramFloat);
 
     default float getFadeInProgress(float currentTime) {
-        String mode = EmbeddiumExtrasConfig.fadeInQuality.get();
-        float fadeTime = 2.5F;
-        if (!Objects.equals(mode, "FANCY"))
-            if (Objects.equals(mode, "OFF")) {
-                fadeTime = Float.POSITIVE_INFINITY;
-            } else if (Objects.equals(mode, "FAST")) {
-                fadeTime = 5.0F;
-            }
-        return (currentTime - ee$getloadTime()) * fadeTime;
+        Integer fadeInTime = EmbeddiumExtrasConfig.fadeInTime.get();
+        if (Objects.equals(fadeInTime, 30)) return Float.POSITIVE_INFINITY;
+        return (currentTime - ee$getloadTime()) * (fadeInTime.floatValue() / 10.0F + 0.1F);
     }
 
     static ChunkGraphicsStateExt ext(ChunkGraphicsState self) {
