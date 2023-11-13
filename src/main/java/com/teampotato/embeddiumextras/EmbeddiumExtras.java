@@ -2,7 +2,7 @@ package com.teampotato.embeddiumextras;
 
 import com.teampotato.embeddiumextras.config.EmbeddiumExtrasConfig;
 import com.teampotato.embeddiumextras.features.entitydistance.RenderChecker;
-import com.teampotato.embeddiumextras.features.gpumemleakfix.MemoryCleaner;
+import com.teampotato.embeddiumextras.features.videotape.MemoryCleaner;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.client.util.InputMappings;
 import net.minecraft.entity.EntityType;
@@ -11,6 +11,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.settings.KeyConflictContext;
 import net.minecraftforge.client.settings.KeyModifier;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.fml.ExtensionPoint;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.client.registry.ClientRegistry;

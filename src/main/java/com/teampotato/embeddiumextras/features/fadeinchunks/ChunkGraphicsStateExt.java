@@ -1,8 +1,8 @@
 package com.teampotato.embeddiumextras.features.fadeinchunks;
 
+import com.teampotato.embeddiumextras.config.EmbeddiumExtrasConfig;
 import me.jellysquid.mods.sodium.client.render.chunk.ChunkGraphicsState;
 import me.jellysquid.mods.sodium.client.render.chunk.ChunkRenderContainer;
-import com.teampotato.embeddiumextras.config.EmbeddiumExtrasConfig;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 

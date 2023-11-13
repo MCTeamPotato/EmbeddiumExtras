@@ -1,6 +1,7 @@
 package com.teampotato.embeddiumextras.mixins.entitydistance;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
+import com.teampotato.embeddiumextras.config.EmbeddiumExtrasConfig;
 import com.teampotato.embeddiumextras.features.entitydistance.RenderChecker;
 import net.minecraft.client.renderer.ActiveRenderInfo;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
@@ -11,7 +12,6 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import com.teampotato.embeddiumextras.config.EmbeddiumExtrasConfig;
 
 @Mixin(TileEntityRendererDispatcher.class)
 public abstract class TileEntityRendererDispatcherMixin

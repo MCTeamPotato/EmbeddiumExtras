@@ -1,6 +1,6 @@
-package com.teampotato.embeddiumextras.mixins.gpumemleakfix;
+package com.teampotato.embeddiumextras.mixins.videotape;
 
-import com.teampotato.embeddiumextras.features.gpumemleakfix.MemoryCleaner;
+import com.teampotato.embeddiumextras.features.videotape.MemoryCleaner;
 import net.minecraft.client.shader.Framebuffer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -14,13 +14,12 @@ public abstract class FramebufferMixin {
     @Shadow public int frameBufferId;
 
     @Override
-    protected void finalize() {
+    protected void finalize() throws Throwable {
         try {
             MemoryCleaner.onFramebufferFinalize(this.depthBufferId, this.colorTextureId, this.frameBufferId);
-        } catch (Throwable ignored) {} finally {
-            try {
-                super.finalize();
-            } catch (Throwable ignored) {}
+        } catch (Throwable e) {
+            MemoryCleaner.LOGGER.error("Error occurs during Framebuffer finalization", e);
         }
+        super.finalize();
     }
 }

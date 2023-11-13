@@ -1,6 +1,8 @@
 package com.teampotato.embeddiumextras.mixins.framecounter;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
+import com.teampotato.embeddiumextras.config.EmbeddiumExtrasConfig;
+import com.teampotato.embeddiumextras.features.framecounter.MinFrameProvider;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.client.gui.ForgeIngameGui;
 import org.jetbrains.annotations.NotNull;
@@ -10,8 +12,6 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import com.teampotato.embeddiumextras.features.framecounter.MinFrameProvider;
-import com.teampotato.embeddiumextras.config.EmbeddiumExtrasConfig;
 
 import java.util.LinkedList;
 import java.util.Objects;

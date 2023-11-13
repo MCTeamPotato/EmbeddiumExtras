@@ -1,5 +1,7 @@
 package com.teampotato.embeddiumextras.mixins.fadeinchunks;
 
+import com.teampotato.embeddiumextras.features.fadeinchunks.ChunkDrawParamsVectorExt;
+import com.teampotato.embeddiumextras.features.fadeinchunks.ChunkGraphicsStateExt;
 import me.jellysquid.mods.sodium.client.gl.device.CommandList;
 import me.jellysquid.mods.sodium.client.render.chunk.ChunkCameraContext;
 import me.jellysquid.mods.sodium.client.render.chunk.ChunkGraphicsState;
@@ -17,8 +19,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import com.teampotato.embeddiumextras.features.fadeinchunks.ChunkDrawParamsVectorExt;
-import com.teampotato.embeddiumextras.features.fadeinchunks.ChunkGraphicsStateExt;
 
 @Mixin(value = {MultidrawChunkRenderBackend.class}, remap = false)
 public abstract class GL43ChunkRenderBackendMixin extends ChunkRenderShaderBackendMixin<MultidrawGraphicsState> {

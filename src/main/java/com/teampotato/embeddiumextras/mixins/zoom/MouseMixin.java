@@ -1,5 +1,8 @@
 package com.teampotato.embeddiumextras.mixins.zoom;
 
+import com.teampotato.embeddiumextras.EmbeddiumExtras;
+import com.teampotato.embeddiumextras.config.EmbeddiumExtrasConfig;
+import com.teampotato.embeddiumextras.features.zoom.ZoomUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.MouseHelper;
 import net.minecraft.client.util.MouseSmoother;
@@ -12,9 +15,6 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
-import com.teampotato.embeddiumextras.EmbeddiumExtras;
-import com.teampotato.embeddiumextras.config.EmbeddiumExtrasConfig;
-import com.teampotato.embeddiumextras.features.zoom.ZoomUtils;
 
 
 //This mixin is responsible for the mouse-behavior-changing part of the zoom.

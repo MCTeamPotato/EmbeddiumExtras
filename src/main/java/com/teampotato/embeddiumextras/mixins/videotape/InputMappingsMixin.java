@@ -1,4 +1,4 @@
-package com.teampotato.embeddiumextras.mixins.shutupglerror;
+package com.teampotato.embeddiumextras.mixins.videotape;
 
 import com.teampotato.embeddiumextras.config.EmbeddiumExtrasConfig;
 import net.minecraft.client.util.InputMappings;

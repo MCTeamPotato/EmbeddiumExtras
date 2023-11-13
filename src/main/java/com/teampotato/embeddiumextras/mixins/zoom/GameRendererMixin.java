@@ -2,6 +2,8 @@ package com.teampotato.embeddiumextras.mixins.zoom;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.teampotato.embeddiumextras.EmbeddiumExtras;
+import com.teampotato.embeddiumextras.config.EmbeddiumExtrasConfig;
+import com.teampotato.embeddiumextras.features.zoom.ZoomUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ActiveRenderInfo;
 import net.minecraft.client.renderer.BufferBuilder;
@@ -19,8 +21,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import com.teampotato.embeddiumextras.config.EmbeddiumExtrasConfig;
-import com.teampotato.embeddiumextras.features.zoom.ZoomUtils;
 
 //This mixin is responsible for managing the fov-changing part of the zoom.
 @SuppressWarnings("deprecation")

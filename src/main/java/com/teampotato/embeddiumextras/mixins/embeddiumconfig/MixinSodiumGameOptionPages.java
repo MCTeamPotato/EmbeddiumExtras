@@ -1,7 +1,7 @@
 package com.teampotato.embeddiumextras.mixins.embeddiumconfig;
 
 import com.teampotato.embeddiumextras.config.EmbeddiumExtrasConfig;
-import com.teampotato.embeddiumextras.features.gpumemleakfix.MemoryCleaner;
+import com.teampotato.embeddiumextras.features.videotape.MemoryCleaner;
 import me.jellysquid.mods.sodium.client.gui.SodiumGameOptionPages;
 import me.jellysquid.mods.sodium.client.gui.SodiumGameOptions;
 import me.jellysquid.mods.sodium.client.gui.options.*;
