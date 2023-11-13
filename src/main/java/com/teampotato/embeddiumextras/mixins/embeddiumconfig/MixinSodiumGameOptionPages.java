@@ -39,7 +39,6 @@ public abstract class MixinSodiumGameOptionPages {
                 .setImpact(OptionImpact.LOW)
                 .build();
 
-
         Option<Integer> displayFpsPos = OptionImpl.createBuilder(Integer.TYPE, sodiumOpts)
                 .setName(I18n.get("extras.display_fps.position.name"))
                 .setTooltip(I18n.get("extras.display_fps.position.tooltip"))
@@ -60,7 +59,17 @@ public abstract class MixinSodiumGameOptionPages {
                 .setImpact(OptionImpact.LOW)
                 .build();
 
-        groups.add(OptionGroup.createBuilder().add(displayFps).add(displayFpsAlignRight).add(displayFpsPos).build());
+        OptionImpl<SodiumGameOptions, Boolean> showPlayTime = OptionImpl.createBuilder(Boolean.class, sodiumOpts)
+                .setName(I18n.get("extras.showPlayTime.name"))
+                .setTooltip(I18n.get("extras.showPlayTime.tooltip"))
+                .setControl(TickBoxControl::new)
+                .setBinding(
+                        (options, value) -> EmbeddiumExtrasConfig.showPlayTime.set(value),
+                        (options) -> EmbeddiumExtrasConfig.showPlayTime.get())
+                .setImpact(OptionImpact.LOW)
+                .build();
+
+        groups.add(OptionGroup.createBuilder().add(displayFps).add(displayFpsAlignRight).add(displayFpsPos).add(showPlayTime).build());
     }
 
     @Inject(method = "advanced", at = @At(value = "INVOKE", target = "Ljava/util/List;add(Ljava/lang/Object;)Z", ordinal = 3, shift = At.Shift.BEFORE, remap = false), locals = LocalCapture.CAPTURE_FAILEXCEPTION)

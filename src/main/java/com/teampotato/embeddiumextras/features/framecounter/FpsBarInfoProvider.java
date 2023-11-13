@@ -5,24 +5,24 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.util.FrameTimer;
 import net.minecraft.util.math.MathHelper;
 
-public class MinFrameProvider {
-    public static int getLastMinFrame() { return lastMinFrame; }
-    private static int lastMinFrame = 0;
+import java.time.LocalDateTime;
+
+public class FpsBarInfoProvider {
+    public static int lastMinFrame = 0;
+    public static LocalDateTime dateStarted = null;
+    public static String splitChar = null;
+    public static String fpsNow = null;
+    public static String fpsMin = null;
+    public static String fpsAvg = null;
+    public static String playTime = null;
 
     public static void recalculate() {
-        Minecraft client = Minecraft.getInstance();
-        FrameTimer ft = client.getFrameTimer();
-
+        FrameTimer ft = Minecraft.getInstance().getFrameTimer();
         int logStart = ft.getLogStart();
         int logEnd = ft.getLogEnd();
-
-        if (logEnd == logStart)
-            return;
-
+        if (logEnd == logStart) return;
         int fps = MinecraftAccessor.ee$getFps();
-        if (fps <= 0)
-            fps = 1;
-
+        if (fps <= 0) fps = 1;
         long[] frames = ft.getLog();
         long maxNS = (long) (1 / (double) fps * 1000000000);
         long totalNS = 0;
@@ -31,8 +31,6 @@ public class MinFrameProvider {
         while (index != logStart && (double) totalNS < 1000000000) {
             long timeNs = frames[index];
             if (timeNs > maxNS) maxNS = timeNs;
-
-
             totalNS += timeNs;
             index = MathHelper.positiveModulo(index - 1, frames.length);
         }

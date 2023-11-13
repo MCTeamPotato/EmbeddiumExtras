@@ -1,4 +1,11 @@
 {
+  "extras.split": " | ",
+  "extras.gameTime": "PLAYTIME: ",
+  "extras.showPlayTime.name": "Show Gameplay Time",
+  "extras.showPlayTime.tooltip": "If enabled, your gameplay time will be appended after the rendering fps",
+  "extras.fps.now": "NOW: ",
+  "extras.fps.min": "MIN: ",
+  "extras.fps.avg": "AVG: ",
   "extras.shut_up_gl_error.name": "Disable Potenial GL Error On Pressing Keys",
   "extras.shut_up_gl_error.tooltip": "There was never a real error going on here - not the kind you should have to worry about and definitely not the kind that should pollute logs constantly.",
   "extras.fix_gpu_memory_leak.name": "Fix GPU Memory Leak",

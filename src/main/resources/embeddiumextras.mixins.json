@@ -20,11 +20,13 @@
     "fastchest.ChestsBlockMixin",
     "fastchest.TileEntityRendererDispatcherMixin",
     "framecounter.FrameCounterMixin",
+    "framecounter.LanguageManagerMixin",
+    "framecounter.MainMenuScreenMixin",
     "framecounter.MinecraftAccessor",
-    "videotape.InputMappingsMixin",
-    "videotape.FramebufferMixin",
     "jei.IngredientListOverlayMixin",
     "performance.RenderTypeLookupMixin",
+    "videotape.FramebufferMixin",
+    "videotape.InputMappingsMixin",
     "zoom.GameRendererMixin",
     "zoom.MouseMixin"
   ]
