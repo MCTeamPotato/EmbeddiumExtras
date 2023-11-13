@@ -14,7 +14,6 @@ public final class MemoryCleaner {
 
     public static boolean shouldFixGPUMemoryLeak;
 
-    @SubscribeEvent(priority = EventPriority.LOWEST)
     public static void onClientTick(TickEvent.ClientTickEvent event) {
         if (event.phase.equals(TickEvent.Phase.END) && shouldFixGPUMemoryLeak) {
             boolean done = false;
