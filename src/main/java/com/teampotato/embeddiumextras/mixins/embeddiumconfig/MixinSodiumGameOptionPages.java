@@ -69,7 +69,17 @@ public abstract class MixinSodiumGameOptionPages {
                 .setImpact(OptionImpact.LOW)
                 .build();
 
-        groups.add(OptionGroup.createBuilder().add(displayFps).add(displayFpsAlignRight).add(displayFpsPos).add(showPlayTime).build());
+        OptionImpl<SodiumGameOptions, Boolean> showMemory = OptionImpl.createBuilder(Boolean.class, sodiumOpts)
+                .setName(I18n.get("extras.showMemory.name"))
+                .setTooltip(I18n.get("extras.showMemory.tooltip"))
+                .setControl(TickBoxControl::new)
+                .setBinding(
+                        (options, value) -> EmbeddiumExtrasConfig.showMemoryPercentage.set(value),
+                        (options) -> EmbeddiumExtrasConfig.showMemoryPercentage.get())
+                .setImpact(OptionImpact.LOW)
+                .build();
+
+        groups.add(OptionGroup.createBuilder().add(displayFps).add(displayFpsAlignRight).add(displayFpsPos).add(showPlayTime).add(showMemory).build());
     }
 
     @Inject(method = "advanced", at = @At(value = "INVOKE", target = "Ljava/util/List;add(Ljava/lang/Object;)Z", ordinal = 3, shift = At.Shift.BEFORE, remap = false), locals = LocalCapture.CAPTURE_FAILEXCEPTION)

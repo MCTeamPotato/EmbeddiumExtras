@@ -16,5 +16,6 @@ public abstract class LanguageManagerMixin {
         FpsBarInfoProvider.fpsMin = null;
         FpsBarInfoProvider.fpsNow = null;
         FpsBarInfoProvider.playTime = null;
+        FpsBarInfoProvider.usedMemory = null;
     }
 }

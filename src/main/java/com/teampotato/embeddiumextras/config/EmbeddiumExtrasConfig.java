@@ -25,7 +25,7 @@ public class EmbeddiumExtrasConfig {
 
     public static ConfigValue<Integer> fadeInTime, maxTileEntityRenderDistanceSquare, maxTileEntityRenderDistanceY, maxEntityRenderDistanceSquare, maxEntityRenderDistanceY;
 
-    public static ConfigValue<Boolean> enableDistanceChecks, enableFastChest, fixGPUMemoryLeak, showPlayTime;
+    public static ConfigValue<Boolean> enableDistanceChecks, showMemoryPercentage, enableFastChest, fixGPUMemoryLeak, showPlayTime;
     public static ConfigValue<String> zoomTransition, zoomMode, cinematicCameraMode;
     public static ConfigValue<Boolean> zoomScrolling, zoomOverlay, lowerZoomSensitivity, shutUpGLError;
     public static ConfigValue<List<? extends String>> entityList, entityModIdList, tileEntityList, tileEntityModIdList;
@@ -34,7 +34,8 @@ public class EmbeddiumExtrasConfig {
         final ConfigBuilder builder = new ConfigBuilder("Embeddium Extra Settings");
 
         builder.block("Misc", b -> {
-            showPlayTime = b.define("Show gameplay time after the rendering fps", true);
+            showMemoryPercentage = b.define("Show how much memory is used after the rendering fps", false);
+            showPlayTime = b.define("Show gameplay time after the rendering fps", false);
             shutUpGLError = b.define("Disable GL Error 65539 Invalid key -1 when pressing keys (There was never a real error going on here - not the kind you should have to worry about and definitely not the kind that should pollute logs constantly.)", true);
             fixGPUMemoryLeak = b.define("Enable GPU Memory Leak Fix", true);
             enableFastChest = b.comment("FastChest helps by removing their dynamic models (aka BlockEntityRenderer) and making them render as static chunk geometry, like most normal blocks. This means they will lose their lid opening animation!").define("Enable Fast Chest", false);

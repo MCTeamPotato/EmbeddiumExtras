@@ -1,4 +1,7 @@
 {
+  "extras.memoryUsed": "内存占用：",
+  "extras.showMemory.name": "显示内存占用",
+  "extras.showMemory.tooltip": "若启用，Fps显示后面会跟上你游戏的内存占用百分比",
   "extras.split": "丨",
   "extras.gameTime": "游玩时长：",
   "extras.showPlayTime.name": "显示游戏时长",

@@ -43,13 +43,19 @@ public abstract class FrameCounterMixin {
         if (Objects.equals(EmbeddiumExtrasConfig.fpsCounterMode.get(), "ADVANCED")) {
             displayString = this.ee$getAdvancedFPSString(fps);
         } else {
-            displayString = String.valueOf(fps);
+            if (FpsBarInfoProvider.fpsNow == null) FpsBarInfoProvider.fpsNow = I18n.get("extras.fps.now");
+            displayString = FpsBarInfoProvider.fpsNow + fps;
         }
 
         if (FpsBarInfoProvider.dateStarted == null) FpsBarInfoProvider.dateStarted = LocalDateTime.now();
+        if (FpsBarInfoProvider.splitChar == null) FpsBarInfoProvider.splitChar = I18n.get("extras.split");
         if (EmbeddiumExtrasConfig.showPlayTime.get()) {
-            if (FpsBarInfoProvider.splitChar == null) FpsBarInfoProvider.splitChar = I18n.get("extras.split");
+            if (FpsBarInfoProvider.playTime == null) FpsBarInfoProvider.playTime = I18n.get("extras.gameTime");
             displayString = displayString + FpsBarInfoProvider.splitChar + FpsBarInfoProvider.playTime + DurationFormatUtils.formatDuration(Duration.between(FpsBarInfoProvider.dateStarted, LocalDateTime.now()).toMillis(), "H:mm:ss", true);
+        }
+        if (EmbeddiumExtrasConfig.showMemoryPercentage.get()) {
+            if (FpsBarInfoProvider.usedMemory == null) FpsBarInfoProvider.usedMemory = I18n.get("extras.memoryUsed");
+            displayString = displayString + FpsBarInfoProvider.splitChar + FpsBarInfoProvider.usedMemory + ee$getUsedMemoryPercent() + "%";
         }
 
         boolean textAlignRight = EmbeddiumExtrasConfig.fpsCounterAlignRight.get();
@@ -110,10 +116,14 @@ public abstract class FrameCounterMixin {
         if (FpsBarInfoProvider.fpsNow == null) FpsBarInfoProvider.fpsNow = I18n.get("extras.fps.now");
         if (FpsBarInfoProvider.fpsMin == null) FpsBarInfoProvider.fpsMin = I18n.get("extras.fps.min");
         if (FpsBarInfoProvider.fpsAvg == null) FpsBarInfoProvider.fpsAvg = I18n.get("extras.fps.avg");
-        if (FpsBarInfoProvider.playTime == null) FpsBarInfoProvider.playTime = I18n.get("extras.gameTime");
         if (FpsBarInfoProvider.splitChar == null) FpsBarInfoProvider.splitChar = I18n.get("extras.split");
 
-        return FpsBarInfoProvider.fpsNow + fps + FpsBarInfoProvider.splitChar + FpsBarInfoProvider.fpsMin + " " + FpsBarInfoProvider.lastMinFrame + FpsBarInfoProvider.splitChar + FpsBarInfoProvider.fpsAvg + " " + this.ee$runningAverageFPS;
+        return FpsBarInfoProvider.fpsNow + fps + FpsBarInfoProvider.splitChar + FpsBarInfoProvider.fpsMin + FpsBarInfoProvider.lastMinFrame + FpsBarInfoProvider.splitChar + FpsBarInfoProvider.fpsAvg + this.ee$runningAverageFPS;
+    }
+
+    @Unique
+    private static int ee$getUsedMemoryPercent() {
+        Runtime runtime = Runtime.getRuntime();
+        return (int) ((runtime.totalMemory() - runtime.freeMemory()) * 100 / (double) runtime.maxMemory());
     }
 }
-

@@ -15,6 +15,7 @@ public class FpsBarInfoProvider {
     public static String fpsMin = null;
     public static String fpsAvg = null;
     public static String playTime = null;
+    public static String usedMemory = null;
 
     public static void recalculate() {
         FrameTimer ft = Minecraft.getInstance().getFrameTimer();

@@ -1,8 +1,11 @@
 {
+  "extras.memoryUsed": "MEMORY: ",
+  "extras.showMemory.name": "Show Used Memory Percentage",
+  "extras.showMemory.tooltip": "If enabled, the used memory will be appedned after the fps",
   "extras.split": " | ",
   "extras.gameTime": "PLAYTIME: ",
   "extras.showPlayTime.name": "Show Gameplay Time",
-  "extras.showPlayTime.tooltip": "If enabled, your gameplay time will be appended after the rendering fps",
+  "extras.showPlayTime.tooltip": "If enabled, your gameplay time will be appended after the fps",
   "extras.fps.now": "NOW: ",
   "extras.fps.min": "MIN: ",
   "extras.fps.avg": "AVG: ",
