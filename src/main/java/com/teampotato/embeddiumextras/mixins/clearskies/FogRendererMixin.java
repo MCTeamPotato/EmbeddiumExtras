@@ -29,15 +29,7 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
 @Mixin(FogRenderer.class)
 public abstract class FogRendererMixin {
-    @ModifyVariable(
-            method = "setupColor",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/util/math/vector/Vector3d;x()D",
-                    shift = At.Shift.BEFORE
-            ),
-            ordinal = 2
-    )
+    @ModifyVariable(method = "setupColor", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/math/vector/Vector3d;x()D", shift = At.Shift.BEFORE), ordinal = 2)
     private static Vector3d onSampleColor(Vector3d vector3d) {
         if (!EmbeddiumExtrasConfig.enableClearSkies.get()) return vector3d;
         final Minecraft minecraft = Minecraft.getInstance();
@@ -50,14 +42,7 @@ public abstract class FogRendererMixin {
         }
     }
 
-    @ModifyVariable(
-            method = "setupColor",
-            at = @At(
-                    value = "INVOKE_ASSIGN",
-                    target = "Lnet/minecraft/util/math/vector/Vector3f;dot(Lnet/minecraft/util/math/vector/Vector3f;)F"
-            ),
-            ordinal = 7
-    )
+    @ModifyVariable(method = "setupColor", at = @At(value = "INVOKE_ASSIGN", target = "Lnet/minecraft/util/math/vector/Vector3f;dot(Lnet/minecraft/util/math/vector/Vector3f;)F"), ordinal = 7)
     private static float afterPlaneDot(float f) {
         if (!EmbeddiumExtrasConfig.enableClearSkies.get()) return f;
         return 0;
