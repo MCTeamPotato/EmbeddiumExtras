@@ -1,4 +1,6 @@
 {
+  "extras.clear_skies.name": "Clear Skies",
+  "extras.clear_skies.tooltip": "Removes the banding at the horizon of Vanilla Minecraft",
   "extras.memoryUsed": "MEMORY: ",
   "extras.showMemory.name": "Show Used Memory Percentage",
   "extras.showMemory.tooltip": "If enabled, the used memory will be appedned after the fps",

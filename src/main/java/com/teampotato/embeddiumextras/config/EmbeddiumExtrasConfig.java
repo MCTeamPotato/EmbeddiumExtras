@@ -25,7 +25,7 @@ public class EmbeddiumExtrasConfig {
 
     public static ConfigValue<Integer> fadeInTime, maxTileEntityRenderDistanceSquare, maxTileEntityRenderDistanceY, maxEntityRenderDistanceSquare, maxEntityRenderDistanceY;
 
-    public static ConfigValue<Boolean> enableDistanceChecks, showMemoryPercentage, enableFastChest, fixGPUMemoryLeak, showPlayTime;
+    public static ConfigValue<Boolean> enableDistanceChecks, enableClearSkies, showMemoryPercentage, enableFastChest, fixGPUMemoryLeak, showPlayTime;
     public static ConfigValue<String> zoomTransition, zoomMode, cinematicCameraMode;
     public static ConfigValue<Boolean> zoomScrolling, zoomOverlay, lowerZoomSensitivity, shutUpGLError;
     public static ConfigValue<List<? extends String>> entityList, entityModIdList, tileEntityList, tileEntityModIdList;
@@ -34,16 +34,17 @@ public class EmbeddiumExtrasConfig {
         final ConfigBuilder builder = new ConfigBuilder("Embeddium Extra Settings");
 
         builder.block("Misc", b -> {
-            showMemoryPercentage = b.define("Show how much memory is used after the rendering fps", false);
-            showPlayTime = b.define("Show gameplay time after the rendering fps", false);
-            shutUpGLError = b.define("Disable GL Error 65539 Invalid key -1 when pressing keys (There was never a real error going on here - not the kind you should have to worry about and definitely not the kind that should pollute logs constantly.)", true);
-            fixGPUMemoryLeak = b.define("Enable GPU Memory Leak Fix", true);
+            enableClearSkies = b.define("Removes the banding at the horizon of Vanilla Minecraft", false);
+            shutUpGLError = b.define("Disable GL Error 65539 Invalid key -1 when pressing keys (There was never a real error going on here - not the kind you should have to worry about and definitely not the kind that should pollute logs constantly.)", false);
+            fixGPUMemoryLeak = b.define("Enable GPU Memory Leak Fix", false);
             enableFastChest = b.comment("FastChest helps by removing their dynamic models (aka BlockEntityRenderer) and making them render as static chunk geometry, like most normal blocks. This means they will lose their lid opening animation!").define("Enable Fast Chest", false);
-            fadeInTime = b.define("Chunk Fade In Speed Modifier", 3);
+            fadeInTime = b.define("Chunk Fade In Speed Modifier", 10);
             hideJeiItems = b.comment("Tweak JEI rendering so that the item list does not display unless search is active. This de-clutters the screen significantly unless you're actively using JEI.").define("Hide JEI Items", false);
         });
 
         builder.block("FPS Counter", b -> {
+            showMemoryPercentage = b.define("Show how much memory is used after the rendering fps", false);
+            showPlayTime = b.define("Show gameplay time after the rendering fps", false);
             fpsCounterMode = b.define("Display FPS Counter (OFF, SIMPLE, ADVANCED)", "ADVANCED");
             fpsCounterAlignRight = b.define("Right-align FPS Counter", false);
             fpsCounterPosition = b.define("FPS Counter Distance", 12);

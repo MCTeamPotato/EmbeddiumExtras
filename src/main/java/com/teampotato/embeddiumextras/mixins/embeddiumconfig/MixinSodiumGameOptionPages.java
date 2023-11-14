@@ -126,6 +126,18 @@ public abstract class MixinSodiumGameOptionPages {
         groups.add(OptionGroup.createBuilder()
                 .add(shutUpGLError)
                 .build());
+
+        OptionImpl<SodiumGameOptions, Boolean> clearSkies = OptionImpl.createBuilder(Boolean.class, sodiumOpts)
+                .setName(I18n.get("extras.clear_skies.name"))
+                .setTooltip(I18n.get("extras.clear_skies.tooltip"))
+                .setControl(TickBoxControl::new)
+                .setBinding((sodiumGameOptions, aBoolean) -> EmbeddiumExtrasConfig.enableClearSkies.set(aBoolean), sodiumGameOptions -> EmbeddiumExtrasConfig.enableClearSkies.get())
+                .setImpact(OptionImpact.LOW)
+                .build();
+
+        groups.add(OptionGroup.createBuilder()
+                .add(clearSkies)
+                .build());
     }
 
     @Inject(method = "performance", at = @At(value = "INVOKE", target = "Ljava/util/List;add(Ljava/lang/Object;)Z", remap = false, ordinal = 0, shift = At.Shift.AFTER), locals = LocalCapture.CAPTURE_FAILEXCEPTION)

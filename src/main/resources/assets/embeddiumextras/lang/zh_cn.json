@@ -1,4 +1,6 @@
 {
+  "extras.clear_skies.name": "洁净天空",
+  "extras.clear_skies.tooltip": "若启用，原版地平线上的条带将会被消除。",
   "extras.memoryUsed": "内存占用：",
   "extras.showMemory.name": "显示内存占用",
   "extras.showMemory.tooltip": "若启用，Fps显示后面会跟上你游戏的内存占用百分比",

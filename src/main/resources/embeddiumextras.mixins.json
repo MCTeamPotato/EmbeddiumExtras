@@ -5,6 +5,7 @@
   "refmap": "embeddiumextras.refmap.json",
   "minVersion": "0.8",
   "client": [
+    "clearskies.FogRendererMixin",
     "embeddiumconfig.MixinSodiumGameOptionPages",
     "embeddiumconfig.ZoomSettingsPage",
     "entitydistance.EntityRendererManagerMixin",
