@@ -19,7 +19,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.util.Map;
 import java.util.function.Predicate;
 
-@Mixin(value = RenderTypeLookup.class)
+@Mixin(value = RenderTypeLookup.class, priority = 2000)
 public abstract class RenderTypeLookupMixin
 {
     @Shadow
