@@ -31,10 +31,13 @@ public class EmbeddiumExtras {
     public static final KeyBinding ZOOM_KEY = new KeyBinding("extras.key.zoom", KeyConflictContext.IN_GAME, KeyModifier.NONE, InputMappings.Type.KEYSYM, GLFW.GLFW_KEY_C, "extras.key.category");
 
     public EmbeddiumExtras() {
+        if (!FMLLoader.getDist().isClient()) {
+            ModLoadingContext.get().registerExtensionPoint(ExtensionPoint.DISPLAYTEST, () -> Pair.of(() -> FMLNetworkConstants.IGNORESERVERONLY, (a, b) -> true));
+            return;
+        }
         MinecraftForge.EVENT_BUS.addListener(EventPriority.LOWEST, MemoryCleaner::onClientTick);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::onClientSetup);
         EmbeddiumExtrasConfig.loadConfig(FMLLoader.getGamePath().resolve("config").resolve("embeddium_extras.toml"));
-        ModLoadingContext.get().registerExtensionPoint(ExtensionPoint.DISPLAYTEST, () -> Pair.of(() -> FMLNetworkConstants.IGNORESERVERONLY, (a, b) -> true));
     }
 
     public void onClientSetup(@NotNull FMLClientSetupEvent event) {

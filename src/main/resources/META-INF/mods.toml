@@ -17,4 +17,4 @@ modId="embeddium"
 mandatory=true
 versionRange="[0.1.14+mc1.16.5,)"
 ordering="NONE"
-side="BOTH"
+side="CLIENT"
