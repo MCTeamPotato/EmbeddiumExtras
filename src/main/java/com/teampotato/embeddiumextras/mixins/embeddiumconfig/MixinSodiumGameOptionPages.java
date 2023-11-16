@@ -1,6 +1,7 @@
 package com.teampotato.embeddiumextras.mixins.embeddiumconfig;
 
 import com.teampotato.embeddiumextras.config.EmbeddiumExtrasConfig;
+import com.teampotato.embeddiumextras.features.entitydistance.IRendererManager;
 import com.teampotato.embeddiumextras.features.videotape.MemoryCleaner;
 import me.jellysquid.mods.sodium.client.gui.SodiumGameOptionPages;
 import me.jellysquid.mods.sodium.client.gui.SodiumGameOptions;
@@ -10,6 +11,8 @@ import me.jellysquid.mods.sodium.client.gui.options.control.CyclingControl;
 import me.jellysquid.mods.sodium.client.gui.options.control.SliderControl;
 import me.jellysquid.mods.sodium.client.gui.options.control.TickBoxControl;
 import me.jellysquid.mods.sodium.client.gui.options.storage.SodiumOptionsStorage;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.text.TranslationTextComponent;
 import org.jetbrains.annotations.NotNull;
@@ -169,7 +172,11 @@ public abstract class MixinSodiumGameOptionPages {
                 .setTooltip(I18n.get("extras.enable_max_entity_distance.tooltip"))
                 .setControl(TickBoxControl::new)
                 .setBinding(
-                        (options, value) -> EmbeddiumExtrasConfig.enableDistanceChecks.set(value),
+                        (options, value) -> {
+                            EmbeddiumExtrasConfig.enableDistanceChecks.set(value);
+                            ((IRendererManager)Minecraft.getInstance().getEntityRenderDispatcher()).ee$setShouldCull(value);
+                            ((IRendererManager)TileEntityRendererDispatcher.instance).ee$setShouldCull(value);
+                        },
                         (options) -> EmbeddiumExtrasConfig.enableDistanceChecks.get())
                 .setImpact(OptionImpact.EXTREME)
                 .build();

@@ -20,7 +20,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.List;
 
-@Pseudo
 @Mixin(value = SodiumOptionsGUI.class, remap = false)
 public abstract class ZoomSettingsPage {
 

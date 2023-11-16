@@ -9,7 +9,7 @@ public class ConfigBuilder {
     private static final ForgeConfigSpec.Builder COMMON_BUILDER = new ForgeConfigSpec.Builder();
 
     public ConfigBuilder(String comment) {
-        COMMON_BUILDER.comment(comment).push("Settings");
+        COMMON_BUILDER.comment(comment).push("Embeddium Extras Settings");
     }
 
     public ForgeConfigSpec save() {
