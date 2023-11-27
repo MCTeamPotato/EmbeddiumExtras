@@ -23,9 +23,9 @@ public class EmbeddiumExtrasConfig {
 
     public static ConfigValue<Boolean> hideJeiItems;
 
-    public static ConfigValue<Integer> fadeInTime, maxTileEntityRenderDistanceSquare, maxTileEntityRenderDistanceY, maxEntityRenderDistanceSquare, maxEntityRenderDistanceY;
+    public static ConfigValue<Integer> fadeInTime, maxTileEntityRenderDistanceSquare, maxTileEntityRenderDistanceY, maxEntityRenderDistanceSquare, maxEntityRenderDistanceY, maxParticleRenderDistance;
 
-    public static ConfigValue<Boolean> enableDistanceChecks, enableClearSkies, showMemoryPercentage, enableFastChest, fixGPUMemoryLeak, showPlayTime;
+    public static ConfigValue<Boolean> enableDistanceChecks, enableClearSkies, showMemoryPercentage, enableFastChest, fixGPUMemoryLeak, showPlayTime, enableParticleDistanceCheck;
     public static ConfigValue<String> zoomTransition, zoomMode, cinematicCameraMode;
     public static ConfigValue<Boolean> zoomScrolling, zoomOverlay, lowerZoomSensitivity, shutUpGLError;
     public static ConfigValue<List<? extends String>> entityList, entityModIdList, tileEntityList, tileEntityModIdList;
@@ -50,8 +50,11 @@ public class EmbeddiumExtrasConfig {
             fpsCounterPosition = b.define("FPS Counter Distance", 12);
         });
 
-        builder.block("Entity Distance", b -> {
-            enableDistanceChecks = b.define("Enable Max Distance Checks", true);
+        builder.block("Render Distance", b -> {
+            enableParticleDistanceCheck = b.define("Enable Paticle Max Ditance Check", false);
+            maxParticleRenderDistance = b.define("Particle Max Rendering Distance [Squared, Default 50]", 50);
+
+            enableDistanceChecks = b.define("Enable (Tile)Entities Max Distance Checks", true);
 
             maxTileEntityRenderDistanceSquare = b.define("(TileEntity) Max Horizontal Render Distance [Squared, Default 64^2]", 4096);
             maxTileEntityRenderDistanceY = b.define("(TileEntity) Max Vertical Render Distance [Raw, Default 32]", 32);

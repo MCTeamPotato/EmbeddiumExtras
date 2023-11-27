@@ -145,6 +145,7 @@ public abstract class MixinSodiumGameOptionPages {
 
     @Inject(method = "performance", at = @At(value = "INVOKE", target = "Ljava/util/List;add(Ljava/lang/Object;)Z", remap = false, ordinal = 0, shift = At.Shift.AFTER), locals = LocalCapture.CAPTURE_FAILEXCEPTION)
     private static void insertSetting3(CallbackInfoReturnable<OptionPage> cir, @NotNull List<OptionGroup> groups) {
+
         OptionImpl<SodiumGameOptions, Boolean> hideJei = OptionImpl.createBuilder(Boolean.class, sodiumOpts)
                 .setName(I18n.get("extras.jei.name"))
                 .setTooltip(I18n.get("extras.jei.tooltip"))
@@ -241,5 +242,27 @@ public abstract class MixinSodiumGameOptionPages {
                         .add(maxTileEntityDistanceVertical)
                         .build()
         );
+
+        OptionImpl<SodiumGameOptions, Boolean> particleCheck = OptionImpl.createBuilder(Boolean.class, sodiumOpts)
+                .setName(I18n.get("extras.enable_particle_distance_check.name"))
+                .setTooltip(I18n.get("extras.enable_particle_distance_check.tooltip"))
+                .setControl(TickBoxControl::new)
+                .setBinding(
+                        (options, value) -> EmbeddiumExtrasConfig.enableParticleDistanceCheck.set(value),
+                        (options) -> EmbeddiumExtrasConfig.enableParticleDistanceCheck.get())
+                .setImpact(OptionImpact.MEDIUM)
+                .build();
+
+        OptionImpl<SodiumGameOptions, Integer> particleDist = OptionImpl.createBuilder(Integer.TYPE, sodiumOpts)
+                .setName(I18n.get("extras.max_particle_distance.name"))
+                .setTooltip(I18n.get("extras.max_particle_distance.tooltip"))
+                .setControl((option) -> new SliderControl(option, 0, 100, 5, ControlValueFormatter.number()))
+                .setBinding(
+                        (options, value) -> EmbeddiumExtrasConfig.maxParticleRenderDistance.set(value),
+                        (options) ->  EmbeddiumExtrasConfig.maxParticleRenderDistance.get())
+                .setImpact(OptionImpact.MEDIUM)
+                .build();
+
+        groups.add(OptionGroup.createBuilder().add(particleCheck).add(particleDist).build());
     }
 }

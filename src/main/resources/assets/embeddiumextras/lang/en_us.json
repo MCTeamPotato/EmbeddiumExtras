@@ -1,4 +1,8 @@
 {
+  "extras.enable_particle_distance_check.name": "Particle Distance Check",
+  "extras.enable_particle_distance_check.tooltip": "If enabled, particles that is far from you will not be renderer, distance configurable below.",
+  "extras.max_particle_distance.name": "Max Particle Distance",
+  "extras.max_particle_distance.tooltip": "The straight line (Unit: Blocks) used for the rendering check from you to the particle",
   "extras.clear_skies.name": "Clear Skies",
   "extras.clear_skies.tooltip": "Removes the banding at the horizon of Vanilla Minecraft",
   "extras.memoryUsed": "Memory: ",

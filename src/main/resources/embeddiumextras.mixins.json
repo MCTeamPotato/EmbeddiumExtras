@@ -25,6 +25,8 @@
     "framecounter.MainMenuScreenMixin",
     "framecounter.MinecraftAccessor",
     "jei.IngredientListOverlayMixin",
+    "particle.ParticleAccessor",
+    "particle.ParticleManagerMixin",
     "performance.RenderTypeLookupMixin",
     "videotape.FramebufferMixin",
     "videotape.InputMappingsMixin",

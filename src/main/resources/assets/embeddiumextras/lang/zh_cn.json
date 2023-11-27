@@ -1,4 +1,8 @@
 {
+  "extras.enable_particle_distance_check.name": "粒子距离判定",
+  "extras.enable_particle_distance_check.tooltip": "若启用，离你过远的粒子将不会被渲染，距离可在下面配置。",
+  "extras.max_particle_distance.name": "最远粒子距离",
+  "extras.max_particle_distance.tooltip": "粒子到你的直线距离（单位：方块），用于渲染判定",
   "extras.clear_skies.name": "洁净天空",
   "extras.clear_skies.tooltip": "若启用，原版地平线上的条带将会被消除。",
   "extras.memoryUsed": "内存占用：",
