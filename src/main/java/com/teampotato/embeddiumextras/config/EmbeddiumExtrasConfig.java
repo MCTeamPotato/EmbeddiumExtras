@@ -52,7 +52,7 @@ public class EmbeddiumExtrasConfig {
 
         builder.block("Render Distance", b -> {
             enableParticleDistanceCheck = b.define("Enable Paticle Max Ditance Check", false);
-            maxParticleRenderDistance = b.define("Particle Max Rendering Distance [Squared, Default 50]", 50);
+            maxParticleRenderDistance = b.define("Particle Max Rendering Distance [Squared, Default 15]", 15);
 
             enableDistanceChecks = b.define("Enable (Tile)Entities Max Distance Checks", true);
 
