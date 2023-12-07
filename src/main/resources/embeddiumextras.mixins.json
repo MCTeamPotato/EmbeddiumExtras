@@ -6,7 +6,6 @@
   "minVersion": "0.8",
   "client": [
     "clear_skies.FogRendererMixin",
-    "disable_debug_message.GameSettingsMixin",
     "embeddium_config.MixinSodiumGameOptionPages",
     "embeddium_config.ZoomSettingsPage",
     "entity_distance.EntityRendererManagerMixin",
@@ -26,6 +25,7 @@
     "frame_counter.MainMenuScreenMixin",
     "frame_counter.MinecraftAccessor",
     "jei.IngredientListOverlayMixin",
+    "options_improvement.GameSettingsMixin",
     "particle.ParticleAccessor",
     "particle.ParticleManagerMixin",
     "performance.RenderTypeLookupMixin",
