@@ -1,4 +1,4 @@
-package com.teampotato.embeddiumextras.mixins.framecounter;
+package com.teampotato.embeddiumextras.mixins.frame_counter;
 
 import com.teampotato.embeddiumextras.features.framecounter.FpsBarInfoProvider;
 import net.minecraft.client.gui.screen.MainMenuScreen;

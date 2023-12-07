@@ -1,4 +1,4 @@
-package com.teampotato.embeddiumextras.mixins.embeddiumconfig;
+package com.teampotato.embeddiumextras.mixins.embeddium_config;
 
 
 import com.google.common.collect.ImmutableList;

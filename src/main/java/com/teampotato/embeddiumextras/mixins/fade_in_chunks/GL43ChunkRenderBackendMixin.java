@@ -1,4 +1,4 @@
-package com.teampotato.embeddiumextras.mixins.fadeinchunks;
+package com.teampotato.embeddiumextras.mixins.fade_in_chunks;
 
 import com.teampotato.embeddiumextras.features.fadeinchunks.ChunkDrawParamsVectorExt;
 import com.teampotato.embeddiumextras.features.fadeinchunks.ChunkGraphicsStateExt;

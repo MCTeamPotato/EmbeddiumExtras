@@ -14,7 +14,7 @@
  * the License.
  ******************************************************************************/
 
-package com.teampotato.embeddiumextras.mixins.clearskies;
+package com.teampotato.embeddiumextras.mixins.clear_skies;
 
 import com.teampotato.embeddiumextras.config.EmbeddiumExtrasConfig;
 import net.minecraft.client.Minecraft;

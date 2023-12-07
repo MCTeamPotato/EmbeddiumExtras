@@ -1,6 +1,6 @@
 package com.teampotato.embeddiumextras.features.framecounter;
 
-import com.teampotato.embeddiumextras.mixins.framecounter.MinecraftAccessor;
+import com.teampotato.embeddiumextras.mixins.frame_counter.MinecraftAccessor;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.FrameTimer;
 import net.minecraft.util.math.MathHelper;

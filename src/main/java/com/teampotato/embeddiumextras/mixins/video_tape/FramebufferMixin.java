@@ -1,4 +1,4 @@
-package com.teampotato.embeddiumextras.mixins.videotape;
+package com.teampotato.embeddiumextras.mixins.video_tape;
 
 import com.teampotato.embeddiumextras.features.videotape.MemoryCleaner;
 import net.minecraft.client.shader.Framebuffer;

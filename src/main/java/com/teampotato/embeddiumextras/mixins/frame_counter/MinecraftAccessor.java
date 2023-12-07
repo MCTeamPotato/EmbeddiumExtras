@@ -1,4 +1,4 @@
-package com.teampotato.embeddiumextras.mixins.framecounter;
+package com.teampotato.embeddiumextras.mixins.frame_counter;
 
 import net.minecraft.client.Minecraft;
 import org.spongepowered.asm.mixin.Mixin;

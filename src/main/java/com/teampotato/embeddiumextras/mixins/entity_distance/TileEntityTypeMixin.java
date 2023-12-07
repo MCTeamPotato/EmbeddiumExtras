@@ -1,12 +1,12 @@
-package com.teampotato.embeddiumextras.mixins.entitydistance;
+package com.teampotato.embeddiumextras.mixins.entity_distance;
 
 import com.teampotato.embeddiumextras.features.entitydistance.RenderChecker;
-import net.minecraft.entity.EntityType;
+import net.minecraft.tileentity.TileEntityType;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 
-@Mixin(EntityType.class)
-public class EntityTypeMixin implements RenderChecker {
+@Mixin(TileEntityType.class)
+public class TileEntityTypeMixin implements RenderChecker {
     @Unique private boolean ee$shouldAlwaysRender;
 
     @Override

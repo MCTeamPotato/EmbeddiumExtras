@@ -1,4 +1,4 @@
-package com.teampotato.embeddiumextras.mixins.entitydistance;
+package com.teampotato.embeddiumextras.mixins.entity_distance;
 
 import com.teampotato.embeddiumextras.config.EmbeddiumExtrasConfig;
 import com.teampotato.embeddiumextras.features.entitydistance.IRendererManager;

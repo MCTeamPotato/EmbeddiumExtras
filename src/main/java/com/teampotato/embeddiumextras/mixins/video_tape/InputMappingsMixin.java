@@ -1,4 +1,4 @@
-package com.teampotato.embeddiumextras.mixins.videotape;
+package com.teampotato.embeddiumextras.mixins.video_tape;
 
 import com.teampotato.embeddiumextras.config.EmbeddiumExtrasConfig;
 import net.minecraft.client.util.InputMappings;

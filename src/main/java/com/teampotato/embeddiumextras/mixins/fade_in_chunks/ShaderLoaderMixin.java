@@ -1,4 +1,4 @@
-package com.teampotato.embeddiumextras.mixins.fadeinchunks;
+package com.teampotato.embeddiumextras.mixins.fade_in_chunks;
 
 import me.jellysquid.mods.sodium.client.SodiumClientMod;
 import me.jellysquid.mods.sodium.client.gl.shader.ShaderLoader;

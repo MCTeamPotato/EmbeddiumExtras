@@ -1,4 +1,4 @@
-package com.teampotato.embeddiumextras.mixins.fastchest;
+package com.teampotato.embeddiumextras.mixins.fast_chest;
 
 import com.teampotato.embeddiumextras.config.EmbeddiumExtrasConfig;
 import net.minecraft.client.renderer.tileentity.TileEntityRenderer;

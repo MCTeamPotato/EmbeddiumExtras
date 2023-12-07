@@ -1,4 +1,4 @@
-package com.teampotato.embeddiumextras.mixins.framecounter;
+package com.teampotato.embeddiumextras.mixins.frame_counter;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.teampotato.embeddiumextras.config.EmbeddiumExtrasConfig;
