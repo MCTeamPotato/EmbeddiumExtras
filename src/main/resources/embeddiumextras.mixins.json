@@ -28,7 +28,6 @@
     "options_improvement.GameSettingsMixin",
     "particle.ParticleAccessor",
     "particle.ParticleManagerMixin",
-    "performance.RenderTypeLookupMixin",
     "video_tape.FramebufferMixin",
     "video_tape.InputMappingsMixin",
     "zoom.GameRendererMixin",
