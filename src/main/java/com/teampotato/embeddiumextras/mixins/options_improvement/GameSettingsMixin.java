@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 @Mixin(GameSettings.class)
 public abstract class GameSettingsMixin {
     @Redirect(method = "load", at = @At(value = "INVOKE", target = "Ljava/lang/Integer;parseInt(Ljava/lang/String;)I", ordinal = 14))
-    private int onParseGlDebugVerbosity(String s) {
+    private int disableOpenGLDebugMessage(String s) {
         return 0;
     }
 

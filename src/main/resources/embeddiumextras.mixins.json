@@ -20,6 +20,7 @@
     "fade_in_chunks.UnsafeChunkDrawCallVectorMixin",
     "fast_chest.ChestsBlockMixin",
     "fast_chest.TileEntityRendererDispatcherMixin",
+    "fast_chest.TileEntityTypeMixin",
     "frame_counter.FrameCounterMixin",
     "frame_counter.LanguageManagerMixin",
     "frame_counter.MainMenuScreenMixin",

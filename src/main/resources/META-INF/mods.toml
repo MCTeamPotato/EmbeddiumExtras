@@ -1,6 +1,6 @@
 modLoader="javafml"
 loaderVersion="[36,)"
-license="LGPL-2.1"
+license="LGPL-v3"
 
 [[mods]]
 modId="embeddiumextras"

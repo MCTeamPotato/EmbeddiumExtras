@@ -2,7 +2,9 @@ package com.teampotato.embeddiumextras;
 
 import com.teampotato.embeddiumextras.config.EmbeddiumExtrasConfig;
 import com.teampotato.embeddiumextras.features.entitydistance.RenderChecker;
+import com.teampotato.embeddiumextras.features.fastchest.FastChestContainer;
 import com.teampotato.embeddiumextras.features.videotape.MemoryCleaner;
+import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.client.util.InputMappings;
 import net.minecraft.entity.EntityType;
@@ -25,6 +27,8 @@ import org.apache.commons.lang3.tuple.Pair;
 import org.jetbrains.annotations.NotNull;
 import org.lwjgl.glfw.GLFW;
 
+import java.util.List;
+
 @Mod(EmbeddiumExtras.MOD_ID)
 public class EmbeddiumExtras {
     public static final String MOD_ID = "embeddiumextras";
@@ -39,6 +43,9 @@ public class EmbeddiumExtras {
         }
     }
 
+    //not configurable because this may not work with mods chests.
+    private static final List<String> FAST_CHEST_ENABLED_TILE_ENTITIES = ObjectArrayList.wrap(new String[]{"minecraft:chest", "minecraft:ender_chest", "minecraft:trapped_chest"});
+
     public void onClientSetup(@NotNull FMLClientSetupEvent event) {
         event.enqueueWork(() -> {
             ClientRegistry.registerKeyBinding(ZOOM_KEY);
@@ -48,7 +55,10 @@ public class EmbeddiumExtras {
             }
             for (TileEntityType<?> entityType : ForgeRegistries.TILE_ENTITIES) {
                 ResourceLocation id = entityType.getRegistryName();
-                if (id != null) ((RenderChecker)entityType).ee$setShouldAlwaysRender(EmbeddiumExtrasConfig.tileEntityList.get().contains(id.toString()) || EmbeddiumExtrasConfig.tileEntityModIdList.get().contains(id.getNamespace()));
+                if (id != null) {
+                    ((RenderChecker)entityType).ee$setShouldAlwaysRender(EmbeddiumExtrasConfig.tileEntityList.get().contains(id.toString()) || EmbeddiumExtrasConfig.tileEntityModIdList.get().contains(id.getNamespace()));
+                    ((FastChestContainer)entityType).ee$setCanBeImpactedByFastChest(FAST_CHEST_ENABLED_TILE_ENTITIES.contains(id.toString()));
+                }
             }
         });
     }
