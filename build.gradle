@@ -133,7 +133,7 @@ String currentChangeLog = file("CHANGELOG.md").getText("UTF-8");
 
 modrinth {
     token = System.getenv("MODRINTH_TOKEN")
-    projectId = "${mod_id}"
+    projectId = "embeddium-extras"
     versionNumber = "${mod_version}"
     uploadFile = jar
     gameVersions.addAll(supportedGameVersions)
