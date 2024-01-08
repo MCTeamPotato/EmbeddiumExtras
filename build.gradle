@@ -39,6 +39,8 @@ minecraft {
         client {
             workingDirectory project.file('run')
             arg '-mixin.config=' + String.valueOf(mod_id) + '.mixins.json'
+            args "--mixin.config", "dev-fix.mixins.json"
+            property 'terminal.jline', 'true'
             //jvmArgs '-XX:+UnlockCommercialFeatures' // uncomment for profiling
             property 'forge.logging.console.level', 'info'
             property 'fml.earlyprogresswindow', 'false'
@@ -54,7 +56,9 @@ minecraft {
         server {
             workingDirectory project.file('run/server')
             arg '-mixin.config=' + String.valueOf(mod_id) + '.mixins.json'
+            args "--mixin.config", "dev-fix.mixins.json"
             property 'forge.logging.console.level', 'info'
+            property 'terminal.jline', 'true'
             property 'mixin.env.remapRefMap', 'true'
             property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
             mods {
@@ -68,9 +72,12 @@ minecraft {
             workingDirectory project.file('run')
             property 'forge.logging.markers', 'REGISTRIES,REGISTRYDUMP'
             property 'forge.logging.console.level', 'debug'
+            property 'terminal.jline', 'true'
             property 'fml.earlyprogresswindow', 'false'
             property 'mixin.env.remapRefMap', 'true'
             property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
+            args "--mixin.config", "dev-fix.mixins.json"
+            args "--mixin.config", "${mod_id}.mixins.json"
             args '--mod', String.valueOf(mod_id), '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources')
             mods {
                 embeddiumextras {
@@ -124,6 +131,7 @@ jar {
                 "MixinConfigs": "${mod_id}.mixins.json"
         ])
     }
+    exclude "dev-fix.mixins.json"
 }
 
 jar.finalizedBy('reobfJar')

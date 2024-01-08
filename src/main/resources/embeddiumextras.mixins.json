@@ -22,6 +22,7 @@
     "fast_chest.TileEntityRendererDispatcherMixin",
     "fast_chest.TileEntityTypeMixin",
     "frame_counter.FrameCounterMixin",
+    "frame_counter.GpuUsageMixin",
     "frame_counter.LanguageManagerMixin",
     "frame_counter.MainMenuScreenMixin",
     "frame_counter.MinecraftAccessor",
