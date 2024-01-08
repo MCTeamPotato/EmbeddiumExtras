@@ -44,9 +44,7 @@ public class GpuUsageMixin implements IGpuUsage {
     @Inject(method = "runTick", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/shader/Framebuffer;blitToScreen(II)V", shift = At.Shift.AFTER))
     private void inject$blitToScreen(boolean pRenderLevel, CallbackInfo ci) {
         if (embPlus$begin) {
-            TimerQuery.getInstance().ifPresent((timerQuery) -> {
-                this.embPlus$currentFrameProfile = timerQuery.endProfile();
-            });
+            TimerQuery.getInstance().ifPresent((timerQuery) -> this.embPlus$currentFrameProfile = timerQuery.endProfile());
         }
     }
 
