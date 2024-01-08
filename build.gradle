@@ -36,64 +36,25 @@ java.toolchain.languageVersion.set(JavaLanguageVersion.of(8))
 minecraft {
     mappings channel: "${mappings_channel}", version: "${mappings_version}"
     runs {
-        client {
+        configureEach {
             workingDirectory project.file('run')
-            arg '-mixin.config=' + String.valueOf(mod_id) + '.mixins.json'
-            args "--mixin.config", "dev-fix.mixins.json"
-            property 'terminal.jline', 'true'
-            //jvmArgs '-XX:+UnlockCommercialFeatures' // uncomment for profiling
-            property 'forge.logging.console.level', 'info'
-            property 'fml.earlyprogresswindow', 'false'
-            property 'mixin.env.remapRefMap', 'true'
-            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
-            mods {
-                embeddiumextras {
-                    source sourceSets.main
-                }
-            }
-        }
-
-        server {
-            workingDirectory project.file('run/server')
-            arg '-mixin.config=' + String.valueOf(mod_id) + '.mixins.json'
-            args "--mixin.config", "dev-fix.mixins.json"
-            property 'forge.logging.console.level', 'info'
-            property 'terminal.jline', 'true'
-            property 'mixin.env.remapRefMap', 'true'
-            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
-            mods {
-                embeddiumextras {
-                    source sourceSets.main
-                }
-            }
-        }
-
-        data {
-            workingDirectory project.file('run')
-            property 'forge.logging.markers', 'REGISTRIES,REGISTRYDUMP'
+            property 'forge.logging.markers', 'REGISTRIES'
             property 'forge.logging.console.level', 'debug'
             property 'terminal.jline', 'true'
-            property 'fml.earlyprogresswindow', 'false'
-            property 'mixin.env.remapRefMap', 'true'
-            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
-            args "--mixin.config", "dev-fix.mixins.json"
-            args "--mixin.config", "${mod_id}.mixins.json"
-            args '--mod', String.valueOf(mod_id), '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources')
             mods {
-                embeddiumextras {
+                "${mod_id}" {
                     source sourceSets.main
                 }
             }
         }
+
+        client {
+            taskName "${mod_id}-client"
+        }
+        server {
+            taskName "${mod_id}-server"
+        }
     }
-}
-
-compileJava {
-    options.compilerArgs = ["-Xdiags:verbose"]
-}
-
-sourceSets.main.resources {
-    srcDir 'src/generated/resources'
 }
 
 repositories {
