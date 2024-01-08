@@ -25,7 +25,7 @@ public class EmbeddiumExtrasConfig {
 
     public static ConfigValue<Integer> fadeInTime, maxTileEntityRenderDistanceSquare, maxTileEntityRenderDistanceY, maxEntityRenderDistanceSquare, maxEntityRenderDistanceY, maxParticleRenderDistance;
 
-    public static ConfigValue<Boolean> enableDistanceChecks, enableClearSkies, showMemoryPercentage, enableFastChest, fixGPUMemoryLeak, showPlayTime, enableParticleDistanceCheck;
+    public static ConfigValue<Boolean> enableDistanceChecks, enableClearSkies, showMemoryPercentage, showGpuPercentage, enableFastChest, fixGPUMemoryLeak, showPlayTime, enableParticleDistanceCheck;
     public static ConfigValue<String> zoomTransition, zoomMode, cinematicCameraMode;
     public static ConfigValue<Boolean> zoomScrolling, zoomOverlay, lowerZoomSensitivity, shutUpGLError;
     public static ConfigValue<List<? extends String>> entityList, entityModIdList, tileEntityList, tileEntityModIdList;
@@ -43,6 +43,7 @@ public class EmbeddiumExtrasConfig {
         });
 
         builder.block("FPS Counter", b -> {
+            showGpuPercentage = b.define("Show how much GPU used after the rendering fps", false);
             showMemoryPercentage = b.define("Show how much memory is used after the rendering fps", false);
             showPlayTime = b.define("Show gameplay time after the rendering fps", false);
             fpsCounterMode = b.define("Display FPS Counter (OFF, SIMPLE, ADVANCED)", "SIMPLE");
