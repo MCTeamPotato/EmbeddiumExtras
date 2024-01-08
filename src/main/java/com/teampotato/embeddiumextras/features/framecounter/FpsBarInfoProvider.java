@@ -22,6 +22,7 @@ public class FpsBarInfoProvider {
     public static String fpsAvg = null;
     public static String playTime = null;
     public static String usedMemory = null;
+    public static String gpuChar = null;
 
     public static void recalculateLastMinFrame() {
         FrameTimer ft = Minecraft.getInstance().getFrameTimer();
@@ -72,6 +73,11 @@ public class FpsBarInfoProvider {
         if (EmbeddiumExtrasConfig.showMemoryPercentage.get()) {
             if (FpsBarInfoProvider.usedMemory == null) FpsBarInfoProvider.usedMemory = I18n.get("extras.memoryUsed");
             displayString = displayString + FpsBarInfoProvider.splitChar + FpsBarInfoProvider.usedMemory + usedMemoryPercent + "%";
+        }
+
+        if (EmbeddiumExtrasConfig.showGpuPercentage.get()) {
+            if (FpsBarInfoProvider.gpuChar == null) FpsBarInfoProvider.gpuChar = I18n.get("extras.gpu");
+            displayString += FpsBarInfoProvider.splitChar + FpsBarInfoProvider.gpuChar + Math.min(Math.round(((IGpuUsage) Minecraft.getInstance()).embExtra$getCooldownGPU()), 100)+ "%";
         }
 
         boolean textAlignRight = EmbeddiumExtrasConfig.fpsCounterAlignRight.get();

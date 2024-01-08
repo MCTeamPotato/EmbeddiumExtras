@@ -48,6 +48,7 @@ public abstract class FrameCounterMixin {
         if (FpsBarInfoProvider.fpsMin == null) FpsBarInfoProvider.fpsMin = I18n.get("extras.fps.min");
         if (FpsBarInfoProvider.fpsAvg == null) FpsBarInfoProvider.fpsAvg = I18n.get("extras.fps.avg");
         if (FpsBarInfoProvider.splitChar == null) FpsBarInfoProvider.splitChar = I18n.get("extras.split");
+        if (FpsBarInfoProvider.gpuChar == null) FpsBarInfoProvider.gpuChar = I18n.get("extras.gpu");
 
         return FpsBarInfoProvider.fpsNow + fps + FpsBarInfoProvider.splitChar + FpsBarInfoProvider.fpsMin + FpsBarInfoProvider.lastMinFrame + FpsBarInfoProvider.splitChar + FpsBarInfoProvider.fpsAvg + this.ee$runningAverageFPS;
     }
