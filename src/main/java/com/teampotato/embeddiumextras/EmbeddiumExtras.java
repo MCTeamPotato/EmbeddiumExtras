@@ -1,10 +1,10 @@
 package com.teampotato.embeddiumextras;
 
+import com.google.common.collect.Sets;
 import com.teampotato.embeddiumextras.config.EmbeddiumExtrasConfig;
 import com.teampotato.embeddiumextras.features.entitydistance.RenderChecker;
 import com.teampotato.embeddiumextras.features.fastchest.FastChestContainer;
 import com.teampotato.embeddiumextras.features.videotape.MemoryCleaner;
-import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.client.util.InputMappings;
 import net.minecraft.entity.EntityType;
@@ -27,7 +27,7 @@ import org.apache.commons.lang3.tuple.Pair;
 import org.jetbrains.annotations.NotNull;
 import org.lwjgl.glfw.GLFW;
 
-import java.util.List;
+import java.util.Set;
 
 @Mod(EmbeddiumExtras.MOD_ID)
 public class EmbeddiumExtras {
@@ -44,7 +44,7 @@ public class EmbeddiumExtras {
     }
 
     //not configurable because this may not work with mods chests.
-    private static final List<String> FAST_CHEST_ENABLED_TILE_ENTITIES = ObjectArrayList.wrap(new String[]{"minecraft:chest", "minecraft:ender_chest", "minecraft:trapped_chest"});
+    private static final Set<String> FAST_CHEST_ENABLED_TILE_ENTITIES = Sets.newHashSet("minecraft:chest", "minecraft:ender_chest", "minecraft:trapped_chest");
 
     public void onClientSetup(@NotNull FMLClientSetupEvent event) {
         event.enqueueWork(() -> {

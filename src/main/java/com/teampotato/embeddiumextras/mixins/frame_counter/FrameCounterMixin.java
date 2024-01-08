@@ -1,24 +1,17 @@
 package com.teampotato.embeddiumextras.mixins.frame_counter;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
-import com.teampotato.embeddiumextras.config.EmbeddiumExtrasConfig;
 import com.teampotato.embeddiumextras.features.framecounter.FpsBarInfoProvider;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
 import net.minecraftforge.client.gui.ForgeIngameGui;
-import org.apache.commons.lang3.time.DurationFormatUtils;
 import org.jetbrains.annotations.NotNull;
-import org.lwjgl.opengl.GL11;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import java.time.Duration;
-import java.time.LocalDateTime;
 import java.util.LinkedList;
-import java.util.Objects;
 import java.util.Queue;
 
 @Mixin(ForgeIngameGui.class)
@@ -30,75 +23,13 @@ public abstract class FrameCounterMixin {
 
     @Inject(at = @At("TAIL"), method = "render")
     public void ee$render(MatrixStack matrixStack, float tickDelta, CallbackInfo info) {
-        if (Objects.equals(EmbeddiumExtrasConfig.fpsCounterMode.get(), "OFF")) return;
-
-        Minecraft client = Minecraft.getInstance();
-
-        // return if F3 menu open and graph not displayed
-        if (client.options.renderDebug && !client.options.renderFpsChart) return;
-
-        String displayString;
-        int fps = MinecraftAccessor.ee$getFps();
-
-        if (Objects.equals(EmbeddiumExtrasConfig.fpsCounterMode.get(), "ADVANCED")) {
-            displayString = this.ee$getAdvancedFPSString(fps);
-        } else {
-            if (FpsBarInfoProvider.fpsNow == null) FpsBarInfoProvider.fpsNow = I18n.get("extras.fps.now");
-            displayString = FpsBarInfoProvider.fpsNow + fps;
-        }
-
-        if (FpsBarInfoProvider.dateStarted == null) FpsBarInfoProvider.dateStarted = LocalDateTime.now();
-        if (FpsBarInfoProvider.splitChar == null) FpsBarInfoProvider.splitChar = I18n.get("extras.split");
-        if (EmbeddiumExtrasConfig.showPlayTime.get()) {
-            if (FpsBarInfoProvider.playTime == null) FpsBarInfoProvider.playTime = I18n.get("extras.gameTime");
-            displayString = displayString + FpsBarInfoProvider.splitChar + FpsBarInfoProvider.playTime + DurationFormatUtils.formatDuration(Duration.between(FpsBarInfoProvider.dateStarted, LocalDateTime.now()).toMillis(), "H:mm:ss", true);
-        }
-        if (EmbeddiumExtrasConfig.showMemoryPercentage.get()) {
-            if (FpsBarInfoProvider.usedMemory == null) FpsBarInfoProvider.usedMemory = I18n.get("extras.memoryUsed");
-            displayString = displayString + FpsBarInfoProvider.splitChar + FpsBarInfoProvider.usedMemory + ee$getUsedMemoryPercent() + "%";
-        }
-
-        boolean textAlignRight = EmbeddiumExtrasConfig.fpsCounterAlignRight.get();
-
-        float textPos = EmbeddiumExtrasConfig.fpsCounterPosition.get().floatValue();
-
-        int textAlpha = 200;
-        int textColor = 0xFFFFFF;
-        float fontScale = 0.75F;
-
-        double guiScale = client.getWindow().getGuiScale();
-        if (guiScale > 0) {
-            textPos /= (float) guiScale;
-        }
-
-        // Prevent FPS-Display to render outside screenspace
-        float maxTextPosX = client.getWindow().getGuiScaledWidth() - client.font.width(displayString);
-        float maxTextPosY = client.getWindow().getGuiScaledHeight() - client.font.lineHeight;
-        float textPosX, textPosY;
-        if (textAlignRight) {
-            textPosX = client.getWindow().getGuiScaledWidth() - client.font.width(displayString) - textPos;
-        } else {
-            textPosX = Math.min(textPos, maxTextPosX);
-        }
-        textPosX = Math.min(Math.max(textPosX, 0), maxTextPosX);
-        textPosY = Math.min(textPos, maxTextPosY);
-
-        int drawColor = ((textAlpha & 0xFF) << 24) | textColor;
-
-        if (client.getWindow().getGuiScale() > 3) {
-            GL11.glPushMatrix();
-            GL11.glScalef(fontScale, fontScale, fontScale);
-            client.font.drawShadow(matrixStack, displayString, textPosX, textPosY, drawColor);
-            GL11.glPopMatrix();
-        } else {
-            client.font.drawShadow(matrixStack, displayString, textPosX, textPosY, drawColor);
-        }
+        FpsBarInfoProvider.render(matrixStack, ee$getUsedMemoryPercent(), ee$getAdvancedFPSString(MinecraftAccessor.ee$getFps()));
     }
 
 
     @Unique
     private @NotNull String ee$getAdvancedFPSString(int fps) {
-        FpsBarInfoProvider.recalculate();
+        FpsBarInfoProvider.recalculateLastMinFrame();
 
         if (this.ee$lastMeasuredFPS != fps) {
             this.ee$lastMeasuredFPS = fps;

@@ -1,8 +1,10 @@
+import net.darkhax.curseforgegradle.TaskPublishCurseForge
+import net.darkhax.curseforgegradle.UploadArtifact
+
 buildscript {
     repositories {
         maven { url = 'https://maven.minecraftforge.net' }
         mavenCentral()
-        jcenter()
         maven { url = 'https://repo.spongepowered.org/repository/maven-public/' }
         maven {
             name 'parchment'
@@ -14,6 +16,11 @@ buildscript {
         classpath group: 'org.spongepowered', name: 'mixingradle', version: "${mixingradle_version}"
         classpath 'org.parchmentmc:librarian:1.+'
     }
+}
+
+plugins {
+    id 'com.modrinth.minotaur' version '2.+'
+    id 'net.darkhax.curseforgegradle' version '1.1.+'
 }
 
 apply plugin: 'net.minecraftforge.gradle'
@@ -82,10 +89,6 @@ sourceSets.main.resources {
     srcDir 'src/generated/resources'
 }
 
-mixin {
-    add sourceSets.main, "${mod_id}.refmap.json"
-}
-
 repositories {
     maven {
         url = "https://www.cursemaven.com"
@@ -99,8 +102,16 @@ dependencies {
     implementation 'org.jetbrains:annotations:24.0.0'
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
-    implementation fg.deobf("org.embeddedt:embeddium-1.16.5:0.2.10-git.02efcd8+mc1.16.5")
+    implementation fg.deobf("org.embeddedt:embeddium-1.16.5:0.2.17-git.6ff2f16+mc1.16.5")
     implementation fg.deobf("curse.maven:jei-238222:4371666")
+}
+
+mixin {
+    add sourceSets.main, "${mod_id}.refmap.json"
+}
+
+java {
+    withSourcesJar()
 }
 
 jar {
@@ -116,3 +127,36 @@ jar {
 }
 
 jar.finalizedBy('reobfJar')
+
+String[] supportedGameVersions = new String[]{"${minecraft_version}"}
+String currentChangeLog = file("CHANGELOG.md").getText("UTF-8");
+
+modrinth {
+    token = System.getenv("MODRINTH_TOKEN")
+    projectId = "${mod_id}"
+    versionNumber = "${mod_version}"
+    uploadFile = jar
+    gameVersions.addAll(supportedGameVersions)
+    loaders = ["forge"]
+    versionType = "release"
+    additionalFiles = [sourcesJar]
+    changelog.set(currentChangeLog)
+}
+
+tasks.register("publishCurseForge", TaskPublishCurseForge) {
+    apiToken = System.getenv("CURSEFORGE_TOKEN")
+    disableVersionDetection()
+
+    UploadArtifact mainFile = upload(cf_project_id, jar)
+    mainFile.displayName = "${mod_id}-${version}"
+    mainFile.releaseType = "release"
+    mainFile.changelog = currentChangeLog
+    mainFile.changelogType = "markdown"
+    mainFile.addModLoader("Forge")
+    mainFile.addJavaVersion("Java 17", "Java 8")
+    mainFile.addGameVersion(supportedGameVersions)
+
+    UploadArtifact sourcesFile = mainFile.withAdditionalFile(sourcesJar)
+    sourcesFile.changelog = currentChangeLog
+    sourcesFile.changelogType = "markdown"
+}
