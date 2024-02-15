@@ -5,6 +5,7 @@ import com.teampotato.embeddiumextras.features.framecounter.IGpuUsage;
 import com.teampotato.embeddiumextras.features.gpu.TimerQuery;
 import net.minecraft.client.GameSettings;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.world.ClientWorld;
 import net.minecraft.util.Util;
 import net.minecraft.util.text.TextFormatting;
 import org.spongepowered.asm.mixin.Final;
@@ -15,6 +16,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import javax.annotation.Nullable;
+
 @Mixin(Minecraft.class)
 public class GpuUsageMixin implements IGpuUsage {
     @Shadow
@@ -22,6 +25,7 @@ public class GpuUsageMixin implements IGpuUsage {
     @Shadow public String fpsString;
 
     @Shadow @Final public GameSettings options;
+    @Shadow @Nullable public ClientWorld level;
     @Unique
     private TimerQuery.FrameProfile embPlus$currentFrameProfile;
     @Unique private boolean embPlus$begin = false;
@@ -31,6 +35,7 @@ public class GpuUsageMixin implements IGpuUsage {
 
     @Inject(method = "runTick", at = @At(value = "INVOKE", target = "Lnet/minecraft/profiler/IProfiler;push(Ljava/lang/String;)V", shift = At.Shift.AFTER, ordinal = 3))
     private void inject$posePush(boolean pRenderLevel, CallbackInfo ci) {
+        if (this.level == null) return;
         if (!EmbeddiumExtrasConfig.showGpuPercentage.get() && !options.renderDebug) {
             embPlus$begin = false;
         } else {
