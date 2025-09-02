@@ -15,6 +15,12 @@
     "dist.renderable.EntityTypeMixin",
     "embeddium.SodiumGameOptionPagesMixin",
     "embeddium.SodiumOptionsGUIMixin",
+    "fade.ChunkGraphicsStateMixin",
+    "fade.ChunkRenderShaderBackendMixin",
+    "fade.MultidrawChunkRenderBackendMixin",
+    "fade.NioChunkDrawCallVectorMixin",
+    "fade.ShaderLoaderMixin",
+    "fade.UnsafeChunkDrawCallVectorMixin",
     "fastchest.BlockEntityRenderDispatcherMixin",
     "fastchest.ChestsBlockMixin",
     "fps.ForgeIngameGuiMixin",
@@ -24,17 +30,9 @@
     "tape.RenderTargetMixin",
     "zoom.GameRendererMixin",
     "zoom.InventoryMixin",
-    "zoom.MouseHandlerMixin",
-    "fade.ChunkGraphicsStateMixin",
-    "fade.ChunkRenderShaderBackendMixin",
-    "fade.MultidrawChunkRenderBackendMixin",
-    "fade.NioChunkDrawCallVectorMixin",
-    "fade.ShaderLoaderMixin",
-    "fade.UnsafeChunkDrawCallVectorMixin"
+    "zoom.MouseHandlerMixin"
   ],
   "injectors": {
     "defaultRequire": 1
-  },
-  "mixins": [
-  ]
+  }
 }

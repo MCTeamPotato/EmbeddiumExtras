@@ -11,6 +11,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(value = ChunkRenderShaderBackend.class, remap = false)
+@SuppressWarnings("unused")
 public class ChunkRenderShaderBackendMixin<P extends ChunkGraphicsState> {
     @Unique protected float extras$currentTime;
 

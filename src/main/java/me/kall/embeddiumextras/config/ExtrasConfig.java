@@ -36,26 +36,28 @@ public class ExtrasConfig {
     public static final BooleanValue FADE_IN_CHUNKS;
     public static final IntValue FADE_IN_TIME;
 
+    public static final BooleanValue NOTE;
+
     static {
         Builder builder = new Builder();
         builder.push("EmbeddiumExtras");
 
         builder.push("FadeInChunks");
-        FADE_IN_CHUNKS = builder.define("EnableFadeInChunks", true);
+        FADE_IN_CHUNKS = builder.define("EnableFadeInChunks", false);
         FADE_IN_TIME = builder.defineInRange("ChunksFadeInAnimationSpeedModifier", 10, 0, 30);
         builder.pop();
 
         builder.push("RenderDistance");
-        ENABLE_ENTITY_DIST_CHECK = builder.define("EnableEntityDistanceCheck", true);
+        ENABLE_ENTITY_DIST_CHECK = builder.define("EnableEntityDistanceCheck", false);
         ENTITY_MAX_RENDERABLE_HEIGHT = builder.defineInRange("EntityMaxRenderableHeight", 32, 0, Integer.MAX_VALUE);
         ENTITY_MAX_RENDERABLE_DIST_SQR = builder.defineInRange("EntityMaxRenderableDistanceSquared", 4096, 0, Integer.MAX_VALUE);
-        ENABLE_TILE_ENTITY_DIST_CHECK = builder.define("EnableTileEntityDistanceCheck", true);
+        ENABLE_TILE_ENTITY_DIST_CHECK = builder.define("EnableTileEntityDistanceCheck", false);
         TILE_MAX_RENDERABLE_HEIGHT = builder.defineInRange("TileMaxRenderableHeight", 32, 0, Integer.MAX_VALUE);
         TILE_MAX_RENDERABLE_DIST_SQR = builder.defineInRange("TileMxaRenderableDistanceSquared", 4096, 0, Integer.MAX_VALUE);
         builder.pop();
 
         builder.push("FpsDisplay");
-        FPS_DISPLAY_MODE = builder.defineEnum("FpsDisplayMode", FpsMode.ADVANCED);
+        FPS_DISPLAY_MODE = builder.defineEnum("FpsDisplayMode", FpsMode.OFF);
         FPS_ALIGN_RIGHT = builder.define("DisplayFpsAtRightSide", false);
         FPS_POS_X_OFFSET = builder.defineInRange("FpsDisplayPositionXOffset", 12, 0, Integer.MAX_VALUE);
         FPS_POS_Y_OFFSET = builder.defineInRange("FpsDisplayPositionYOffset", 12, 0, Integer.MAX_VALUE);
@@ -65,9 +67,10 @@ public class ExtrasConfig {
         builder.pop();
 
         builder.push("Misc");
-        SHUT_UP_GL_ERROR = builder.define("ShutUpGLError", true);
-        MEMORY_LEAK_FIX = builder.define("PotentialMemoryLeakFix", true);
-        FAST_CHEST = builder.define("FastChest", true);
+        NOTE = builder.define("Note", true);
+        SHUT_UP_GL_ERROR = builder.define("ShutUpGLError", false);
+        MEMORY_LEAK_FIX = builder.define("PotentialMemoryLeakFix", false);
+        FAST_CHEST = builder.define("FastChest", false);
         HIDE_JEI_ITEMS = builder.comment("Stop rendering the items in Just Enough Items GUI unless you are searching").define("HideJEIItems", false);
         CLEAR_SKIES = builder.comment("Removes the banding at the horizon of Vanilla Minecraft").define("EnableClearSkies", false);
         builder.pop();

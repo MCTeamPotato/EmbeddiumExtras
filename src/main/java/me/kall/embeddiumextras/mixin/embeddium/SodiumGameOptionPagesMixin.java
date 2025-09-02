@@ -47,6 +47,16 @@ public abstract class SodiumGameOptionPagesMixin {
                 .build();
 
         groups.add(OptionGroup.createBuilder().add(zoom).add(maxZoomScale).build());
+
+        OptionImpl<SodiumGameOptions, Boolean> note = OptionImpl.createBuilder(Boolean.class, sodiumOpts)
+                .setName(I18n.get("extras.note.name"))
+                .setTooltip(I18n.get("extras.none"))
+                .setControl(TickBoxControl::new)
+                .setBinding((sodiumGameOptions, value) -> NOTE.set(value), sodiumGameOptions -> NOTE.get())
+                .setImpact(OptionImpact.LOW)
+                .build();
+
+        groups.add(OptionGroup.createBuilder().add(note).build());
     }
 
     @Inject(method = "performance", at = @At(value = "INVOKE", target = "Ljava/util/List;add(Ljava/lang/Object;)Z", shift = At.Shift.AFTER, remap = false))

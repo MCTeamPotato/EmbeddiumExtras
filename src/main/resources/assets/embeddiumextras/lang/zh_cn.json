@@ -25,7 +25,7 @@
   "extras.zoom.max_zoom_scale.tooltip": "最大缩放比例无法在此处调整，请前往config/embeddiumextras-client.toml",
 
   "extras.hide_jei_items": "隐藏JEI物品",
-  "extras.hide_jei_items.tooltip": "调整JEI的渲染。当你不在搜索物品时，JEI的海量物品列表不会显示。这将大大减少它们造成的干扰，除非你正在积极地使用JEI。\\n注意：如果你是一名整合包作者，不推荐将这个选项为你的终端用户设置为默认开启，否则他们可能会因此感到困惑。",
+  "extras.hide_jei_items.tooltip": "调整JEI的渲染。当你不在搜索物品时，JEI的海量物品列表不会显示。这将大大减少它们造成的干扰，除非你正在积极地使用JEI。注意：如果你是一名整合包作者，不推荐将这个选项为你的终端用户设置为默认开启，否则他们可能会因此感到困惑。",
 
   "extras.dist.entity.check": "启用基于距离的实体剔除",
   "extras.dist.entity.dist_sqr": "实体最大可渲染水平距离",
@@ -36,7 +36,7 @@
   "extras.dist.tile.height": "方块实体最大可渲染垂直高度",
 
   "extras.fast_chest": "快速箱子渲染",
-  "extras.fast_chest.tooltip": "移除了箱子的动态模型，让它们以静态块状几何体的方式渲染。\\n这也意味着，你将无法再看到箱子打开时的动画效果。\\n需要资源包支持",
+  "extras.fast_chest.tooltip": "移除了箱子的动态模型，让它们以静态块状几何体的方式渲染。这也意味着，你将无法再看到箱子打开时的动画效果。需要资源包支持",
   "extras.fast_chest.note.enable": "你已经开启了快速箱子渲染，不要忘记启用资源包内的EmbeddiumExtrasFastChestResourcepack。",
   "extras.fast_chest.note.disable": "你已经关闭了快速箱子渲染，不要忘记禁用资源包内的EmbeddiumExtrasFastChestResourcepack，否则箱子将不会渲染。",
 

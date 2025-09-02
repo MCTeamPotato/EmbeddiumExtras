@@ -1,6 +1,9 @@
 {
   "extras.none": "",
 
+  "extras.note": "Thank you for using Embeddium Extras! By default, all the extras features are disabled, you can follow your preference and enable them in the video setting.",
+  "extras.note.name": "Note Player When They Login",
+
   "extras.display_fps.page": "Fps Viewer",
   "extras.display_fps.display.name": "Fps Display Mode",
   "extras.display_fps.position.x.name": "Fps Bar Pos X",
@@ -36,7 +39,7 @@
   "extras.dist.tile.height": "Max Renderable Entity Vertical Height From Player",
 
   "extras.fast_chest": "Fast Chest",
-  "extras.fast_chest.tooltip": "Remove chests' dynamic models (aka BlockEntityRenderer) and making them render as static chunk geometry, like most normal blocks. \\nThis means they will lose their lid opening animation.",
+  "extras.fast_chest.tooltip": "Remove chests' dynamic models (aka BlockEntityRenderer) and making them render as static chunk geometry, like most normal blocks. This means they will lose their lid opening animation.",
   "extras.fast_chest.note.enable": "You've turned on Fast Chest feature, don't forget validating the EmbeddiumExtrasFastChestResourcepack in your resourcepacks",
   "extras.fast_chest.note.disable": "You've turned off Fast Chest feature, don't forget invalidating the EmbeddiumExtrasFastChestResourcepack in your resourcepacks",
 
