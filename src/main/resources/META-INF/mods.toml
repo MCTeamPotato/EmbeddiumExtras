@@ -1,20 +1,13 @@
-modLoader="javafml"
-loaderVersion="[36,)"
-license="LGPL-v3"
+modLoader = "javafml"
+loaderVersion = "[36,)"
+#issueTrackerURL = ""
+license = "GPL-v3"
 
 [[mods]]
-modId="embeddiumextras"
-version="${file.jarVersion}"
-displayName="Embeddium Extras"
-credits="TeamDeusVult, TexTrue, LocalizedMC"
-authors="Team Potato"
-description='''
-Adds Extra Settings to Embeddium.
+modId = "embeddiumextras"
+version = "${version}"
+displayName = "EmbeddiumExtras"
+authors = "Kall"
+description = '''
 '''
-
-[[dependencies.embeddiumextras]]
-modId="embeddium"
-mandatory=true
-versionRange="[0.1.14+mc1.16.5,)"
-ordering="NONE"
-side="CLIENT"
+#logoFile = ""
