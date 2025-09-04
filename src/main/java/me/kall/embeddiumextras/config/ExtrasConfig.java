@@ -53,7 +53,7 @@ public class ExtrasConfig {
         ENTITY_MAX_RENDERABLE_DIST_SQR = builder.defineInRange("EntityMaxRenderableDistanceSquared", 4096, 0, Integer.MAX_VALUE);
         ENABLE_TILE_ENTITY_DIST_CHECK = builder.define("EnableTileEntityDistanceCheck", false);
         TILE_MAX_RENDERABLE_HEIGHT = builder.defineInRange("TileMaxRenderableHeight", 32, 0, Integer.MAX_VALUE);
-        TILE_MAX_RENDERABLE_DIST_SQR = builder.defineInRange("TileMxaRenderableDistanceSquared", 4096, 0, Integer.MAX_VALUE);
+        TILE_MAX_RENDERABLE_DIST_SQR = builder.defineInRange("TileMaxRenderableDistanceSquared", 4096, 0, Integer.MAX_VALUE);
         builder.pop();
 
         builder.push("FpsDisplay");
