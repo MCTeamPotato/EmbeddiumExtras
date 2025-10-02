@@ -11,6 +11,7 @@ import me.jellysquid.mods.sodium.client.render.chunk.passes.BlockRenderPass;
 import me.kall.embeddiumextras.config.ExtrasConfig;
 import me.kall.embeddiumextras.features.fade.ChunkDrawParamsVectorExt;
 import me.kall.embeddiumextras.features.fade.ChunkGraphicsStateExt;
+import me.kall.embeddiumextras.features.fade.ShaderChecker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import org.spongepowered.asm.mixin.Final;
@@ -27,7 +28,7 @@ public abstract class MultidrawChunkRenderBackendMixin extends ChunkRenderShader
 
     @Inject(method = "setupDrawBatches", at = {@At(value = "INVOKE", target = "Lme/jellysquid/mods/sodium/client/render/chunk/backends/multidraw/ChunkDrawParamsVector;pushChunkDrawParams(FFF)V", shift = At.Shift.AFTER)})
     private void pushChunkDrawParamFadeInProgress(CommandList i, ChunkRenderListIterator<MultidrawGraphicsState> it, ChunkCameraContext visible, CallbackInfo ci) {
-        if (ExtrasConfig.FADE_IN_CHUNKS.get()) {
+        if (ExtrasConfig.FADE_IN_CHUNKS.get() && ShaderChecker.shaderAbsent()) {
             LocalPlayer player = (Minecraft.getInstance()).player;
             if (player == null) return;
             ChunkGraphicsState state = it.getGraphicsState();
@@ -44,7 +45,7 @@ public abstract class MultidrawChunkRenderBackendMixin extends ChunkRenderShader
 
     @ModifyArg(method = "upload", at = @At(value = "INVOKE", target = "Lme/jellysquid/mods/sodium/client/render/chunk/ChunkRenderContainer;setGraphicsState(Lme/jellysquid/mods/sodium/client/render/chunk/passes/BlockRenderPass;Lme/jellysquid/mods/sodium/client/render/chunk/ChunkGraphicsState;)V", ordinal = 0))
     private ChunkGraphicsState setLoadTime(BlockRenderPass pass, ChunkGraphicsState newState) {
-        if (ExtrasConfig.FADE_IN_CHUNKS.get()) {
+        if (ExtrasConfig.FADE_IN_CHUNKS.get() && ShaderChecker.shaderAbsent()) {
             ChunkGraphicsState oldState = ChunkGraphicsStateExt.ext(newState).extras$getContainer().getGraphicsState(pass);
             ChunkGraphicsStateExt.ext(newState).extras$setLoadTime((oldState == null) ? this.extras$currentTime : ChunkGraphicsStateExt.ext(oldState).extras$getLoadTime());
         }

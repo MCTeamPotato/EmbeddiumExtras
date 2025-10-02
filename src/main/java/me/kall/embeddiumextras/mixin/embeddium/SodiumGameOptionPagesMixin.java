@@ -8,6 +8,7 @@ import me.jellysquid.mods.sodium.client.gui.options.control.ControlValueFormatte
 import me.jellysquid.mods.sodium.client.gui.options.control.SliderControl;
 import me.jellysquid.mods.sodium.client.gui.options.control.TickBoxControl;
 import me.jellysquid.mods.sodium.client.gui.options.storage.SodiumOptionsStorage;
+import me.kall.embeddiumextras.features.fade.ShaderChecker;
 import me.kall.embeddiumextras.features.fastchest.FastChestInformer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
@@ -198,7 +199,7 @@ public abstract class SodiumGameOptionPagesMixin {
                 .setName(I18n.get("extras.fade_in_chunks"))
                 .setTooltip(I18n.get("extras.fade_in_chunks.tooltip"))
                 .setControl(TickBoxControl::new)
-                .setBinding((sodiumGameOptions, value) -> FADE_IN_CHUNKS.set(value), options -> FADE_IN_CHUNKS.get())
+                .setBinding((sodiumGameOptions, value) -> FADE_IN_CHUNKS.set(value && ShaderChecker.shaderAbsent()), options -> FADE_IN_CHUNKS.get())
                 .setImpact(OptionImpact.LOW)
                 .setFlags(new OptionFlag[]{OptionFlag.REQUIRES_RENDERER_RELOAD})
                 .build();

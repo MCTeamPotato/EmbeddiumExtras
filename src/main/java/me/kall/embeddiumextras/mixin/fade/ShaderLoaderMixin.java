@@ -4,6 +4,7 @@ import me.jellysquid.mods.sodium.client.SodiumClientMod;
 import me.jellysquid.mods.sodium.client.gl.shader.ShaderLoader;
 import me.jellysquid.mods.sodium.client.render.chunk.backends.multidraw.MultidrawChunkRenderBackend;
 import me.kall.embeddiumextras.config.ExtrasConfig;
+import me.kall.embeddiumextras.features.fade.ShaderChecker;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
@@ -24,9 +25,8 @@ public abstract class ShaderLoaderMixin {
 
     @Inject(method = "getShaderSource", at = {@At("RETURN")}, cancellable = true)
     private static void modifyShaderForFadeInEffect(String path, CallbackInfoReturnable<String> cir) {
-        if (ExtrasConfig.FADE_IN_CHUNKS.get()) {
-            if (!(SodiumClientMod.options()).advanced.useChunkMultidraw || !MultidrawChunkRenderBackend.isSupported(false))
-                return;
+        if (ExtrasConfig.FADE_IN_CHUNKS.get() && ShaderChecker.shaderAbsent()) {
+            if (!(SodiumClientMod.options()).advanced.useChunkMultidraw || !MultidrawChunkRenderBackend.isSupported(false)) return;
             boolean isVertexShader = path.equals(getShaderPath(new ResourceLocation("sodium", "chunk_gl20.v.glsl")));
             boolean isFragmentShader = path.equals(getShaderPath(new ResourceLocation("sodium", "chunk_gl20.f.glsl")));
             if (!isVertexShader && !isFragmentShader) return;
