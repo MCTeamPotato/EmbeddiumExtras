@@ -1,6 +1,9 @@
 {
   "extras.none": "",
 
+  "extras.note": "感谢您使用 Embeddium Extras！默认情况下，所有的功能都是禁用的，你可以根据自己的偏好打开。",
+  "extras.note.name": "玩家登入时发送提示",
+
   "extras.display_fps.page": "FPS显示",
   "extras.display_fps.display.name": "FPS显示模式",
   "extras.display_fps.position.x.name": "FPS条横坐标",
