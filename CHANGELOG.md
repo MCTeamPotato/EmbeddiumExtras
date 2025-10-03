@@ -1,2 +1,2 @@
-# 1.12.1
-Resolve https://github.com/MCTeamPotato/Kasualix-Issue-Tracker/issues/116
+# 1.12.2
+Extremely reduce the performance impact of distance check by introducing renderable as a property and update it regularly.
