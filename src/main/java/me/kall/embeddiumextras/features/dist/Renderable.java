@@ -1,5 +1,6 @@
 package me.kall.embeddiumextras.features.dist;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
@@ -23,8 +24,14 @@ public interface Renderable {
         return false;
     }
 
+    static Vec3 renderInfo() {
+        return Minecraft.getInstance().gameRenderer.getMainCamera().getPosition();
+    }
+
     boolean dist$alwaysRenderable();
     void dist$setAlwaysRenderable(boolean alwaysRenderable);
 
-
+    interface Entity {
+        boolean dist$renderable();
+    }
 }

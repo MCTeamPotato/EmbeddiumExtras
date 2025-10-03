@@ -13,6 +13,6 @@ import org.spongepowered.asm.mixin.Mixin;
 public abstract class EntityRenderDispatcherMixin {
     @WrapMethod(method = "shouldRender")
     private <E extends Entity> boolean onCheck(E entity, Frustum frustum, double camX, double camY, double camZ, Operation<Boolean> original) {
-        return (((Renderable)entity.getType()).dist$alwaysRenderable() || !ExtrasConfig.ENABLE_ENTITY_DIST_CHECK.get() || Renderable.isEntityInDist(entity.position(), camX, camY, camZ, ExtrasConfig.ENTITY_MAX_RENDERABLE_HEIGHT.get(), ExtrasConfig.ENTITY_MAX_RENDERABLE_DIST_SQR.get())) ? original.call(entity, frustum, camX, camY, camZ) : false;
+        return (((Renderable)entity.getType()).dist$alwaysRenderable() || !ExtrasConfig.ENABLE_ENTITY_DIST_CHECK.get() || ((Renderable.Entity)entity).dist$renderable()) ? original.call(entity, frustum, camX, camY, camZ) : false;
     }
 }

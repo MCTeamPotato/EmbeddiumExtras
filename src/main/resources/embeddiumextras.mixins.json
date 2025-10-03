@@ -30,7 +30,9 @@
     "tape.RenderTargetMixin",
     "zoom.GameRendererMixin",
     "zoom.InventoryMixin",
-    "zoom.MouseHandlerMixin"
+    "zoom.MouseHandlerMixin",
+    "dist.renderable.BlockEntityMixin",
+    "dist.renderable.EntityMixin"
   ],
   "injectors": {
     "defaultRequire": 1
