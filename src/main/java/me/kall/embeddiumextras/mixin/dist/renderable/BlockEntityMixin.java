@@ -2,7 +2,6 @@ package me.kall.embeddiumextras.mixin.dist.renderable;
 
 import me.kall.embeddiumextras.config.ExtrasConfig;
 import me.kall.embeddiumextras.features.dist.Renderable;
-import me.kall.embeddiumextras.features.fps.FpsBarInfoProvider;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.phys.Vec3;
@@ -29,7 +28,7 @@ public abstract class BlockEntityMixin implements Renderable.Entity {
     private void onRenderCall(CallbackInfoReturnable<Double> cir) {
         if (ExtrasConfig.ENABLE_ENTITY_DIST_CHECK.get()) {
             this.dist$renderCallCount++;
-            if (this.dist$renderCallCount >= FpsBarInfoProvider.getAvgFps()) {
+            if (this.dist$renderCallCount >= 60) {
                 this.dist$renderCallCount = 0;
                 Vec3 camera = Renderable.renderInfo();
                 this.dist$renderable = Renderable.isEntityInDist(this.worldPosition, camera, ExtrasConfig.ENTITY_MAX_RENDERABLE_HEIGHT.get(), ExtrasConfig.ENTITY_MAX_RENDERABLE_DIST_SQR.get());

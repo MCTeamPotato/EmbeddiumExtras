@@ -41,7 +41,7 @@ public class FpsBarInfoProvider {
         return count == 0 ? getCurrentFps() : minFps;
     }
 
-    public static int getAvgFps() {
+    private static int getAvgFps() {
         return count == 0 ? getCurrentFps() : totalFps / count;
     }
 
