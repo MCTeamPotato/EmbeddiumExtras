@@ -30,6 +30,7 @@ public final class EmbeddiumExtras {
     public static final String MOD_NAME = "EmbeddiumExtras";
     public static final Logger LOGGER = LogManager.getLogger(MOD_NAME);
     private static boolean note;
+    public static double originalGamma;
 
     public EmbeddiumExtras() {
         if (!FMLLoader.getDist().isClient()) return;

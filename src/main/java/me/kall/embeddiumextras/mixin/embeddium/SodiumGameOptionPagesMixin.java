@@ -58,6 +58,16 @@ public abstract class SodiumGameOptionPagesMixin {
                 .build();
 
         groups.add(OptionGroup.createBuilder().add(note).build());
+
+        OptionImpl<SodiumGameOptions, Boolean> nightVision = OptionImpl.createBuilder(Boolean.class, sodiumOpts)
+                .setName(I18n.get("extras.night_vision"))
+                .setTooltip(I18n.get("extras.none"))
+                .setControl(TickBoxControl::new)
+                .setBinding((sodiumGameOptions, aBoolean) -> NIGHT_VISION.set(aBoolean), sodiumGameOptions -> NIGHT_VISION.get())
+                .setImpact(OptionImpact.LOW)
+                .build();
+
+        groups.add(OptionGroup.createBuilder().add(nightVision).build());
     }
 
     @Inject(method = "performance", at = @At(value = "INVOKE", target = "Ljava/util/List;add(Ljava/lang/Object;)Z", shift = At.Shift.AFTER, remap = false))

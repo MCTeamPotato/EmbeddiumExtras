@@ -4,6 +4,8 @@
   "extras.note": "Thank you for using Embeddium Extras! By default, all the extras features are disabled, you can follow your preference and enable them in the video setting.",
   "extras.note.name": "Note Player When They Login",
 
+  "extras.night_vision": "Enable Night Vision",
+
   "extras.display_fps.page": "Fps Viewer",
   "extras.display_fps.display.name": "Fps Display Mode",
   "extras.display_fps.position.x.name": "Fps Bar Pos X",

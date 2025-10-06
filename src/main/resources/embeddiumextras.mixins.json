@@ -11,7 +11,9 @@
     "clearskies.FogRendererMixin",
     "dist.BlockEntityRenderDispatcherMixin",
     "dist.EntityRenderDispatcherMixin",
+    "dist.renderable.BlockEntityMixin",
     "dist.renderable.BlockEntityTypeMixin",
+    "dist.renderable.EntityMixin",
     "dist.renderable.EntityTypeMixin",
     "embeddium.SodiumGameOptionPagesMixin",
     "embeddium.SodiumOptionsGUIMixin",
@@ -26,13 +28,12 @@
     "fps.ForgeIngameGuiMixin",
     "fps.MinecraftMixin",
     "jei.IngredientListOverlayMixin",
+    "nightvision.LightTextureMixin",
     "shutup.InputConstantsMixin",
     "tape.RenderTargetMixin",
     "zoom.GameRendererMixin",
     "zoom.InventoryMixin",
-    "zoom.MouseHandlerMixin",
-    "dist.renderable.BlockEntityMixin",
-    "dist.renderable.EntityMixin"
+    "zoom.MouseHandlerMixin"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -44,6 +44,8 @@ public class ExtrasConfig {
 
     public static final BooleanValue NOTE;
 
+    public static final BooleanValue NIGHT_VISION;
+
     static {
         Builder builder = new Builder();
         builder.push("EmbeddiumExtras");
@@ -81,6 +83,7 @@ public class ExtrasConfig {
         FAST_CHEST = builder.define("FastChest", false);
         HIDE_JEI_ITEMS = builder.comment("Stop rendering the items in Just Enough Items GUI unless you are searching").define("HideJEIItems", false);
         CLEAR_SKIES = builder.comment("Removes the banding at the horizon of Vanilla Minecraft").define("EnableClearSkies", false);
+        NIGHT_VISION = builder.define("EnableNightVision", false);
         builder.pop();
 
         builder.push("Zoom");
