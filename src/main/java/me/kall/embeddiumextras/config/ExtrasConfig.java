@@ -45,6 +45,7 @@ public class ExtrasConfig {
     public static final BooleanValue NOTE;
 
     public static final BooleanValue NIGHT_VISION;
+    public static final BooleanValue HIDE_NIGHT_VISION_OPTION_IN_VIDEO_SETTING;
 
     static {
         Builder builder = new Builder();
@@ -84,6 +85,7 @@ public class ExtrasConfig {
         HIDE_JEI_ITEMS = builder.comment("Stop rendering the items in Just Enough Items GUI unless you are searching").define("HideJEIItems", false);
         CLEAR_SKIES = builder.comment("Removes the banding at the horizon of Vanilla Minecraft").define("EnableClearSkies", false);
         NIGHT_VISION = builder.define("EnableNightVision", false);
+        HIDE_NIGHT_VISION_OPTION_IN_VIDEO_SETTING = builder.define("HideNightVisionOptionInVideoSetting", false);
         builder.pop();
 
         builder.push("Zoom");
