@@ -19,18 +19,13 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLLoader;
 import net.minecraftforge.registries.ForgeRegistries;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.util.Set;
 
 @Mod(EmbeddiumExtras.MOD_ID)
 public final class EmbeddiumExtras {
     public static final String MOD_ID = "embeddiumextras";
-    public static final String MOD_NAME = "EmbeddiumExtras";
-    public static final Logger LOGGER = LogManager.getLogger(MOD_NAME);
     private static boolean note;
-    public static double originalGamma;
 
     public EmbeddiumExtras() {
         if (!FMLLoader.getDist().isClient()) return;

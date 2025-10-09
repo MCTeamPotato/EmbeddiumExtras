@@ -1,6 +1,5 @@
 package me.kall.embeddiumextras.mixin.nightvision;
 
-import me.kall.embeddiumextras.EmbeddiumExtras;
 import me.kall.embeddiumextras.config.ExtrasConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.LightTexture;
@@ -18,10 +17,7 @@ public abstract class LightTextureMixin {
     @Inject(method = "updateLightTexture", at = @At("HEAD"))
     private void onCheckGamma(float partialTicks, CallbackInfo ci) {
         if (this.minecraft.options.gamma != 15D && ExtrasConfig.NIGHT_VISION.get()) {
-            EmbeddiumExtras.originalGamma = this.minecraft.options.gamma;
             this.minecraft.options.gamma = 15D;
-        } else if (!ExtrasConfig.NIGHT_VISION.get() && this.minecraft.options.gamma != EmbeddiumExtras.originalGamma){
-            this.minecraft.options.gamma = EmbeddiumExtras.originalGamma;
         }
     }
 }

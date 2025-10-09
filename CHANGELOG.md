@@ -1,2 +1,2 @@
-# 1.12.4
-- Add HIDE_NIGHT_VISION_OPTION_IN_VIDEO_SETTING config option
+# 1.12.5
+- Fix gamma set to 0
